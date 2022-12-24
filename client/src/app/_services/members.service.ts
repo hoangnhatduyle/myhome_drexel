@@ -2,10 +2,11 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, of, take } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { LikeParams } from '../_models/likeParam';
 import { Member } from '../_models/member';
 import { PaginatedResult } from '../_models/pagination';
 import { User } from '../_models/user';
-import { UserParams } from '../_models/userPrams';
+import { UserParams } from '../_models/userParams';
 import { AccountService } from './account.service';
 
 @Injectable({
@@ -19,7 +20,7 @@ export class MembersService {
   user: User | undefined;
 
   constructor(private http: HttpClient, private accountService: AccountService) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe({
+    this.accountService.currentUser$.pipe().subscribe({
       next: user => {
         if (user) {
           this.user = user;
@@ -115,6 +116,18 @@ export class MembersService {
         return paginatedResult;
       })
     );
+  }
+
+  addLike(username: string) {
+    return this.http.post(this.baseUrl + 'likes/' + username, {});
+  }
+
+  getLikes(likeParams: LikeParams) {
+    let params = this.getPaginationHeaders(likeParams.pageNumber, likeParams.pageSize);
+
+    params = params.append('predicate', likeParams.predicate);
+
+    return this.getPaginatedResult<Member[]>(this.baseUrl + 'likes', params);
   }
 
   private getPaginationHeaders(pageNumber: number, pageSize: number) {
