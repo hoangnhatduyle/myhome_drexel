@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { LikeParams } from '../_models/likeParam';
+import { LikeParams } from '../_models/likeParams';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
 import { MembersService } from '../_services/members.service';
