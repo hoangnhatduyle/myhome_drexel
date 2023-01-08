@@ -46,7 +46,8 @@ namespace API.Controllers
         [HttpGet("{username}")]
         public async Task<ActionResult<MemberDto>> GetSpecificUser(string username)
         {
-            return await _unitOfWork.UserRepository.GetMemberByUsernameAsync(username);
+            bool isCurrentUser = username == User.GetUsername();
+            return await _unitOfWork.UserRepository.GetMemberByUsernameAsync(username, isCurrentUser);
         }
 
         [HttpPut]
@@ -80,7 +81,7 @@ namespace API.Controllers
                 PublicId = result.PublicId
             };
 
-            if (user.Photos.Count == 0) photo.IsMain = true;
+            // if (user.Photos.Count == 0) photo.IsMain = true;
 
             user.Photos.Add(photo);
 

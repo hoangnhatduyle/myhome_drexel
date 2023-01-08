@@ -35,7 +35,10 @@ export class MemberEditComponent implements OnInit {
   loadMember() {
     if (!this.user) return;
     this.memberService.getMember(this.user.userName).subscribe({
-      next: member => this.member = member
+      next: member => {
+        this.member = member
+        this.member?.photos.sort((a, b) => (a.isApproved < b.isApproved) ? 1 : -1);
+      }
     })
   }
 
