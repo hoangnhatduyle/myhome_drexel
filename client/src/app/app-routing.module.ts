@@ -10,13 +10,15 @@ import { MemberDetailComponent } from './members/member-detail/member-detail.com
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MemberListComponent } from './members/member-list/member-list.component';
 import { MessagesComponent } from './messages/messages.component';
+import { MyhomeDashboardComponent } from './myhome-dashboard/myhome-dashboard.component';
+import { MyhomeLoginComponent } from './myhome-login/myhome-login.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
+  { path: '', component: MyhomeLoginComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',
@@ -27,7 +29,8 @@ const routes: Routes = [
       { path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
-      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] }
+      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },      
+      { path: 'dashboard', component: MyhomeDashboardComponent }
     ]
   },
   { path: 'errors', component: TestErrorComponent},

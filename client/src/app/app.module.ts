@@ -32,6 +32,9 @@ import { UserManagementComponent } from './admin/user-management/user-management
 import { PhotoManagementComponent } from './admin/photo-management/photo-management.component';
 import { RolesModalComponent } from './modals/roles-modal/roles-modal.component';
 import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.component';
+import { MyhomeLoginComponent } from './myhome-login/myhome-login.component';
+import { MyhomeRegisterComponent } from './myhome-register/myhome-register.component';
+import { MyhomeDashboardComponent } from './myhome-dashboard/myhome-dashboard.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +60,10 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
     UserManagementComponent,
     PhotoManagementComponent,
     RolesModalComponent,
-    ConfirmDialogComponent
+    ConfirmDialogComponent,
+    MyhomeLoginComponent,
+    MyhomeRegisterComponent,
+    MyhomeDashboardComponent
   ],
   imports: [
     BrowserModule,

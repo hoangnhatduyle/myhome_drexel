@@ -1,0 +1,86 @@
+<main>
+    <div class="container">
+
+        <section class="section register min-vh-100 d-flex flex-column align-items-center justify-content-center py-4">
+            <div class="container">
+                <div class="row justify-content-center">
+                    <div class="col-lg-4 col-md-6 d-flex flex-column align-items-center justify-content-center">
+
+                        <div class="d-flex justify-content-center py-4">
+                            <a href="index.html" class="logo d-flex align-items-center w-auto">
+                                <img src="assets/images/logo.png" alt="">
+                                <span class="d-none d-lg-block" style="color: brown;"> myHOME</span>
+                            </a>
+                        </div><!-- End Logo -->
+
+                        <div class="card mb-3">
+
+                            <div class="card-body">
+
+                                <div class="py-2">
+                                    <h5 class="card-title text-center pb-0 fs-4"
+                                        style="color: brown; font-weight: bold;">Create an Account
+                                    </h5>
+                                    <p class="text-center small">Enter your personal details to create account</p>
+                                </div>
+
+                                <form class="row g-3 needs-validation" [formGroup]="registerForm"
+                                    (ngSubmit)="registerForm.valid && register()" autocomplete="off">
+
+                                    <div class="col-12">
+                                        <app-text-input [formControl]="$any(registerForm.controls['knownAs'])"
+                                            [label]="'Full Name'"></app-text-input>
+                                        <app-text-input [formControl]="$any(registerForm.controls['username'])"
+                                            [label]="'Username'"></app-text-input>
+                                        <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])"
+                                            [label]="'Date Of Birth'" [maxDate]="maxDate"></app-date-picker>
+                                        <app-text-input [formControl]="$any(registerForm.controls['city'])"
+                                            [label]="'City'"></app-text-input>
+                                        <app-text-input [formControl]="$any(registerForm.controls['country'])"
+                                            [label]="'Country'"></app-text-input>
+                                        <app-text-input [formControl]="$any(registerForm.controls['password'])"
+                                            [label]="'Password'" [type]="'password'"></app-text-input>
+                                        <app-text-input [formControl]="$any(registerForm.controls['confirmPassword'])"
+                                            [label]="'Confirm Password'" [type]="'password'"></app-text-input>
+
+                                        <div class="row" *ngIf="validationErrors">
+                                            <ul class="text-danger">
+                                                <li *ngFor="let error of validationErrors">{{error}}</li>
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                    <div class="col-12 mt-0">
+                                        <div class="form-check">
+                                            <input class="form-check-input" name="terms" type="checkbox" value=""
+                                                id="acceptTerms" [(ngModel)]="isChecked"
+                                                [ngModelOptions]="{standalone: true}">
+                                            <label class="form-check-label" for="acceptTerms">I agree and accept the
+                                                <a href="../../assets/document/HousingContract.pdf"
+                                                    target="_blank">terms and
+                                                    conditions</a>
+                                            </label>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <button class="btn btn-warning w-100" type="submit"
+                                            [disabled]="!registerForm.valid || !isChecked">Register</button>
+                                    </div>
+                                    <div class="col-12">
+                                        <p class="small mb-0">Already have an account?
+                                            <button type="button" (click)="cancel()" class="me-2 ps-0"
+                                                style="color: brown; border: none; background: none;">Log in</button>
+                                        </p>
+                                    </div>
+                                </form>
+
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </section>
+    </div>
+</main>
