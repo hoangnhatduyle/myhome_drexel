@@ -16,4 +16,11 @@ export interface Member {
     city: string;
     country: string;
     photos: Photo[];
+    leaseEnd: Date;
+    roomType: string;
+    roomNumber: number;
+    address: string;
+    rentalFee: number;
+    phone: string;
+    email: string;
 }

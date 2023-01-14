@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { Member } from '../_models/member';
@@ -19,7 +20,7 @@ export class MyhomeDashboardComponent implements OnInit {
   member: Member | undefined;
   user: User | null = null;
 
-  constructor(private accountService: AccountService, private memberService: MembersService, private toastr: ToastrService) {
+  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService, private toastr: ToastrService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
@@ -42,5 +43,10 @@ export class MyhomeDashboardComponent implements OnInit {
 
   toggleSearch(): void {
     this.search = !this.search;
+  }
+
+  logout() {
+    this.accountService.logout();
+    this.router.navigateByUrl("/");
   }
 }

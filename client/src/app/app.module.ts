@@ -36,6 +36,7 @@ import { MyhomeLoginComponent } from './myhome-login/myhome-login.component';
 import { MyhomeRegisterComponent } from './myhome-register/myhome-register.component';
 import { MyhomeDashboardComponent } from './myhome-dashboard/myhome-dashboard.component';
 import { MyhomeCalendarComponent } from './myhome-calendar/myhome-calendar.component';
+import { MyhomeInfocardComponent } from './myhome-infocard/myhome-infocard.component';
 
 @NgModule({
   declarations: [
@@ -65,7 +66,8 @@ import { MyhomeCalendarComponent } from './myhome-calendar/myhome-calendar.compo
     MyhomeLoginComponent,
     MyhomeRegisterComponent,
     MyhomeDashboardComponent,
-    MyhomeCalendarComponent
+    MyhomeCalendarComponent,
+    MyhomeInfocardComponent
   ],
   imports: [
     BrowserModule,

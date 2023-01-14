@@ -33,9 +33,4 @@ export class MyhomeLoginComponent implements OnInit {
       next: () => this.router.navigateByUrl("/dashboard")
     });
   }
-
-  logout() {
-    this.accountService.logout();
-    this.router.navigateByUrl("/");
-  }
 }

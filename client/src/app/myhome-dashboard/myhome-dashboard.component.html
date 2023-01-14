@@ -153,7 +153,7 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center">
+                                    <a class="dropdown-item d-flex align-items-center" (click)="logout()">
                                         <fa-icon [icon]="['fas', 'sign-out']"></fa-icon>
                                         <span class="ms-3">Sign Out</span>
                                     </a>
@@ -179,7 +179,7 @@
                 </div><!-- End Page Title -->
 
                 <section class="section dashboard">
-                    <!-- <app-info-card></app-info-card> -->
+                    <app-myhome-infocard [member]="member"></app-myhome-infocard>
                     <div class="row">
                         <div class="col-lg-8" style="padding-right: 6px">
                             <!-- <app-bill-chart></app-bill-chart> -->
