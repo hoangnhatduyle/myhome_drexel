@@ -1,4 +1,10 @@
 import { Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
+import { take } from 'rxjs';
+import { Member } from '../_models/member';
+import { User } from '../_models/user';
+import { AccountService } from '../_services/account.service';
+import { MembersService } from '../_services/members.service';
 
 @Component({
   selector: 'app-myhome-dashboard',
@@ -6,10 +12,35 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./myhome-dashboard.component.css']
 })
 export class MyhomeDashboardComponent implements OnInit {
+  opened: boolean = true;
+  search: boolean = false;
+  autoCollapseWidth: number = 800;
 
-  constructor() { }
+  member: Member | undefined;
+  user: User | null = null;
 
-  ngOnInit(): void {
+  constructor(private accountService: AccountService, private memberService: MembersService, private toastr: ToastrService) {
+    this.accountService.currentUser$.pipe(take(1)).subscribe({
+      next: user => this.user = user
+    })
   }
 
+  ngOnInit(): void {
+    this.loadMember()
+  }
+
+  loadMember() {
+    if (!this.user) return;
+    this.memberService.getMember(this.user.userName).subscribe({
+      next: member => this.member = member
+    })
+  }
+
+  toggleOpened(): void {
+    this.opened = !this.opened;
+  }
+
+  toggleSearch(): void {
+    this.search = !this.search;
+  }
 }

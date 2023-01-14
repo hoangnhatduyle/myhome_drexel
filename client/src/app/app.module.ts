@@ -35,6 +35,7 @@ import { ConfirmDialogComponent } from './modals/confirm-dialog/confirm-dialog.c
 import { MyhomeLoginComponent } from './myhome-login/myhome-login.component';
 import { MyhomeRegisterComponent } from './myhome-register/myhome-register.component';
 import { MyhomeDashboardComponent } from './myhome-dashboard/myhome-dashboard.component';
+import { MyhomeCalendarComponent } from './myhome-calendar/myhome-calendar.component';
 
 @NgModule({
   declarations: [
@@ -63,7 +64,8 @@ import { MyhomeDashboardComponent } from './myhome-dashboard/myhome-dashboard.co
     ConfirmDialogComponent,
     MyhomeLoginComponent,
     MyhomeRegisterComponent,
-    MyhomeDashboardComponent
+    MyhomeDashboardComponent,
+    MyhomeCalendarComponent
   ],
   imports: [
     BrowserModule,

@@ -11,6 +11,10 @@ import { PaginationModule } from 'ngx-bootstrap/pagination';
 import { ButtonsModule } from 'ngx-bootstrap/buttons';
 import { TimeagoModule } from 'ngx-timeago';
 import { ModalModule } from 'ngx-bootstrap/modal';
+import { SidebarModule } from 'ng-sidebar';
+import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontawesome';
+import { fas } from '@fortawesome/free-solid-svg-icons';
+import { far } from '@fortawesome/free-regular-svg-icons';
 @NgModule({
   declarations: [],
   imports: [
@@ -27,6 +31,8 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     PaginationModule.forRoot(),
     ButtonsModule.forRoot(),
     TimeagoModule.forRoot(),
+    SidebarModule.forRoot(),
+    FontAwesomeModule,
     ModalModule.forRoot()
   ],
   exports: [
@@ -40,7 +46,13 @@ import { ModalModule } from 'ngx-bootstrap/modal';
     PaginationModule,
     ButtonsModule,
     TimeagoModule,
-    ModalModule
+    ModalModule,
+    SidebarModule,
+    FontAwesomeModule
   ]
 })
-export class SharedModule { }
+export class SharedModule {
+  constructor(library: FaIconLibrary) {
+    library.addIconPacks(fas, far);
+  }
+}
