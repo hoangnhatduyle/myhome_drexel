@@ -1,0 +1,182 @@
+[
+    {
+        "Type": "water",
+        "Month": 1,
+        "Amount": 61
+    },
+    {
+        "Type": "water",
+        "Month": 2,
+        "Amount": 87
+    },
+    {
+        "Type": "water",
+        "Month": 3,
+        "Amount": 57
+    },
+    {
+        "Type": "water",
+        "Month": 4,
+        "Amount": 95
+    },
+    {
+        "Type": "water",
+        "Month": 5,
+        "Amount": 68
+    },
+    {
+        "Type": "water",
+        "Month": 6,
+        "Amount": 57
+    },
+    {
+        "Type": "water",
+        "Month": 7,
+        "Amount": 75
+    },
+    {
+        "Type": "water",
+        "Month": 8,
+        "Amount": 93
+    },
+    {
+        "Type": "water",
+        "Month": 9,
+        "Amount": 65
+    },
+    {
+        "Type": "water",
+        "Month": 10,
+        "Amount": 81
+    },
+    {
+        "Type": "water",
+        "Month": 11,
+        "Amount": 93
+    },
+    {
+        "Type": "water",
+        "Month": 12,
+        "Amount": 53
+    },
+    {
+        "Type": "gas",
+        "Month": 1,
+        "Amount": 78
+    },
+    {
+        "Type": "gas",
+        "Month": 2,
+        "Amount": 63
+    },
+    {
+        "Type": "gas",
+        "Month": 3,
+        "Amount": 83
+    },
+    {
+        "Type": "gas",
+        "Month": 4,
+        "Amount": 50
+    },
+    {
+        "Type": "gas",
+        "Month": 5,
+        "Amount": 55
+    },
+    {
+        "Type": "gas",
+        "Month": 6,
+        "Amount": 75
+    },
+    {
+        "Type": "gas",
+        "Month": 7,
+        "Amount": 83
+    },
+    {
+        "Type": "gas",
+        "Month": 8,
+        "Amount": 72
+    },
+    {
+        "Type": "gas",
+        "Month": 9,
+        "Amount": 70
+    },
+    {
+        "Type": "gas",
+        "Month": 10,
+        "Amount": 97
+    },
+    {
+        "Type": "gas",
+        "Month": 11,
+        "Amount": 73
+    },
+    {
+        "Type": "gas",
+        "Month": 12,
+        "Amount": 69
+    },
+    {
+        "Type": "electricity",
+        "Month": 1,
+        "Amount": 68
+    },
+    {
+        "Type": "electricity",
+        "Month": 2,
+        "Amount": 91
+    },
+    {
+        "Type": "electricity",
+        "Month": 3,
+        "Amount": 99
+    },
+    {
+        "Type": "electricity",
+        "Month": 4,
+        "Amount": 80
+    },
+    {
+        "Type": "electricity",
+        "Month": 5,
+        "Amount": 54
+    },
+    {
+        "Type": "electricity",
+        "Month": 6,
+        "Amount": 68
+    },
+    {
+        "Type": "electricity",
+        "Month": 7,
+        "Amount": 89
+    },
+    {
+        "Type": "electricity",
+        "Month": 8,
+        "Amount": 68
+    },
+    {
+        "Type": "electricity",
+        "Month": 9,
+        "Amount": 70
+    },
+    {
+        "Type": "electricity",
+        "Month": 10,
+        "Amount": 83
+    },
+    {
+        "Type": "electricity",
+        "Month": 11,
+        "Amount": 69
+    },
+    {
+        "Type": "electricity",
+        "Month": 12,
+        "Amount": 73
+    }
+]

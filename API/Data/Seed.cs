@@ -15,7 +15,7 @@ namespace API.Data
 
             var userData = await File.ReadAllTextAsync("Data/UserSeedData.json");
 
-            var options = new JsonSerializerOptions{PropertyNameCaseInsensitive = false};
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = false };
 
             var users = JsonSerializer.Deserialize<List<AppUser>>(userData);
 
@@ -50,7 +50,25 @@ namespace API.Data
             };
 
             await userManager.CreateAsync(admin, "Pa$$w0rd");
-            await userManager.AddToRolesAsync(admin, new[] {"Admin", "Moderator"});
+            await userManager.AddToRolesAsync(admin, new[] { "Admin", "Moderator" });
+        }
+
+        public static async Task SeedBills(DataContext context)
+        {
+            if (await context.Bills.AnyAsync()) return;
+
+            var billData = await File.ReadAllTextAsync("Data/BillSeedData.json");
+
+            var options = new JsonSerializerOptions { PropertyNameCaseInsensitive = false };
+
+            var bills = JsonSerializer.Deserialize<List<Bills>>(billData);
+
+            foreach (var bill in bills)
+            {
+                context.Bills.Add(bill);
+            }
+
+            await context.SaveChangesAsync();
         }
     }
 }

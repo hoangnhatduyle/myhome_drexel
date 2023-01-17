@@ -8,6 +8,7 @@
 
 # Node
 /node_modules
+/src/assets/canvasjs-3.7.4
 npm-debug.log
 yarn-error.log
 

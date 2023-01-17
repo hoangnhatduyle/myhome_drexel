@@ -37,6 +37,12 @@ import { MyhomeRegisterComponent } from './myhome-register/myhome-register.compo
 import { MyhomeDashboardComponent } from './myhome-dashboard/myhome-dashboard.component';
 import { MyhomeCalendarComponent } from './myhome-calendar/myhome-calendar.component';
 import { MyhomeInfocardComponent } from './myhome-infocard/myhome-infocard.component';
+import { BillChartComponent } from './bill-chart/bill-chart.component';
+import { ReisdentSumComponent } from './reisdent-sum/reisdent-sum.component';
+import { RecentPaymentComponent } from './recent-payment/recent-payment.component';
+import { PaymentPieChartComponent } from './payment-pie-chart/payment-pie-chart.component';
+import * as CanvasJSAngularChart from '../assets/canvasjs-3.7.4/canvasjs.angular.component';
+var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
   declarations: [
@@ -67,7 +73,12 @@ import { MyhomeInfocardComponent } from './myhome-infocard/myhome-infocard.compo
     MyhomeRegisterComponent,
     MyhomeDashboardComponent,
     MyhomeCalendarComponent,
-    MyhomeInfocardComponent
+    MyhomeInfocardComponent,
+    BillChartComponent,
+    ReisdentSumComponent,
+    RecentPaymentComponent,
+    PaymentPieChartComponent,
+    CanvasJSChart
   ],
   imports: [
     BrowserModule,

@@ -16,7 +16,6 @@ namespace API.Data
         {
             _mapper = mapper;
             _context = context;
-
         }
 
         public async Task<MemberDto> GetMemberByUsernameAsync(string username, bool isCurrentUser)
