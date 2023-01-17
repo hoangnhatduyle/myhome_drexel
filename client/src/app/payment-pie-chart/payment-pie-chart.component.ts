@@ -1,4 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
+import { Bill } from '../_models/bill';
+import { Member } from '../_models/member';
+import { BillService } from '../_services/bill.service';
 
 @Component({
   selector: 'app-payment-pie-chart',
@@ -6,10 +9,51 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./payment-pie-chart.component.css']
 })
 export class PaymentPieChartComponent implements OnInit {
+  @Input() member: Member | undefined;
+  water: number = 0;
+  gas: number = 0;
+  electricity: number = 0;
+  roomPercent: number = 0;
+  waterPercent: number = 0;
+  gasPercent: number = 0;
+  electricityPercent: number = 0;
+  chartOptions = {};
 
-  constructor() { }
+  constructor(private billService: BillService) { }
 
   ngOnInit(): void {
+    let date = new Date();
+    let currMonth = date.getMonth();
+
+    this.billService.getBills().subscribe({
+      next: bills => {
+        if (bills) {
+          this.water = bills.filter(x => x.type == 'water' && x.month == currMonth + 1)[0].amount;
+          this.gas = bills.filter(x => x.type == 'gas' && x.month == currMonth + 1)[0].amount;
+          this.electricity = bills.filter(x => x.type == 'electricity' && x.month == currMonth + 1)[0].amount;
+        }
+
+        let total = this.water + this.gas + this.electricity + this.member!.rentalFee;
+
+        this.chartOptions = {
+          animationEnabled: true,
+          title: {
+            text: "Payment Breakdown"
+          },
+          data: [{
+            type: "doughnut",
+            yValueFormatString: "#,###.##'%'",
+            indexLabel: "{name}",
+            dataPoints: [
+              { y: this.member!.rentalFee / total * 100, name: "Room" },
+              { y: this.electricity / total * 100, name: "Electricity" },
+              { y: this.water / total * 100, name: "Water" },
+              { y: this.gas / total * 100, name: "Gas" }
+            ]
+          }]
+        }
+      }
+    })
   }
 
 }

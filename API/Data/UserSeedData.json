@@ -26,6 +26,32 @@
         ]
     },
     {
+        "UserName": "jake",
+        "Gender": "male",
+        "DateOfBirth": "1966-07-14",
+        "KnownAs": "Jake",
+        "LeaseEnd": "1971-01-26",
+        "Created": "2020-02-09",
+        "LastActive": "2020-05-07",
+        "Introduction": "Laborum voluptate ullamco ea reprehenderit excepteur ipsum proident cupidatat voluptate quis do ipsum. Id elit consequat ad fugiat eu aliquip aliqua ad mollit culpa. Excepteur amet irure et mollit pariatur.\r\n",
+        "LookingFor": "Ea id enim consectetur eu. Nostrud do est nulla adipisicing consectetur laborum. Id ut veniam tempor esse incididunt. Ex eu ea ullamco magna proident irure laborum proident. Id deserunt sunt nulla Lorem ex ipsum nisi.\r\n",
+        "Interests": "Esse Lorem eiusmod minim dolore ea.",
+        "City": "Onton",
+        "Country": "French Polynesia",
+        "RoomType": "Single",
+        "Address": "400 Rutledge Street, Boykin, Guam, 7989",
+        "RoomNumber": 2,
+        "RentalFee": 379,
+        "PhoneNumber": "+1 (954) 471-3092",
+        "Email": "jakehouston@medesign.com",
+        "Photos": [
+            {
+                "Url": "https://randomuser.me/api/portraits/men/28.jpg",
+                "isMain": true
+            }
+        ]
+    },
+    {
         "UserName": "Pratt",
         "Gender": "male",
         "DateOfBirth": "1975-10-08",

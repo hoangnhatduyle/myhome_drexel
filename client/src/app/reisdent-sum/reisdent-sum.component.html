@@ -6,20 +6,20 @@
         </a>
     </div>
 
-    <div class="card-body">
+    <div class="card-body pb-2">
         <h5 class="card-title" style="font-weight: 600;">Resident Intro</h5>
-        <div class="card mb-0" *ngIf="isVisible">
-            <mat-expansion-panel class="mb-2" hideToggle *ngFor="let member of members">
+        <div class="card-body px-0 py-0 mb-0" *ngIf="isVisible" style="background-color: none !important;">
+            <mat-expansion-panel class="mb-3" hideToggle *ngFor="let member of members">
                 <mat-expansion-panel-header class="px-0">
                     <mat-panel-title class="card-header py-0 px-1 me-0 d-flex align-items-center" style="background-color: rgb(255, 242, 233);">
                         <div class="profile-wrapper">
                             <img src="{{member.photoUrl || './assets/images/user.png'}}" alt="{{member.knownAs}}" width="35" height="35"
                                 class="me-3 ms-2 rounded profile">
-                            <span style="color: black">{{member.knownAs}}'s Background</span>
+                            <span style="color: rgb(82, 14, 14); font-weight: 400;">{{member.knownAs}}'s Background</span>
                         </div>
                     </mat-panel-title>
                 </mat-expansion-panel-header>
-                <div class="card-body py-2">
+                <div class="card-body pt-2 pb-3">
                     <p>Member Since: {{member.created | date:'mediumDate'}}</p>
                     <p>Last Day: {{member.leaseEnd | date:'mediumDate'}}</p>
                     <button class="btn btn-warning">Message</button>
