@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
@@ -20,10 +21,11 @@ export class MyhomeDashboardComponent implements OnInit {
   member: Member | undefined;
   user: User | null = null;
 
-  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService, private toastr: ToastrService) {
+  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
+    this.titleService.setTitle("myHOME - Dashboard");
   }
 
   ngOnInit(): void {

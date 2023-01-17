@@ -1,1 +1,32 @@
-<p>reisdent-sum works!</p>
+<!-- Reports -->
+<div class="card">
+    <div class="filter">
+        <a class="icon" style="cursor: pointer;">
+            <fa-icon [icon]="['fas', 'sync']"></fa-icon>
+        </a>
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title" style="font-weight: 600;">Resident Intro</h5>
+        <div class="card mb-0">
+            <mat-expansion-panel class="mb-2" hideToggle *ngFor="let member of members">
+                <mat-expansion-panel-header class="px-0">
+                    <mat-panel-title class="card-header py-0 px-1 me-0 d-flex align-items-center">
+                        <div class="profile-wrapper">
+                            <img src="{{member.photoUrl || './assets/images/user.png'}}" alt="{{member.knownAs}}" width="35"
+                                class="me-3 ms-2 rounded profile">
+                            <span style="color: black">{{member.knownAs}}'s Background</span>
+                        </div>
+                    </mat-panel-title>
+                </mat-expansion-panel-header>
+                <div class="card-body py-2">
+                    <p>Member Since: {{member.created | date:'mediumDate'}}</p>
+                    <p>Last Day: {{member.leaseEnd | date:'mediumDate'}}</p>
+                    <button class="btn btn-warning">Message</button>
+                </div>
+            </mat-expansion-panel>
+        </div>
+
+
+    </div>
+</div><!-- End Reports -->
