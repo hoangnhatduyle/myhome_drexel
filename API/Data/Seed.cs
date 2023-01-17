@@ -37,6 +37,7 @@ namespace API.Data
 
                 user.UserName = user.UserName.ToLower();
                 user.Photos.First().IsApproved = true;
+                user.Photos.First().IsMain = true;
                 // user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
                 // user.PasswordSalt = hmac.Key;
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Bill } from '../_models/bill';
 import { BillService } from '../_services/bill.service';
 
@@ -13,8 +13,9 @@ export class BillChartComponent implements OnInit {
   gas: Bill[] = [];
   electricity: Bill[] = [];
   chartOptions = {};
+  isVisible: boolean = true;
 
-  constructor(private billService: BillService) { }
+  constructor(private billService: BillService, private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.billService.getBills().subscribe({
@@ -88,7 +89,7 @@ export class BillChartComponent implements OnInit {
   }
 
   private processArray(input: Bill[]) {
-    let returnArray : any = [];
+    let returnArray: any = [];
     for (let i = 0; i < input.length; i++) {
       returnArray.push({
         x: new Date(2023, i, 1), y: input[i].amount
@@ -98,4 +99,9 @@ export class BillChartComponent implements OnInit {
     return returnArray;
   }
 
+  rerender(): void {
+    this.isVisible = false;
+    this.changeDetectorRef.detectChanges();
+    this.isVisible = true;
+  }
 }

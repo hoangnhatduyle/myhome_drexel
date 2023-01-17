@@ -20,7 +20,7 @@
         "Email": "dalehouston@medesign.com",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/84.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/9.jpg",
                 "isMain": true
             }
         ]
@@ -46,7 +46,7 @@
         "Email": "pratthouston@medesign.com",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/87.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/64.jpg",
                 "isMain": true
             }
         ]
@@ -72,7 +72,7 @@
         "Email": "christensenhouston@medesign.com",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/26.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/12.jpg",
                 "isMain": true
             }
         ]
@@ -98,7 +98,7 @@
         "Email": "nealhouston@medesign.com",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/87.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/37.jpg",
                 "isMain": true
             }
         ]
@@ -124,7 +124,7 @@
         "Email": "richardhouston@medesign.com",
         "Photos": [
             {
-                "url": "https://randomuser.me/api/portraits/women/25.jpg",
+                "Url": "https://randomuser.me/api/portraits/men/26.jpg",
                 "isMain": true
             }
         ]

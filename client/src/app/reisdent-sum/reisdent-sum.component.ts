@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ApplicationRef, ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
 import { UserParams } from '../_models/userParams';
@@ -13,8 +13,9 @@ export class ReisdentSumComponent implements OnInit {
   members: Member[] = [];
   pagination: Pagination | undefined;
   userParams: UserParams | undefined;
+  isVisible: boolean = true;
 
-  constructor(private memberService: MembersService) {
+  constructor(private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef) {
     this.userParams = this.memberService.getUserParams();
   }
 
@@ -32,4 +33,9 @@ export class ReisdentSumComponent implements OnInit {
     })
   }
 
+  rerender(): void {
+    this.isVisible = false;
+    this.changeDetectorRef.detectChanges();
+    this.isVisible = true;
+  }
 }

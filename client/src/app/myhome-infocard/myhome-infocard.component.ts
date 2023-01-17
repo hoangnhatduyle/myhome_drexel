@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { Member } from '../_models/member';
 
 @Component({
@@ -9,8 +9,9 @@ import { Member } from '../_models/member';
 export class MyhomeInfocardComponent implements OnInit {
   @Input() member: Member | undefined;
   dueDate: string | undefined;
+  isVisible: boolean = true;
 
-  constructor() { }
+  constructor(private changeDetectorRef: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -24,4 +25,9 @@ export class MyhomeInfocardComponent implements OnInit {
     this.dueDate = dueDate;
   }
 
+  rerender(): void {
+    this.isVisible = false;
+    this.changeDetectorRef.detectChanges();
+    this.isVisible = true;
+  }
 }
