@@ -1,1 +1,63 @@
-<p>recent-payment works!</p>
+<div class="card recent-sales overflow-auto">
+
+    <div class="filter">
+        <a class="icon" style="cursor: pointer;">
+            <fa-icon [icon]="['fas', 'sync']" (click)="rerender()"></fa-icon>
+        </a>
+    </div>
+
+    <div class="card-body">
+        <h5 class="card-title">Recent Payments <span>| Today</span></h5>
+
+        <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="isVisible">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Method</th>
+                    <th scope="col">Pay Date</th>
+                    <th scope="col">Amount</th>
+                    <th scope="col">Status</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Cash</td>
+                    <td>Test</td>
+                    <td>$64</td>
+                    <td><span class="badge bg-success">Approved</span></td>
+                </tr>
+                <tr>
+                    <th scope="row">2</th>
+                    <td>Zelle</td>
+                    <td>Test</td>
+                    <td>$47</td>
+                    <td><span class="badge bg-warning">Pending</span></td>
+                </tr>
+                <tr>
+                    <th scope="row">3</th>
+                    <td>Cash</td>
+                    <td>Test</td>
+                    <td>$147</td>
+                    <td><span class="badge bg-success">Approved</span></td>
+                </tr>
+                <tr>
+                    <th scope="row">4</th>
+                    <td>Zelle</td>
+                    <td>Test</td>
+                    <td>$67</td>
+                    <td><span class="badge bg-danger">Rejected</span></td>
+                </tr>
+                <tr>
+                    <th scope="row">5</th>
+                    <td>Cash</td>
+                    <td>Test</td>
+                    <td>$165</td>
+                    <td><span class="badge bg-success">Approved</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+</div>

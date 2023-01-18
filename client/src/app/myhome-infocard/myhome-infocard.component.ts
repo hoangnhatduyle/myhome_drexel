@@ -1,6 +1,8 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
+import { Bill } from '../_models/bill';
 import { Member } from '../_models/member';
+import { BillService } from '../_services/bill.service';
 
 @Component({
   selector: 'app-myhome-infocard',
@@ -11,8 +13,13 @@ export class MyhomeInfocardComponent implements OnInit {
   @Input() member: Member | undefined;
   dueDate: string | undefined;
   isVisible: boolean = true;
+  bills: Bill[] = [];
+  water: number = 0;
+  gas: number = 0;
+  electricity: number = 0;
+  total = 0;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
+  constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private billService: BillService) { }
 
   ngOnInit(): void {
     const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -24,6 +31,18 @@ export class MyhomeInfocardComponent implements OnInit {
     let dueDate = month[currMonth] + " - 15";
 
     this.dueDate = dueDate;
+
+    this.billService.getBills().subscribe({
+      next: bills => {
+        if (bills) {
+          this.water = bills.filter(x => x.type == 'water' && x.month == currMonth + 1)[0].amount;
+          this.gas = bills.filter(x => x.type == 'gas' && x.month == currMonth + 1)[0].amount;
+          this.electricity = bills.filter(x => x.type == 'electricity' && x.month == currMonth + 1)[0].amount;
+        }
+
+        this.total = this.water + this.gas + this.electricity + this.member!.rentalFee;        
+      }
+    })
   }
 
   rerender(): void {

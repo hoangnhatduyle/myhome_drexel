@@ -16,6 +16,7 @@ import { FontAwesomeModule, FaIconLibrary } from '@fortawesome/angular-fontaweso
 import { fas } from '@fortawesome/free-solid-svg-icons';
 import { far } from '@fortawesome/free-regular-svg-icons';
 import {MatExpansionModule} from '@angular/material/expansion';
+import { DataTablesModule } from "angular-datatables";
 @NgModule({
   declarations: [],
   imports: [
@@ -35,7 +36,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     SidebarModule.forRoot(),
     FontAwesomeModule,
     MatExpansionModule,
-    ModalModule.forRoot()
+    ModalModule.forRoot(),
+    DataTablesModule
   ],
   exports: [
     BsDropdownModule,
@@ -51,7 +53,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
     ModalModule,
     SidebarModule,
     FontAwesomeModule,
-    MatExpansionModule
+    MatExpansionModule,
+    DataTablesModule
   ]
 })
 export class SharedModule {

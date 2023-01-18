@@ -19,6 +19,10 @@ export class BillChartComponent implements OnInit {
   constructor(private billService: BillService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
 
   ngOnInit(): void {
+    let date = new Date();
+
+    let title = "Bill Report - " + date.getFullYear()
+
     this.billService.getBills().subscribe({
       next: bills => {
         if (bills) {
@@ -31,7 +35,7 @@ export class BillChartComponent implements OnInit {
             animationEnabled: true,
             theme: "light2",
             title: {
-              text: "Bill Report - 2023"
+              text: title
             },
             axisX: {
               valueFormatString: "MMM",
