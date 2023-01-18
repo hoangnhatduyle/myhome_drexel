@@ -42,6 +42,9 @@ import { ReisdentSumComponent } from './reisdent-sum/reisdent-sum.component';
 import { RecentPaymentComponent } from './recent-payment/recent-payment.component';
 import { PaymentPieChartComponent } from './payment-pie-chart/payment-pie-chart.component';
 import * as CanvasJSAngularChart from '../assets/canvasjs-3.7.4/canvasjs.angular.component';
+import { BillManagementComponent } from './bill-management/bill-management.component';
+import { PaymentManagementComponent } from './payment-management/payment-management.component';
+import { MyhomeNavComponent } from './myhome-nav/myhome-nav.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -78,7 +81,10 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     ReisdentSumComponent,
     RecentPaymentComponent,
     PaymentPieChartComponent,
-    CanvasJSChart
+    CanvasJSChart,
+    BillManagementComponent,
+    PaymentManagementComponent,
+    MyhomeNavComponent
   ],
   imports: [
     BrowserModule,

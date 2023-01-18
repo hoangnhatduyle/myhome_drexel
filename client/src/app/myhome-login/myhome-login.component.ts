@@ -30,7 +30,7 @@ export class MyhomeLoginComponent implements OnInit {
 
   login() {
     this.accountService.login(this.model).subscribe({
-      next: () => this.router.navigateByUrl("/dashboard")
+      next: () => this.router.navigateByUrl("/main/dashboard")
     });
   }
 }

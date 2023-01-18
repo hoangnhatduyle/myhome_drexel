@@ -1,15 +1,35 @@
-<h2>Admin Panel</h2>
-<div class="tab-panel">
-    <tabset class="member-tabset">
-        <tab heading="User Management" *appHasRole="['Admin']">
-            <div class="container">
-                <app-user-management></app-user-management>
-            </div>
-        </tab>
-        <tab heading="Photo Management" *appHasRole="['Admin', 'Moderator']">
-            <div class="container">
-                <app-photo-management></app-photo-management>
-            </div>
-        </tab>
-    </tabset>
-</div>
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 style="font-weight: 400; color: rgb(82, 14, 14);">Admin Panel</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a style="font-weight: 400;">Menu</a></li>
+                <li class="breadcrumb-item active" style="font-weight: 400;">Admin</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section dashboard">
+        <div class="tab-panel">
+            <tabset class="member-tabset">
+                <tab heading="User Management" *appHasRole="['Admin']">
+                    <div class="container ps-0 ms-3 mt-3">
+                        <app-user-management></app-user-management>
+                    </div>
+                </tab>
+                <tab heading="Bill Management" *appHasRole="['Admin', 'Moderator']">
+                    <div class="container">
+                        <!-- <app-photo-management></app-photo-management> -->
+                        <app-bill-management></app-bill-management>
+                    </div>
+                </tab>
+                <tab heading="Payment Management" *appHasRole="['Admin', 'Moderator']">
+                    <div class="container">
+                        <!-- <app-photo-management></app-photo-management> -->
+                        <app-payment-management></app-payment-management>
+                    </div>
+                </tab>
+            </tabset>
+        </div>
+    </section>
+</main>

@@ -12,6 +12,7 @@ import { MemberListComponent } from './members/member-list/member-list.component
 import { MessagesComponent } from './messages/messages.component';
 import { MyhomeDashboardComponent } from './myhome-dashboard/myhome-dashboard.component';
 import { MyhomeLoginComponent } from './myhome-login/myhome-login.component';
+import { MyhomeNavComponent } from './myhome-nav/myhome-nav.component';
 import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
@@ -24,18 +25,29 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'members', component: MemberListComponent},
-      { path: 'members/:username', component: MemberDetailComponent, resolve: {member: MemberDetailedResolver} },
+      { path: 'members', component: MemberListComponent },
+      { path: 'members/:username', component: MemberDetailComponent, resolve: { member: MemberDetailedResolver } },
       { path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       { path: 'lists', component: ListsComponent },
       { path: 'messages', component: MessagesComponent },
-      { path: 'admin', component: AdminPanelComponent, canActivate: [AdminGuard] },      
-      { path: 'dashboard', component: MyhomeDashboardComponent }
+      {
+        path: 'main', component: MyhomeNavComponent, 
+        children: [
+          {
+            path: 'dashboard',
+            component: MyhomeDashboardComponent
+          },
+          {
+            path: 'admin',
+            component: AdminPanelComponent, canActivate: [AdminGuard]
+          }
+        ]
+      }
     ]
   },
-  { path: 'errors', component: TestErrorComponent},
-  { path: 'not-found', component: NotFoundComponent},
-  { path: 'server-error', component: ServerErrorComponent},
+  { path: 'errors', component: TestErrorComponent },
+  { path: 'not-found', component: NotFoundComponent },
+  { path: 'server-error', component: ServerErrorComponent },
   { path: '**', component: NotFoundComponent, pathMatch: 'full' }
 ];
 

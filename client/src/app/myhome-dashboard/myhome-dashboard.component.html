@@ -1,203 +1,31 @@
-<ng-sidebar-container style="height: 100vh" *ngIf="member">
-    <ng-sidebar style="margin-top: 62px;" [(opened)]="opened" [autoCollapseWidth]="autoCollapseWidth">
-        <div style="position: relative; height: 100%; width: 320px;">
-            <div class="sidebar">
-                <ul class="sidebar-nav" id="sidebar-nav">
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 style="font-weight: 400; color: rgb(82, 14, 14);">Dashboard</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a style="font-weight: 400;">Home</a></li>
+                <li class="breadcrumb-item active" style="font-weight: 400;">Dashboard</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
 
-                    <li class="nav-item">
-                        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-                            [routerLinkActive]="['is-active']">
-                            <fa-icon [icon]="['fas', 'home']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/dashboard">Dashboard</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            <fa-icon [icon]="['fas', 'user']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/profile">Profile</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            <fa-icon [icon]="['fas', 'door-closed']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/room">My Room</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            <fa-icon [icon]="['fas', 'folder-open']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/document">Document</span>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link">
-                            <fa-icon [icon]="['fas', 'cog']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/settings">Settings</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item" style="border-bottom: solid 1px rgb(82, 14, 14);">
-                        <a class="nav-link">
-                            <fa-icon [icon]="['fas', 'phone']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/contact">Contact Me</span>
-                        </a>
-                    </li>
-                </ul>
-                <app-myhome-calendar></app-myhome-calendar>
+    <section class="section dashboard">
+        <app-myhome-infocard *appHasRole="['Member']" [member]="member"></app-myhome-infocard>
+        <div class="row">
+            <div class="col-lg-8" style="padding-right: 6px">
+                <app-bill-chart></app-bill-chart>
+            </div>
+            <div class="col-lg-4">
+                <app-reisdent-sum></app-reisdent-sum>
             </div>
         </div>
-    </ng-sidebar>
-
-    <div ng-sidebar-content>
-        <header class="header fixed-top d-flex align-items-center">
-            <div class="d-flex align-items-center justify-content-between">
-                <a class="logo d-flex align-items-center" routerLink="/main/dashboard">
-                    <img src="assets/images/logo.png" alt="" style="max-height: 35px;">
-                    <span class="d-none d-lg-block" style="color: rgb(82, 14, 14);">myHOME</span>
-                </a>
-                <!-- <i class="fa fa-bars ms-3 toggle-btn" style="font-size: 24px;" (click)="toggleOpened()"></i> -->
-                <fa-icon [icon]="['fas', 'bars']" style="font-size: 24px;" class="ms-3 toggle-btn"
-                    (click)="toggleOpened()"></fa-icon>
-            </div><!-- End Logo -->
-
-            <div class="search-bar" [class.search-bar-show]="search">
-                <form class="search-form d-flex align-items-center" method="POST" action="#">
-                    <input type="text" name="query" placeholder="Search" title="Enter search keyword">
-                    <button type="submit" title="Search">
-                        <fa-icon [icon]="['fas', 'search']"></fa-icon>
-                    </button>
-                </form>
-            </div><!-- End Search Bar -->
-
-            <nav class="header-nav ms-auto">
-                <ul class="d-flex align-items-center">
-
-                    <li class="nav-item d-block d-xl-none">
-                        <a class="nav-link nav-icon search-bar-toggle">
-                            <fa-icon [icon]="['fas', 'search']" (click)="toggleSearch()"></fa-icon>
-                        </a>
-                    </li><!-- End Search Icon-->
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link nav-icon" data-bs-toggle="dropdown">
-                            <fa-icon [icon]="['far', 'bell']"></fa-icon>
-                            <span class="badge bg-primary badge-number">4</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item dropdown">
-                        <a class="nav-link nav-icon" data-bs-toggle="dropdown">
-                            <fa-icon [icon]="['far', 'comment-dots']"></fa-icon>
-                            <span class="badge bg-success badge-number">3</span>
-                        </a>
-                    </li>
-
-                    <li class="nav-item dropdown pe-3">
-
-                        <div class="dropdown d-flex align-items-center pe-0" dropdown>
-                            <img src="{{member.photoUrl || './assets/images/user.png'}}" alt="user photo"
-                                class="dropdown-toggle rounded-circle" style="max-height: 36px;">
-                            <a class="dropdown-toggle text-decoration-none d-none d-md-block ps-2" style="color: rgb(82, 14, 14); font-size: 14px;
-                                font-weight: 500;" dropdownToggle>{{member.knownAs}}</a>
-                            <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
-                                style="margin-top: 2.5rem" *dropdownMenu>
-                                <li class="dropdown-header">
-                                    <h6 style="font-weight: 400;">{{member.knownAs}}</h6>
-                                    <span>House Member</span>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center">
-                                        <fa-icon [icon]="['fas', 'lock']"></fa-icon>
-                                        <span class="ms-3">Admin</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center">
-                                        <fa-icon [icon]="['far', 'user']"></fa-icon>
-                                        <span class="ms-3">My Profile</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center">
-                                        <fa-icon [icon]="['fas', 'cog']"></fa-icon>
-                                        <span class="ms-3">Account Settings</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center">
-                                        <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
-                                        <span class="ms-3">Need Help?</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <hr class="dropdown-divider">
-                                </li>
-
-                                <li>
-                                    <a class="dropdown-item d-flex align-items-center" (click)="logout()">
-                                        <fa-icon [icon]="['fas', 'sign-out']"></fa-icon>
-                                        <span class="ms-3">Sign Out</span>
-                                    </a>
-                                </li>
-
-                            </ul><!-- End Profile Dropdown Items -->
-                        </div>
-                    </li>
-                </ul>
-            </nav>
-        </header>
-
-        <section style="margin-top: 60px;" [class.is-collapsed]="opened">
-            <main id="main" class="main">
-                <div class="pagetitle">
-                    <h1 style="font-weight: 400; color: rgb(82, 14, 14);">Dashboard</h1>
-                    <nav>
-                        <ol class="breadcrumb">
-                            <li class="breadcrumb-item"><a style="font-weight: 400;">Home</a></li>
-                            <li class="breadcrumb-item active" style="font-weight: 400;">Dashboard</li>
-                        </ol>
-                    </nav>
-                </div><!-- End Page Title -->
-
-                <section class="section dashboard">
-                    <app-myhome-infocard [member]="member"></app-myhome-infocard>
-                    <div class="row">
-                        <div class="col-lg-8" style="padding-right: 6px">
-                            <app-bill-chart></app-bill-chart>
-                        </div>
-                        <div class="col-lg-4">
-                            <app-reisdent-sum></app-reisdent-sum>
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="col-lg-8">
-                            <app-recent-payment></app-recent-payment>
-                        </div>
-                        <div class="col-lg-4">
-                            <app-payment-pie-chart [member]="member"></app-payment-pie-chart>
-                        </div>
-                    </div>
-                </section>
-            </main>
-        </section>
-    </div>
-</ng-sidebar-container>
+        <div class="row">
+            <div class="col-lg-8">
+                <app-recent-payment></app-recent-payment>
+            </div>
+            <div class="col-lg-4">
+                <app-payment-pie-chart [member]="member"></app-payment-pie-chart>
+            </div>
+        </div>
+    </section>
+</main>

@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
 import { Member } from '../_models/member';
 import { User } from '../_models/user';
@@ -9,11 +8,15 @@ import { AccountService } from '../_services/account.service';
 import { MembersService } from '../_services/members.service';
 
 @Component({
-  selector: 'app-myhome-dashboard',
-  templateUrl: './myhome-dashboard.component.html',
-  styleUrls: ['./myhome-dashboard.component.css']
+  selector: 'app-myhome-nav',
+  templateUrl: './myhome-nav.component.html',
+  styleUrls: ['./myhome-nav.component.css']
 })
-export class MyhomeDashboardComponent implements OnInit {
+export class MyhomeNavComponent implements OnInit {
+  opened: boolean = true;
+  search: boolean = false;
+  autoCollapseWidth: number = 800;
+
   member: Member | undefined;
   user: User | null = null;
 
@@ -33,5 +36,18 @@ export class MyhomeDashboardComponent implements OnInit {
     this.memberService.getMember(this.user.userName).subscribe({
       next: member => this.member = member
     })
+  }
+
+  toggleOpened(): void {
+    this.opened = !this.opened;
+  }
+
+  toggleSearch(): void {
+    this.search = !this.search;
+  }
+
+  logout() {
+    this.accountService.logout();
+    this.router.navigateByUrl("/");
   }
 }
