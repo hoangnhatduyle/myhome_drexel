@@ -9,8 +9,8 @@
         </nav>
     </div><!-- End Page Title -->
 
-    <section class="section dashboard">
-        <app-myhome-infocard *appHasRole="['Member']" [member]="member"></app-myhome-infocard>
+    <section class="section dashboard" *appHasRole="['Member']">
+        <app-myhome-infocard [member]="member"></app-myhome-infocard>
         <div class="row">
             <div class="col-lg-8" style="padding-right: 6px">
                 <app-bill-chart></app-bill-chart>
@@ -22,6 +22,16 @@
         <div class="row">
             <div class="col-lg-8">
                 <app-recent-payment></app-recent-payment>
+            </div>
+            <div class="col-lg-4">
+                <app-payment-pie-chart [member]="member"></app-payment-pie-chart>
+            </div>
+        </div>
+    </section>
+    <section class="section dashboard" *appHasRole="['Admin', 'Moderator']">
+        <div class="row">
+            <div class="col-lg-8" style="padding-right: 6px">
+                <app-bill-chart></app-bill-chart>
             </div>
             <div class="col-lg-4">
                 <app-payment-pie-chart [member]="member"></app-payment-pie-chart>

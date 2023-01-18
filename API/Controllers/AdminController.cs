@@ -32,6 +32,7 @@ namespace API.Controllers
             {
                 u.Id,
                 UserName = u.UserName,
+                RentFee = u.RentalFee,
                 Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
             }).ToListAsync();
 

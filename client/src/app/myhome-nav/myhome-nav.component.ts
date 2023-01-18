@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { take } from 'rxjs';
@@ -20,11 +20,15 @@ export class MyhomeNavComponent implements OnInit {
   member: Member | undefined;
   user: User | null = null;
 
-  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title) {
+  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, private cdref: ChangeDetectorRef) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
-    this.titleService.setTitle("myHOME - Dashboard");
+    this.titleService.setTitle("myHOME");
+  }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
   }
 
   ngOnInit(): void {

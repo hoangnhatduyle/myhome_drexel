@@ -5,44 +5,49 @@
                 <ul class="sidebar-nav" id="sidebar-nav">
 
                     <li class="nav-item">
-                        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}"
-                            [routerLinkActive]="['is-active']">
+                        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
+                            routerLink="/main/dashboard">
                             <fa-icon [icon]="['fas', 'home']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/main/dashboard">Dashboard</span>
+                            <span style="font-weight: 500;">Dashboard</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
+                            routerLink="/main/profile">
                             <fa-icon [icon]="['fas', 'user']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/main/profile">Profile</span>
+                            <span style="font-weight: 500;">Profile</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
+                            routerLink="/main/room">
                             <fa-icon [icon]="['fas', 'door-closed']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/main/room">My Room</span>
+                            <span style="font-weight: 500;">My Room</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
+                            routerLink="/main/document">
                             <fa-icon [icon]="['fas', 'folder-open']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/main/document">Document</span>
+                            <span style="font-weight: 500;">Document</span>
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link">
+                        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
+                            routerLink="/main/settings">
                             <fa-icon [icon]="['fas', 'cog']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/main/settings">Settings</span>
+                            <span style="font-weight: 500;">Settings</span>
                         </a>
                     </li>
 
                     <li class="nav-item" style="border-bottom: solid 1px rgb(82, 14, 14);">
-                        <a class="nav-link">
+                        <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
+                            routerLink="/main/contact">
                             <fa-icon [icon]="['fas', 'phone']" class="me-2"></fa-icon>
-                            <span style="font-weight: 500;" routerLink="/main/contact">Contact Me</span>
+                            <span style="font-weight: 500;">Contact Me</span>
                         </a>
                     </li>
                 </ul>

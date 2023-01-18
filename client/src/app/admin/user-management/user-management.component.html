@@ -4,6 +4,7 @@
             <tr>
                 <th style="width: 30%">Username</th>
                 <th style="width: 30%">Active Roles</th>
+                <th style="width: 30%">This Month Due</th>
                 <th style="width: 30%"></th>
             </tr>
         </thead>
@@ -11,6 +12,8 @@
             <tr *ngFor="let user of users">
                 <td>{{user.userName}}</td>
                 <td>{{user.roles.join(', ')}}</td>
+                <td *ngIf="user.roles.includes('Member')">{{user.rentFee + utility}}$</td>
+                <td *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">N/A</td>
                 <td><button (click)="openRolesModal(user)" class="btn btn-warning" style="color: white;">Edit Role</button></td>
             </tr>
         </tbody>

@@ -49,9 +49,9 @@ export class PaymentPieChartComponent implements OnInit {
             indexLabel: "{name}",
             dataPoints: [
               { y: this.member!.rentalFee, name: "Room" },
-              { y: this.electricity, name: "Electricity" },
-              { y: this.water, name: "Water" },
-              { y: this.gas, name: "Gas" }
+              { y: this.electricity / 6, name: "Electricity" },
+              { y: this.water / 6, name: "Water" },
+              { y: this.gas / 6, name: "Gas" }
             ]
           }]
         }

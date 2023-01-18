@@ -13,11 +13,10 @@ export class MyhomeLoginComponent implements OnInit {
   registerMode = false;
 
   constructor(public accountService: AccountService, private router: Router, private titleService: Title) {
-    this.titleService.setTitle("myHOME - Login");
   }
 
   ngOnInit(): void {
-
+    this.titleService.setTitle("myHOME - Login/Register");
   }
 
   registerToggle() {

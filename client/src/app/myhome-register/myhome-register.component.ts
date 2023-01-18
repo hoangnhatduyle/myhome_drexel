@@ -17,8 +17,7 @@ export class MyhomeRegisterComponent implements OnInit {
   maxDate: Date = new Date();
   validationErrors: string[] | undefined;
 
-  constructor(private accountService: AccountService, private toastr: ToastrService, private fb: FormBuilder, private router: Router, private titleService: Title) {
-    this.titleService.setTitle("myHOME - Register");
+  constructor(private accountService: AccountService, private toastr: ToastrService, private fb: FormBuilder, private router: Router) {
   }
 
   ngOnInit(): void {

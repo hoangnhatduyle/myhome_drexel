@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
+import { Bill } from 'src/app/_models/bill';
 import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
+import { BillService } from 'src/app/_services/bill.service';
 
 @Component({
   selector: 'app-user-management',
@@ -11,6 +13,15 @@ import { AdminService } from 'src/app/_services/admin.service';
 })
 export class UserManagementComponent implements OnInit {
   users: User[] = [];
+  bills: Bill[] = [];
+  water: Bill[] = [];
+  gas: Bill[] = [];
+  electricity: Bill[] = [];
+  utility: number = 0;
+
+  date = new Date();
+  currMonth = this.date.getMonth();
+
   bsModalRef: BsModalRef<RolesModalComponent> = new BsModalRef<RolesModalComponent>();
   availableRoles = [
     'Admin',
@@ -18,15 +29,30 @@ export class UserManagementComponent implements OnInit {
     'Member'
   ]
 
-  constructor(private adminService: AdminService, private modalService: BsModalService) { }
+  constructor(private adminService: AdminService, private modalService: BsModalService, private billService: BillService) { }
 
   ngOnInit(): void {
     this.getUsersWithRoles();
+    this.getBill();
   }
 
   getUsersWithRoles() {
     this.adminService.getUsersWithRoles().subscribe({
       next: users => this.users = users
+    })
+  }
+
+  getBill() {
+    this.billService.getBills().subscribe({
+      next: bills => {
+        if (bills) {
+          this.bills = bills.filter(x => x.amount != 0);
+          this.water = this.bills.filter(x => x.type == 'water');
+          this.gas = this.bills.filter(x => x.type == 'gas');
+          this.electricity = this.bills.filter(x => x.type == 'electricity');
+          this.utility = parseInt((this.water[this.currMonth].amount / 6 + this.gas[this.currMonth].amount / 6 + this.electricity[this.currMonth].amount / 6).toFixed(2));
+        }
+      }
     })
   }
 

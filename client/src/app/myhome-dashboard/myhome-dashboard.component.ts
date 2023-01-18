@@ -17,11 +17,10 @@ export class MyhomeDashboardComponent implements OnInit {
   member: Member | undefined;
   user: User | null = null;
 
-  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title) {
+  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
-    this.titleService.setTitle("myHOME - Dashboard");
   }
 
   ngOnInit(): void {
