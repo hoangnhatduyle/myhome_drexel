@@ -21,6 +21,7 @@ namespace API.Entities
         public string Address { get; set; }
         public int RoomNumber { get; set; }
         public int RentalFee { get; set; }
+        public int LastRentalFee { get; set; }
         public List<Photo> Photos { get; set; } = new();
 
         // public int GetAge()

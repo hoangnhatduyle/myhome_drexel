@@ -2,181 +2,181 @@
     {
         "Type": "water",
         "Month": 1,
-        "Amount": 61
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 2,
-        "Amount": 87
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 3,
-        "Amount": 57
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 4,
-        "Amount": 95
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 5,
-        "Amount": 68
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 6,
-        "Amount": 57
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 7,
-        "Amount": 75
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 8,
-        "Amount": 93
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 9,
-        "Amount": 65
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 10,
-        "Amount": 81
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 11,
-        "Amount": 93
+        "Amount": 0
     },
     {
         "Type": "water",
         "Month": 12,
-        "Amount": 53
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 1,
-        "Amount": 78
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 2,
-        "Amount": 63
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 3,
-        "Amount": 83
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 4,
-        "Amount": 50
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 5,
-        "Amount": 55
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 6,
-        "Amount": 75
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 7,
-        "Amount": 83
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 8,
-        "Amount": 72
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 9,
-        "Amount": 70
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 10,
-        "Amount": 97
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 11,
-        "Amount": 73
+        "Amount": 0
     },
     {
         "Type": "gas",
         "Month": 12,
-        "Amount": 69
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 1,
-        "Amount": 68
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 2,
-        "Amount": 91
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 3,
-        "Amount": 99
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 4,
-        "Amount": 80
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 5,
-        "Amount": 54
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 6,
-        "Amount": 68
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 7,
-        "Amount": 89
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 8,
-        "Amount": 68
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 9,
-        "Amount": 70
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 10,
-        "Amount": 83
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 11,
-        "Amount": 69
+        "Amount": 0
     },
     {
         "Type": "electricity",
         "Month": 12,
-        "Amount": 73
+        "Amount": 0
     }
 ]

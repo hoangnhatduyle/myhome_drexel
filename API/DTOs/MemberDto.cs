@@ -21,6 +21,7 @@ namespace API.DTOs
         public string Address { get; set; }
         public int RoomNumber { get; set; }
         public int RentalFee { get; set; }
+        public int LastRentalFee { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
     }

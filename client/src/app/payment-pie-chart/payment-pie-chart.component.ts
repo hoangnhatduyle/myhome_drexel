@@ -20,13 +20,16 @@ export class PaymentPieChartComponent implements OnInit {
   electricityPercent: number = 0;
   chartOptions = {};
   isVisible: boolean = true;
+  date = new Date();
+  currMonth = this.date.getMonth();
 
   constructor(private billService: BillService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    let date = new Date();
-    let currMonth = date.getMonth();
+    this.getBills(this.currMonth);
+  }
 
+  getBills(currMonth: number) {
     this.billService.getBills().subscribe({
       next: bills => {
         if (bills) {
@@ -35,8 +38,6 @@ export class PaymentPieChartComponent implements OnInit {
           this.electricity = bills.filter(x => x.type == 'electricity' && x.month == currMonth + 1)[0].amount;
         }
 
-        let total = this.water + this.gas + this.electricity + this.member!.rentalFee;
-
         this.chartOptions = {
           animationEnabled: true,
           title: {
@@ -44,13 +45,13 @@ export class PaymentPieChartComponent implements OnInit {
           },
           data: [{
             type: "doughnut",
-            yValueFormatString: "#,###.##'%'",
+            yValueFormatString: "#,###.##'$'",
             indexLabel: "{name}",
             dataPoints: [
-              { y: this.member!.rentalFee / total * 100, name: "Room" },
-              { y: this.electricity / total * 100, name: "Electricity" },
-              { y: this.water / total * 100, name: "Water" },
-              { y: this.gas / total * 100, name: "Gas" }
+              { y: this.member!.rentalFee, name: "Room" },
+              { y: this.electricity, name: "Electricity" },
+              { y: this.water, name: "Water" },
+              { y: this.gas, name: "Gas" }
             ]
           }]
         }
@@ -62,6 +63,7 @@ export class PaymentPieChartComponent implements OnInit {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
     this.isVisible = true;
+    this.getBills(this.currMonth);
     this.toastr.success("Refresh successfully!");
   }
 }

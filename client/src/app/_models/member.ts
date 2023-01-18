@@ -21,6 +21,7 @@ export interface Member {
     roomNumber: number;
     address: string;
     rentalFee: number;
+    lastRentalFee: number;
     phone: string;
     email: string;
 }

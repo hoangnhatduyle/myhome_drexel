@@ -1,1 +1,29 @@
-<p>bill-management works!</p>
+<div>
+    <select class="form-select w-25" #billSelection (change)="onSelected()">
+        <option default>Bill Select...</option>
+        <option value="water">Water</option>
+        <option value="gas">Gas</option>
+        <option value="electricity">Electricity</option>
+    </select>
+
+    <table class="table mt-3">
+        <thead>
+            <tr>
+                <th style="width: 20%">#</th>
+                <th style="width: 20%">Type</th>
+                <th style="width: 20%">Month</th>
+                <th style="width: 20%">Amount</th>
+                <th style="width: 20%"></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let bill of selectedBills; let index = index;">
+                <td>{{index + 1}}</td>
+                <td>{{bill.type}}</td>
+                <td>{{bill.month}}</td>
+                <td>{{bill.amount}}</td>
+                <td><button (click)="openRolesModal(bill)" class="btn btn-warning" style="color: white;">Edit Bill</button></td>
+            </tr>
+        </tbody>
+    </table>
+</div>

@@ -19,6 +19,10 @@ export class BillService {
     return this.http.get<Bill[]>(this.baseUrl + 'bill/' + type);
   }
 
+  updateBill(id: number, amount: number) {
+    return this.http.put<number>(this.baseUrl + 'admin/edit-bill-amount/' + id, {"amount": amount})
+  }
+
   removeBill(id: number) {
     return this.http.delete(this.baseUrl + 'bill/' + id);    
   }

@@ -38,6 +38,7 @@ export class ReisdentSumComponent implements OnInit {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
     this.isVisible = true;
+    this.loadMembers();
     this.toastr.success("Refresh successfully!");
   }
 }

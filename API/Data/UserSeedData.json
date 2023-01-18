@@ -16,6 +16,7 @@
         "Address": "400 Rutledge Street, Boykin, Guam, 7989",
         "RoomNumber": 2,
         "RentalFee": 379,
+        "LastRentalFee": 400,
         "PhoneNumber": "+1 (954) 471-3092",
         "Email": "dalehouston@medesign.com",
         "Photos": [
@@ -42,6 +43,7 @@
         "Address": "400 Rutledge Street, Boykin, Guam, 7989",
         "RoomNumber": 2,
         "RentalFee": 379,
+        "LastRentalFee": 400,
         "PhoneNumber": "+1 (954) 471-3092",
         "Email": "jakehouston@medesign.com",
         "Photos": [
@@ -68,6 +70,7 @@
         "Address": "746 Rochester Avenue, Gardiner, Nebraska, 2094",
         "RoomNumber": 3,
         "RentalFee": 398,
+        "LastRentalFee": 400,
         "PhoneNumber": "+1 (804) 413-3509",
         "Email": "pratthouston@medesign.com",
         "Photos": [
@@ -94,6 +97,7 @@
         "Address": "649 Menahan Street, Glidden, Kentucky, 2777",
         "RoomNumber": 5,
         "RentalFee": 378,
+        "LastRentalFee": 440,
         "PhoneNumber": "+1 (898) 581-2378",
         "Email": "christensenhouston@medesign.com",
         "Photos": [
@@ -120,6 +124,7 @@
         "Address": "125 Fane Court, Brandywine, Illinois, 5899",
         "RoomNumber": 1,
         "RentalFee": 367,
+        "LastRentalFee": 440,
         "PhoneNumber": "+1 (830) 487-3467",
         "Email": "nealhouston@medesign.com",
         "Photos": [
@@ -146,6 +151,7 @@
         "Address": "787 Beaver Street, Knowlton, Texas, 2194",
         "RoomNumber": 4,
         "RentalFee": 370,
+        "LastRentalFee": 460,
         "PhoneNumber": "+1 (878) 515-2249",
         "Email": "richardhouston@medesign.com",
         "Photos": [

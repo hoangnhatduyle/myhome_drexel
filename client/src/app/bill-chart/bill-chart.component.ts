@@ -15,18 +15,21 @@ export class BillChartComponent implements OnInit {
   electricity: Bill[] = [];
   chartOptions = {};
   isVisible: boolean = true;
+  date = new Date();
+  title = "Bill Report - " + this.date.getFullYear()
 
   constructor(private billService: BillService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    let date = new Date();
 
-    let title = "Bill Report - " + date.getFullYear()
+    this.getBill(this.title);
+  }
 
+  getBill(title: string) {
     this.billService.getBills().subscribe({
       next: bills => {
         if (bills) {
-          this.bills = bills;
+          this.bills = bills.filter(x => x.amount != 0);
           this.water = this.bills.filter(x => x.type == 'water');
           this.gas = this.bills.filter(x => x.type == 'gas');
           this.electricity = this.bills.filter(x => x.type == 'electricity');
@@ -108,6 +111,7 @@ export class BillChartComponent implements OnInit {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
     this.isVisible = true;
+    this.getBill(this.title);
     this.toastr.success("Refresh successfully!");
   }
 }

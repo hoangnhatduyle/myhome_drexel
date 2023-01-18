@@ -1,6 +1,7 @@
 using API.DTOs;
 using API.Entities;
 using API.Interfaces;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -13,8 +14,10 @@ namespace API.Controllers
         private readonly UserManager<AppUser> _userManager;
         private readonly IUnitOfWork _unitOfWork;
         private readonly IPhotoService _photoService;
-        public AdminController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork, IPhotoService photoService)
+        private readonly IMapper _mapper;
+        public AdminController(UserManager<AppUser> userManager, IUnitOfWork unitOfWork, IPhotoService photoService, IMapper mapper)
         {
+            _mapper = mapper;
             _photoService = photoService;
             _unitOfWork = unitOfWork;
             _userManager = userManager;
@@ -104,6 +107,21 @@ namespace API.Controllers
 
             await _unitOfWork.Complete();
             return Ok();
+        }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPut("edit-bill-amount/{id}")]
+        public async Task<ActionResult> EditBillAmount(int id, BillUpdateDto billUpdateDto)
+        {
+            var bill = await _unitOfWork.BillRepository.GetBill(id);
+
+            if (bill == null) return NotFound();
+
+            _mapper.Map(billUpdateDto, bill);
+
+            if (await _unitOfWork.Complete()) return Ok(billUpdateDto.Amount);
+
+            return BadRequest("Failed to update bill");
         }
     }
 }

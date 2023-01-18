@@ -18,6 +18,8 @@ export class MyhomeInfocardComponent implements OnInit {
   gas: number = 0;
   electricity: number = 0;
   total = 0;
+  percentChange = 0;
+  higher: boolean = false;
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private billService: BillService) { }
 
@@ -40,7 +42,10 @@ export class MyhomeInfocardComponent implements OnInit {
           this.electricity = bills.filter(x => x.type == 'electricity' && x.month == currMonth + 1)[0].amount;
         }
 
-        this.total = this.water + this.gas + this.electricity + this.member!.rentalFee;        
+        this.total = Math.round(this.water / 6 + this.gas / 6 + this.electricity / 6 + this.member!.rentalFee);
+        this.percentChange = Math.abs((this.member!.rentalFee - this.member!.lastRentalFee) / this.member!.lastRentalFee * 100);
+        if (this.member!.rentalFee > this.member!.lastRentalFee) this.higher = true;
+        else this.higher = false;
       }
     })
   }
