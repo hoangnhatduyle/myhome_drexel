@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Member } from '../_models/member';
 
 @Component({
@@ -11,7 +12,7 @@ export class MyhomeInfocardComponent implements OnInit {
   dueDate: string | undefined;
   isVisible: boolean = true;
 
-  constructor(private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -29,5 +30,6 @@ export class MyhomeInfocardComponent implements OnInit {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
     this.isVisible = true;
+    this.toastr.success("Refresh successfully!");
   }
 }

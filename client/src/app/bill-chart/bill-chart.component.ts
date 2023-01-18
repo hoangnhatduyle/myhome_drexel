@@ -1,4 +1,5 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Bill } from '../_models/bill';
 import { BillService } from '../_services/bill.service';
 
@@ -15,7 +16,7 @@ export class BillChartComponent implements OnInit {
   chartOptions = {};
   isVisible: boolean = true;
 
-  constructor(private billService: BillService, private changeDetectorRef: ChangeDetectorRef) { }
+  constructor(private billService: BillService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.billService.getBills().subscribe({
@@ -103,5 +104,6 @@ export class BillChartComponent implements OnInit {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
     this.isVisible = true;
+    this.toastr.success("Refresh successfully!");
   }
 }

@@ -8,41 +8,41 @@
                         <a class="nav-link" [routerLinkActiveOptions]="{exact: true}"
                             [routerLinkActive]="['is-active']">
                             <fa-icon [icon]="['fas', 'home']" class="me-2"></fa-icon>
-                            <span style="font-weight: 600;" routerLink="/dashboard">Dashboard</span>
+                            <span style="font-weight: 500;" routerLink="/dashboard">Dashboard</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link">
                             <fa-icon [icon]="['fas', 'user']" class="me-2"></fa-icon>
-                            <span style="font-weight: 600;" routerLink="/profile">Profile</span>
+                            <span style="font-weight: 500;" routerLink="/profile">Profile</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link">
                             <fa-icon [icon]="['fas', 'door-closed']" class="me-2"></fa-icon>
-                            <span style="font-weight: 600;" routerLink="/room">My Room</span>
+                            <span style="font-weight: 500;" routerLink="/room">My Room</span>
                         </a>
                     </li>
 
                     <li class="nav-item">
                         <a class="nav-link">
                             <fa-icon [icon]="['fas', 'folder-open']" class="me-2"></fa-icon>
-                            <span style="font-weight: 600;" routerLink="/document">Document</span>
+                            <span style="font-weight: 500;" routerLink="/document">Document</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link">
                             <fa-icon [icon]="['fas', 'cog']" class="me-2"></fa-icon>
-                            <span style="font-weight: 600;" routerLink="/settings">Settings</span>
+                            <span style="font-weight: 500;" routerLink="/settings">Settings</span>
                         </a>
                     </li>
 
                     <li class="nav-item" style="border-bottom: solid 1px rgb(82, 14, 14);">
                         <a class="nav-link">
                             <fa-icon [icon]="['fas', 'phone']" class="me-2"></fa-icon>
-                            <span style="font-weight: 600;" routerLink="/contact">Contact Me</span>
+                            <span style="font-weight: 500;" routerLink="/contact">Contact Me</span>
                         </a>
                     </li>
                 </ul>
@@ -101,7 +101,7 @@
                             <img src="{{member.photoUrl || './assets/images/user.png'}}" alt="user photo"
                                 class="dropdown-toggle rounded-circle" style="max-height: 36px;">
                             <a class="dropdown-toggle text-decoration-none d-none d-md-block ps-2" style="color: rgb(82, 14, 14); font-size: 14px;
-                                font-weight: 600;" dropdownToggle>{{member.knownAs}}</a>
+                                font-weight: 500;" dropdownToggle>{{member.knownAs}}</a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
                                 style="margin-top: 2.5rem" *dropdownMenu>
                                 <li class="dropdown-header">

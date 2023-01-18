@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Bill } from '../_models/bill';
 import { Member } from '../_models/member';
 import { BillService } from '../_services/bill.service';
@@ -18,8 +19,9 @@ export class PaymentPieChartComponent implements OnInit {
   gasPercent: number = 0;
   electricityPercent: number = 0;
   chartOptions = {};
+  isVisible: boolean = true;
 
-  constructor(private billService: BillService) { }
+  constructor(private billService: BillService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     let date = new Date();
@@ -56,4 +58,10 @@ export class PaymentPieChartComponent implements OnInit {
     })
   }
 
+  rerender(): void {
+    this.isVisible = false;
+    this.changeDetectorRef.detectChanges();
+    this.isVisible = true;
+    this.toastr.success("Refresh successfully!");
+  }
 }

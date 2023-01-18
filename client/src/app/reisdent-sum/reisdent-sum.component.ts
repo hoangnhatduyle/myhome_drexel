@@ -1,4 +1,5 @@
 import { ApplicationRef, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ToastrService } from 'ngx-toastr';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
 import { UserParams } from '../_models/userParams';
@@ -15,7 +16,7 @@ export class ReisdentSumComponent implements OnInit {
   userParams: UserParams | undefined;
   isVisible: boolean = true;
 
-  constructor(private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef) {
+  constructor(private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) {
     this.userParams = this.memberService.getUserParams();
   }
 
@@ -37,5 +38,6 @@ export class ReisdentSumComponent implements OnInit {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
     this.isVisible = true;
+    this.toastr.success("Refresh successfully!");
   }
 }

@@ -2,13 +2,13 @@
 <div class="card" *ngIf="member">
     <div class="filter">
         <a class="icon" style="cursor: pointer;">
-            <fa-icon [icon]="['fas', 'sync']"></fa-icon>
+            <fa-icon [icon]="['fas', 'sync']" (click)="rerender()"></fa-icon>
         </a>
     </div>
 
     <div class="card-body">
         <h5 class="card-title" style="font-weight: 600;">Payment Breakdown <span>/ This Month</span></h5>
-        <div>
+        <div *ngIf="isVisible">
             <canvasjs-chart [options]="chartOptions" [styles]="{width: '100%', height:'360px'}"></canvasjs-chart>
         </div>
     </div>
