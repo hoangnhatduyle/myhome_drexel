@@ -42,6 +42,10 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   ngOnInit(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
+      language: {
+        search: "",
+        searchPlaceholder: 'Search...',
+      },
       lengthMenu: [
         [5, 10, 25, -1],
         [5, 10, 25, 'All'],

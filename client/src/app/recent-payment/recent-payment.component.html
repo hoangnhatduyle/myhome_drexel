@@ -1,4 +1,4 @@
-<div class="card recent-sales overflow-auto">
+<div class="card recent-sales overflow-auto" *ngIf="member">
 
     <div class="filter">
         <a class="icon" style="cursor: pointer;">
@@ -15,45 +15,21 @@
                     <th scope="col">#</th>
                     <th scope="col">Method</th>
                     <th scope="col">Pay Date</th>
+                    <th scope="col">Pay For</th>
                     <th scope="col">Amount</th>
                     <th scope="col">Status</th>
                 </tr>
             </thead>
             <tbody>
-                <tr>
-                    <th scope="row">1</th>
-                    <td>Cash</td>
-                    <td>Test</td>
-                    <td>$64</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">2</th>
-                    <td>Zelle</td>
-                    <td>Test</td>
-                    <td>$47</td>
-                    <td><span class="badge bg-warning">Pending</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">3</th>
-                    <td>Cash</td>
-                    <td>Test</td>
-                    <td>$147</td>
-                    <td><span class="badge bg-success">Approved</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">4</th>
-                    <td>Zelle</td>
-                    <td>Test</td>
-                    <td>$67</td>
-                    <td><span class="badge bg-danger">Rejected</span></td>
-                </tr>
-                <tr>
-                    <th scope="row">5</th>
-                    <td>Cash</td>
-                    <td>Test</td>
-                    <td>$165</td>
-                    <td><span class="badge bg-success">Approved</span></td>
+                <tr *ngFor="let payment of payments; let index = index;">
+                    <th scope="row">{{index}}</th>
+                    <td>{{payment.method}}</td>
+                    <td>{{payment.payDate}}</td>
+                    <td>{{payment.payMonth}}</td>
+                    <td>{{payment.amount}}</td>
+                    <td *ngIf="payment.paymentStatus == 'Approve'"><span class="badge bg-success">{{payment.paymentStatus}}</span></td>
+                    <td *ngIf="payment.paymentStatus == 'Pending'"><span class="badge bg-warning">{{payment.paymentStatus}}</span></td>
+                    <td *ngIf="payment.paymentStatus == 'Reject'"><span class="badge bg-danger">{{payment.paymentStatus}}</span></td>
                 </tr>
             </tbody>
         </table>

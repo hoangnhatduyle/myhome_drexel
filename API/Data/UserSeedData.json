@@ -27,13 +27,27 @@
         ],
         "Payment": [
             {
-              "Method": "Zelle",
-              "PayDate": "2020-02-29",
-              "PaymentStatus": "Pending",
-              "Amount": 414,
-              "PayMonth": 1
+                "Method": "Zelle",
+                "PayDate": "2020-02-29",
+                "PaymentStatus": "Pending",
+                "Amount": 414,
+                "PayMonth": 1
+            },
+            {
+                "Method": "Cash",
+                "PayDate": "2021-08-14",
+                "PaymentStatus": "Pending",
+                "Amount": 313,
+                "PayMonth": 2
+            },
+            {
+                "Method": "Cash",
+                "PayDate": "2022-06-10",
+                "PaymentStatus": "Pending",
+                "Amount": 290,
+                "PayMonth": 3
             }
-          ]
+        ]
     },
     {
         "UserName": "jake",
@@ -63,13 +77,13 @@
         ],
         "Payment": [
             {
-              "Method": "Zelle",
-              "PayDate": "2019-07-25",
-              "PaymentStatus": "Pending",
-              "Amount": 315,
-              "PayMonth": 1
+                "Method": "Zelle",
+                "PayDate": "2019-07-25",
+                "PaymentStatus": "Pending",
+                "Amount": 315,
+                "PayMonth": 1
             }
-          ]
+        ]
     },
     {
         "UserName": "Pratt",
@@ -99,13 +113,13 @@
         ],
         "Payment": [
             {
-              "Method": "Zelle",
-              "PayDate": "2020-06-26",
-              "PaymentStatus": "Pending",
-              "Amount": 440,
-              "PayMonth": 1
+                "Method": "Zelle",
+                "PayDate": "2020-06-26",
+                "PaymentStatus": "Pending",
+                "Amount": 440,
+                "PayMonth": 1
             }
-          ]
+        ]
     },
     {
         "UserName": "Christensen",
@@ -135,13 +149,13 @@
         ],
         "Payment": [
             {
-              "Method": "Zelle",
-              "PayDate": "2020-01-23",
-              "PaymentStatus": "Pending",
-              "Amount": 428,
-              "PayMonth": 1
+                "Method": "Zelle",
+                "PayDate": "2020-01-23",
+                "PaymentStatus": "Pending",
+                "Amount": 428,
+                "PayMonth": 1
             }
-          ]
+        ]
     },
     {
         "UserName": "Neal",
@@ -171,13 +185,13 @@
         ],
         "Payment": [
             {
-              "Method": "Zelle",
-              "PayDate": "2019-08-09",
-              "PaymentStatus": "Pending",
-              "Amount": 344,
-              "PayMonth": 1
+                "Method": "Zelle",
+                "PayDate": "2019-08-09",
+                "PaymentStatus": "Pending",
+                "Amount": 344,
+                "PayMonth": 1
             }
-          ]
+        ]
     },
     {
         "UserName": "Richard",
@@ -207,12 +221,12 @@
         ],
         "Payment": [
             {
-              "Method": "Zelle",
-              "PayDate": "2019-08-28",
-              "PaymentStatus": "Pending",
-              "Amount": 322,
-              "PayMonth": 1
+                "Method": "Zelle",
+                "PayDate": "2019-08-28",
+                "PaymentStatus": "Pending",
+                "Amount": 322,
+                "PayMonth": 1
             }
-          ]
+        ]
     }
 ]

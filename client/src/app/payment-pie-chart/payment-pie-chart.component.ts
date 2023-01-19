@@ -62,8 +62,8 @@ export class PaymentPieChartComponent implements OnInit {
   rerender(): void {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
-    this.isVisible = true;
     this.getBills(this.currMonth);
+    this.isVisible = true;
     this.toastr.success("Refresh successfully!");
   }
 }

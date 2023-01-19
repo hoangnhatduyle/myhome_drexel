@@ -110,8 +110,8 @@ export class BillChartComponent implements OnInit {
   rerender(): void {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
-    this.isVisible = true;
     this.getBill(this.title);
+    this.isVisible = true;
     this.toastr.success("Refresh successfully!");
   }
 }

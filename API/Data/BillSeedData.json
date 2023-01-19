@@ -2,7 +2,7 @@
     {
         "Type": "water",
         "Month": 1,
-        "Amount": 0
+        "Amount": 120
     },
     {
         "Type": "water",
@@ -62,7 +62,7 @@
     {
         "Type": "gas",
         "Month": 1,
-        "Amount": 0
+        "Amount": 186
     },
     {
         "Type": "gas",
@@ -122,7 +122,7 @@
     {
         "Type": "electricity",
         "Month": 1,
-        "Amount": 0
+        "Amount": 163
     },
     {
         "Type": "electricity",

@@ -17,9 +17,11 @@ export class MyhomeInfocardComponent implements OnInit {
   water: number = 0;
   gas: number = 0;
   electricity: number = 0;
-  percentChange : string = '';
+  percentChange: string = '';
   higher: boolean = false;
   total = 0;
+  date = new Date();
+  currMonth = this.date.getMonth();
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private billService: BillService) { }
 
@@ -27,13 +29,13 @@ export class MyhomeInfocardComponent implements OnInit {
     const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     // const currentDate = document.querySelector("#due_date");
 
-    let date = new Date();
-    let currMonth = date.getMonth();
-
-    let dueDate = month[currMonth] + " - 15";
+    let dueDate = month[this.currMonth] + " - 15";
 
     this.dueDate = dueDate;
+    this.getBill(this.currMonth);
+  }
 
+  getBill(currMonth: number) {
     this.billService.getBills().subscribe({
       next: bills => {
         if (bills) {
@@ -58,6 +60,7 @@ export class MyhomeInfocardComponent implements OnInit {
   rerender(): void {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
+    this.getBill(this.currMonth);
     this.isVisible = true;
     this.toastr.success("Refresh successfully!");
   }
