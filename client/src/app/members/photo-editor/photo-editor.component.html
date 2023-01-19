@@ -1,43 +1,39 @@
-<div class="row mb-3" *ngIf="member">
-    <div class="col-2 mb-1" *ngFor="let photo of member.photos">
-        <img src="{{photo.url}}" alt="photo of user" class="img-thumbnail mb-1"
-            [class.not-approved]="!photo.isApproved">
+<div class="row mb-3 ps-3" *ngIf="member">
+    <div class="col-1 mx-4 mb-1" *ngFor="let photo of member.photos">
+        <div class="d-flex justify-content-center">
+            <img src="{{photo.url}}" alt="photo of user" class="img-thumbnail mb-1 rounded-circle"
+                [class.not-approved]="!photo.isApproved" style="max-width: 100px;">
+        </div>
         <div class="text-center img-text" *ngIf="!photo.isApproved">
             <span class="text-danger">Awaiting approval</span>
         </div>
-        <div class="text-center">
+        <div class="text-center d-flex justify-content-center">
             <button class="btn btn-sm" [disabled]="photo.isMain" (click)="setMainPhoto(photo)"
-                [ngClass]="photo.isMain ? 'btn-success active' : 'btn-outline-success'" [disabled]="photo.isMain || !photo.isApproved">Main</button>
+                [ngClass]="photo.isMain ? 'btn-success active' : 'btn-outline-success'"
+                [disabled]="photo.isMain || !photo.isApproved">Main</button>
             <button class="btn btn-sm btn-danger" [disabled]="photo.isMain" (click)="deletePhoto(photo)"><i
                     class="fa fa-trash"></i></button>
         </div>
     </div>
 </div>
 
-<div class="row">
-
+<div class="row pb-3">
     <div class="col-3">
-
         <h3>Add Photos</h3>
-
         <div ng2FileDrop [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" (fileOver)="fileOverBase($event)"
             [uploader]="uploader" class="card bg-faded p-3 text-center mb-3 my-drop-zone">
             <i class="fa fa-upload fa-3x"></i>
             Drop photos here
         </div>
-
         Multiple
         <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
-
         Single
         <input type="file" ng2FileSelect [uploader]="uploader" />
     </div>
 
     <div class="col-9" style="margin-bottom: 40px" *ngIf="uploader?.queue?.length">
-
         <h3>Upload queue</h3>
         <p>Queue length: {{ uploader?.queue?.length }}</p>
-
         <table class="table">
             <thead>
                 <tr>
@@ -74,7 +70,5 @@
                 <span class="fa fa-trash"></span> Remove all
             </button>
         </div>
-
     </div>
-
 </div>

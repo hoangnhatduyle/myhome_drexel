@@ -1,0 +1,44 @@
+<div class="tab-pane fade show active profile-overview" *ngIf="member">
+    <h5 class="card-title pt-0 pb-3 mb-0">About</h5>
+    <p class="small fst-italic mb-3">
+        {{member.introduction}}
+    </p>
+
+    <h5 class="card-title pt-0 pb-3 mb-0">Profile Details</h5>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label ">Full Name</div>
+        <div class="col-lg-9 col-md-8">{{member.knownAs}}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label">Room Number</div>
+        <div class="col-lg-9 col-md-8">{{member.roomNumber}}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label">Room Type</div>
+        <div class="col-lg-9 col-md-8">{{member.roomType}}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label">Lease End</div>
+        <div class="col-lg-9 col-md-8">{{member.leaseEnd}}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label">City</div>
+        <div class="col-lg-9 col-md-8">{{member.city}}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label">Phone</div>
+        <div class="col-lg-9 col-md-8">{{member.phoneNumber}}</div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-3 col-md-4 label">Email</div>
+        <div class="col-lg-9 col-md-8">{{member.email}}</div>
+    </div>
+
+</div>

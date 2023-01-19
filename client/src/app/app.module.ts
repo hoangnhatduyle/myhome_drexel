@@ -47,6 +47,8 @@ import { PaymentManagementComponent } from './payment-management/payment-managem
 import { MyhomeNavComponent } from './myhome-nav/myhome-nav.component';
 import { BillsModalComponent } from './modals/bills-modal/bills-modal.component';
 import { PaymentModalComponent } from './modals/payment-modal/payment-modal.component';
+import { MyhomeMemberOverviewComponent } from './myhome-member-overview/myhome-member-overview.component';
+import { MyhomeChangepasswordComponent } from './myhome-changepassword/myhome-changepassword.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -88,7 +90,9 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     PaymentManagementComponent,
     MyhomeNavComponent,
     BillsModalComponent,
-    PaymentModalComponent
+    PaymentModalComponent,
+    MyhomeMemberOverviewComponent,
+    MyhomeChangepasswordComponent
   ],
   imports: [
     BrowserModule,

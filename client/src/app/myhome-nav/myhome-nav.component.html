@@ -102,8 +102,8 @@
 
                     <li class="nav-item dropdown pe-3">
 
-                        <div class="dropdown d-flex align-items-center pe-0" dropdown>
-                            <img src="{{member.photoUrl || './assets/images/user.png'}}" alt="user photo"
+                        <div class="dropdown d-flex align-items-center pe-0" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+                            <img src="{{user.photoUrl || './assets/images/user.png'}}" alt="user photo"
                                 class="dropdown-toggle rounded-circle" style="max-height: 36px;">
                             <a class="dropdown-toggle text-decoration-none d-block ps-2" style="color: rgb(82, 14, 14); font-size: 14px;
                                 font-weight: 500;" dropdownToggle>{{member.knownAs}}</a>
@@ -129,7 +129,7 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center">
+                                    <a class="dropdown-item d-flex align-items-center" routerLink="/main/profile">
                                         <fa-icon [icon]="['far', 'user']"></fa-icon>
                                         <span class="ms-3">My Profile</span>
                                     </a>
@@ -175,5 +175,18 @@
         <section style="margin-top: 60px;" [class.is-collapsed]="opened">
             <router-outlet></router-outlet>
         </section>
+
+        <footer id="footer" class="footer">
+            <div class="copyright">
+                &copy; Copyright <strong><span>HNDL</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                <!-- All the links in the footer should remain intact. -->
+                <!-- You can delete the links only if you purchased the pro version. -->
+                <!-- Licensing information: https://bootstrapmade.com/license/ -->
+                <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/nice-admin-bootstrap-admin-html-template/ -->
+                Designed by <a href="https://hoangnhatduyle.github.io/portfolio/" target="_blank">Hoang Nhat Duy Le</a>
+            </div>
+        </footer><!-- End Footer -->
     </div>
 </ng-sidebar-container>

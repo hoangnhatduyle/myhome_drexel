@@ -20,7 +20,7 @@ export class MyhomeNavComponent implements OnInit {
   member: Member | undefined;
   user: User | null = null;
 
-  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, private cdref: ChangeDetectorRef) {
+  constructor(public accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, private cdref: ChangeDetectorRef) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })

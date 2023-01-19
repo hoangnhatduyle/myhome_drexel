@@ -24,6 +24,6 @@ export interface Member {
     address: string;
     rentalFee: number;
     lastRentalFee: number;
-    phone: string;
+    phoneNumber: string;
     email: string;
 }

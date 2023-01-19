@@ -40,6 +40,10 @@ const routes: Routes = [
           {
             path: 'admin',
             component: AdminPanelComponent, canActivate: [AdminGuard]
+          },
+          {
+            path: 'profile',
+            component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard]
           }
         ]
       }
