@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { Subject } from 'rxjs';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
 import { Bill } from 'src/app/_models/bill';
 import { User } from 'src/app/_models/user';
@@ -11,7 +12,10 @@ import { BillService } from 'src/app/_services/bill.service';
   templateUrl: './user-management.component.html',
   styleUrls: ['./user-management.component.css']
 })
-export class UserManagementComponent implements OnInit {
+export class UserManagementComponent implements OnDestroy, OnInit {
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject<any>();
+
   users: User[] = [];
   bills: Bill[] = [];
   water: Bill[] = [];
@@ -31,7 +35,18 @@ export class UserManagementComponent implements OnInit {
 
   constructor(private adminService: AdminService, private modalService: BsModalService, private billService: BillService) { }
 
+  ngOnDestroy(): void {
+    this.dtTrigger.unsubscribe();
+  }
+
   ngOnInit(): void {
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      lengthMenu: [
+        [5, 10, 25, -1],
+        [5, 10, 25, 'All'],
+      ]
+    };
     this.getUsersWithRoles();
     this.getBill();
   }
@@ -47,11 +62,14 @@ export class UserManagementComponent implements OnInit {
       next: bills => {
         if (bills) {
           this.bills = bills.filter(x => x.amount != 0);
-          this.water = this.bills.filter(x => x.type == 'water');
-          this.gas = this.bills.filter(x => x.type == 'gas');
-          this.electricity = this.bills.filter(x => x.type == 'electricity');
-          this.utility = parseInt((this.water[this.currMonth].amount / 6 + this.gas[this.currMonth].amount / 6 + this.electricity[this.currMonth].amount / 6).toFixed(2));
+          if (this.bills.length > 0) {
+            this.water = this.bills.filter(x => x.type == 'water');
+            this.gas = this.bills.filter(x => x.type == 'gas');
+            this.electricity = this.bills.filter(x => x.type == 'electricity');
+            this.utility = parseInt((this.water[this.currMonth].amount / 6 + this.gas[this.currMonth].amount / 6 + this.electricity[this.currMonth].amount / 6).toFixed(2));
+          }
         }
+        this.dtTrigger.next(void 0);
       }
     })
   }

@@ -1,39 +1,41 @@
 <div>
-    <select class="form-select w-25">
+    <select class="form-select w-25" #paymentSelection (change)="onSelected()">
         <option default>Month Select...</option>
-        <option value="jan">January</option>
-        <option value="feb">February</option>
-        <option value="mar">March</option>
-        <option value="apr">April</option>
-        <option value="may">May</option>
-        <option value="jun">June</option>
-        <option value="jul">July</option>
-        <option value="aug">August</option>
-        <option value="sep">September</option>
-        <option value="oct">October</option>
-        <option value="nov">November</option>
-        <option value="dec">December</option>
+        <option value="1">January</option>
+        <option value="2">February</option>
+        <option value="3">March</option>
+        <option value="4">April</option>
+        <option value="5">May</option>
+        <option value="6">June</option>
+        <option value="7">July</option>
+        <option value="8">August</option>
+        <option value="9">September</option>
+        <option value="10">October</option>
+        <option value="11">November</option>
+        <option value="12">December</option>
     </select>
 
     <table class="table mt-3">
         <thead>
             <tr>
                 <th style="width: 10%">#</th>
-                <th style="width: 18%">Username</th>
-                <th style="width: 18%">Method</th>
-                <th style="width: 18%">Paydate</th>
-                <th style="width: 18%">Amount</th>
-                <th style="width: 18%"></th>
+                <th style="width: 15%">Username</th>
+                <th style="width: 15%">Method</th>
+                <th style="width: 15%">Month</th>
+                <th style="width: 15%">Pay Date</th>
+                <th style="width: 15%">Amount</th>
+                <th style="width: 15%"></th>
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td>test</td>
-                <td><button class="btn btn-warning" style="color: white;">Action</button></td>
+            <tr *ngFor="let payment of selectedPayment; let index = index;">
+                <td>{{index + 1}}</td>
+                <td>{{payment.username}}</td>
+                <td>{{payment.method}}</td>
+                <td>{{payment.payMonth}}</td>
+                <td>{{payment.payDate}}</td>
+                <td>{{payment.amount}}</td>
+                <td><button (click)="openPaymentModal(payment)" class="btn btn-warning" style="color: white;">Action</button></td>
             </tr>
         </tbody>
     </table>

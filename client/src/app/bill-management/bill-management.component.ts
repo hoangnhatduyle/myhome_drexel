@@ -1,7 +1,7 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { BillsModalComponent } from '../bills-modal/bills-modal.component';
+import { BillsModalComponent } from '../modals/bills-modal/bills-modal.component';
 import { RolesModalComponent } from '../modals/roles-modal/roles-modal.component';
 import { Bill } from '../_models/bill';
 import { BillService } from '../_services/bill.service';
@@ -55,7 +55,7 @@ export class BillManagementComponent implements OnInit {
     }
   }
 
-  openRolesModal(bill: Bill) {
+  openBillModal(bill: Bill) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
     const config = {
@@ -74,18 +74,10 @@ export class BillManagementComponent implements OnInit {
         const amount = this.bsModalRef.content!.amount;
         this.billService.updateBill(id, amount).subscribe({
           next: () => {
-            this.billService.getBills().subscribe({
-              next: bills => {
-                if (bills) {
-                  this.bills = bills;
-                  this.water = this.bills.filter(x => x.type == 'water');
-                  this.gas = this.bills.filter(x => x.type == 'gas');
-                  this.electricity = this.bills.filter(x => x.type == 'electricity');
-                  this.onSelected();
-                  this.toastr.success("Bill has been updated successfully")
-                }
-              }
-            })
+            bill.amount = amount;
+            const index = this.selectedBills.indexOf(bill)
+            this.selectedBills[index] = { ...this.selectedBills[index], ...bill }
+            this.toastr.success("Bill has been updated successfully");
           }
         })
 

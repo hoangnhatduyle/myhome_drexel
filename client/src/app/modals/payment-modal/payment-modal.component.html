@@ -1,0 +1,48 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Information for this payment</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form #billsForm="ngForm" id="billsForm">
+        <div class="form-group row">
+            <label for="billID" class="col-sm-2 col-form-label me-0 pe-0">ID</label>
+            <div class="col-sm-10 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" id="staticEmail" value={{id}}>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="method" class="col-sm-2 col-form-label me-0 pe-0">Method</label>
+            <div class="col-sm-10 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" id="method" value={{method}}>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="month" class="col-sm-2 col-form-label me-0 pe-0">Month</label>
+            <div class="col-sm-10 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" id="month" value={{month}}>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="payDate" class="col-sm-2 col-form-label me-0 pe-0">Pay Date</label>
+            <div class="col-sm-10 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" id="payDate" value={{payDate}}>
+            </div>
+        </div>
+        
+        <div class="form-group row">
+            <label for="amount" class="col-sm-2 col-form-label me-0 pe-0">Amount</label>
+            <div class="col-sm-10 me-0 pe-0">
+                <input type="text" creadonly class="form-control-plaintext" id="amount" value={{amount}}>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="bsModalRef.hide()">Approve</button>
+    <button type="button" class="btn btn-danger" (click)="bsModalRef.hide(); reject()">Reject</button>
+</div>

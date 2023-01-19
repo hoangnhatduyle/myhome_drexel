@@ -62,6 +62,11 @@ namespace API.Data
             return await _context.Users.Include(p => p.Photos).IgnoreQueryFilters().Where(x => x.Photos.Any(p => p.Id == photoId)).FirstOrDefaultAsync();
         }
 
+        public async Task<AppUser> GetUserByPaymentIdAsync(int paymentId)
+        {
+            return await _context.Users.Include(p => p.Photos).Where(x => x.Payment.Any(p => p.Id == paymentId)).FirstOrDefaultAsync();
+        }
+
         public async Task<AppUser> GetUserByUsernameAsync(string username)
         {
             return await _context.Users.Include(p => p.Photos).FirstOrDefaultAsync(x => x.UserName == username);

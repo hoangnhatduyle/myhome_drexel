@@ -46,6 +46,13 @@ namespace API.Controllers
             return Ok(await _unitOfWork.PhotoRepository.GetUnapprovedPhotos());
         }
 
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpGet("payment-to-approve/")]
+        public async Task<ActionResult<PaymentForApprovalDto>> GetPaymentsForApproval()
+        {
+            return Ok(await _unitOfWork.PaymentRepository.GetUnapprovedPayment());
+        }
+
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
         public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles)
@@ -123,6 +130,30 @@ namespace API.Controllers
             if (await _unitOfWork.Complete()) return Ok(billUpdateDto.Amount);
 
             return BadRequest("Failed to update bill");
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPut("approve-payment/{paymentId}")]
+        public async Task<ActionResult> ApprovePayment(int paymentId)
+        {
+            var payment = await _unitOfWork.PaymentRepository.GetPaymentById(paymentId);
+
+            payment.PaymentStatus = "Approve";
+
+            await _unitOfWork.Complete();
+            return Ok();
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPut("reject-payment/{paymentId}")]
+        public async Task<ActionResult> RejectPayment(int paymentId)
+        {
+            var payment = await _unitOfWork.PaymentRepository.GetPaymentById(paymentId);
+
+            payment.PaymentStatus = "Reject";
+
+            await _unitOfWork.Complete();
+            return Ok();
         }
     }
 }

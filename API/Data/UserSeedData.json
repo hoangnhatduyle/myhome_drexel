@@ -24,7 +24,16 @@
                 "Url": "https://randomuser.me/api/portraits/men/9.jpg",
                 "isMain": true
             }
-        ]
+        ],
+        "Payment": [
+            {
+              "Method": "Zelle",
+              "PayDate": "2020-02-29",
+              "PaymentStatus": "Pending",
+              "Amount": 414,
+              "PayMonth": 1
+            }
+          ]
     },
     {
         "UserName": "jake",
@@ -51,7 +60,16 @@
                 "Url": "https://randomuser.me/api/portraits/men/28.jpg",
                 "isMain": true
             }
-        ]
+        ],
+        "Payment": [
+            {
+              "Method": "Zelle",
+              "PayDate": "2019-07-25",
+              "PaymentStatus": "Pending",
+              "Amount": 315,
+              "PayMonth": 1
+            }
+          ]
     },
     {
         "UserName": "Pratt",
@@ -78,7 +96,16 @@
                 "Url": "https://randomuser.me/api/portraits/men/64.jpg",
                 "isMain": true
             }
-        ]
+        ],
+        "Payment": [
+            {
+              "Method": "Zelle",
+              "PayDate": "2020-06-26",
+              "PaymentStatus": "Pending",
+              "Amount": 440,
+              "PayMonth": 1
+            }
+          ]
     },
     {
         "UserName": "Christensen",
@@ -105,7 +132,16 @@
                 "Url": "https://randomuser.me/api/portraits/men/12.jpg",
                 "isMain": true
             }
-        ]
+        ],
+        "Payment": [
+            {
+              "Method": "Zelle",
+              "PayDate": "2020-01-23",
+              "PaymentStatus": "Pending",
+              "Amount": 428,
+              "PayMonth": 1
+            }
+          ]
     },
     {
         "UserName": "Neal",
@@ -132,7 +168,16 @@
                 "Url": "https://randomuser.me/api/portraits/men/37.jpg",
                 "isMain": true
             }
-        ]
+        ],
+        "Payment": [
+            {
+              "Method": "Zelle",
+              "PayDate": "2019-08-09",
+              "PaymentStatus": "Pending",
+              "Amount": 344,
+              "PayMonth": 1
+            }
+          ]
     },
     {
         "UserName": "Richard",
@@ -159,6 +204,15 @@
                 "Url": "https://randomuser.me/api/portraits/men/26.jpg",
                 "isMain": true
             }
-        ]
+        ],
+        "Payment": [
+            {
+              "Method": "Zelle",
+              "PayDate": "2019-08-28",
+              "PaymentStatus": "Pending",
+              "Amount": 322,
+              "PayMonth": 1
+            }
+          ]
     }
 ]

@@ -7,6 +7,7 @@ namespace API.Interfaces
         ILikesRepository LikesRepository { get; }
         IPhotoRepository PhotoRepository { get; }
         IBillRepository BillRepository { get; }
+        IPaymentRepository PaymentRepository { get; }
         Task<bool> Complete();
         bool HasChanges();
     }

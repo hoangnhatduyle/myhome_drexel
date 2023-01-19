@@ -23,6 +23,7 @@ namespace API.Entities
         public int RentalFee { get; set; }
         public int LastRentalFee { get; set; }
         public List<Photo> Photos { get; set; } = new();
+        public List<Payment> Payment { get; set; } = new();
 
         // public int GetAge()
         // {

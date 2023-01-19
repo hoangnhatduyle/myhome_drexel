@@ -16,6 +16,7 @@ namespace API.DTOs
         public string City { get; set; }
         public string Country { get; set; }
         public List<PhotoDto> Photos { get; set; }
+        public List<PaymentDto> Payment { get; set; }
         public DateOnly LeaseEnd { get; set; }
         public string RoomType { get; set; }
         public string Address { get; set; }

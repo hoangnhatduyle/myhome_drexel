@@ -45,7 +45,8 @@ import * as CanvasJSAngularChart from '../assets/canvasjs-3.7.4/canvasjs.angular
 import { BillManagementComponent } from './bill-management/bill-management.component';
 import { PaymentManagementComponent } from './payment-management/payment-management.component';
 import { MyhomeNavComponent } from './myhome-nav/myhome-nav.component';
-import { BillsModalComponent } from './bills-modal/bills-modal.component';
+import { BillsModalComponent } from './modals/bills-modal/bills-modal.component';
+import { PaymentModalComponent } from './modals/payment-modal/payment-modal.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -86,7 +87,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     BillManagementComponent,
     PaymentManagementComponent,
     MyhomeNavComponent,
-    BillsModalComponent
+    BillsModalComponent,
+    PaymentModalComponent
   ],
   imports: [
     BrowserModule,
