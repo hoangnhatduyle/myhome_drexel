@@ -51,6 +51,8 @@ import { MyhomeMemberOverviewComponent } from './myhome-member-overview/myhome-m
 import { MyhomeChangepasswordComponent } from './myhome-changepassword/myhome-changepassword.component';
 import { ContactComponent } from './contact/contact.component';
 import { MyhomeMemberSettingComponent } from './myhome-member-setting/myhome-member-setting.component';
+import { RoomManagementComponent } from './room-management/room-management.component';
+import { RoomModalComponent } from './modals/room-modal/room-modal.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -96,7 +98,9 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     MyhomeMemberOverviewComponent,
     MyhomeChangepasswordComponent,
     ContactComponent,
-    MyhomeMemberSettingComponent
+    MyhomeMemberSettingComponent,
+    RoomManagementComponent,
+    RoomModalComponent
   ],
   imports: [
     BrowserModule,

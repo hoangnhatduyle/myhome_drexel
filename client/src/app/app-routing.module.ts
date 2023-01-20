@@ -45,7 +45,7 @@ const routes: Routes = [
           },
           {
             path: 'profile',
-            component: MemberEditComponent
+            component: MemberEditComponent, resolve: { member: MemberDetailedResolver }
           },
           {
             path: 'settings',

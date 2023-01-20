@@ -1,0 +1,32 @@
+<div>
+    <select class="form-select w-25" #roomSelection (change)="onSelected()">
+        <option default>Room Select...</option>
+        <option value="1">Room 1</option>
+        <option value="2">Room 2</option>
+        <option value="3">Room 3</option>
+        <option value="4">Room 4</option>
+    </select>
+
+    <div class="card info-card mt-4">
+        <table class="table mt-3">
+            <thead>
+                <tr>
+                    <th style="width: 20%">#</th>
+                    <th style="width: 20%">User</th>
+                    <th style="width: 20%">Room #</th>
+                    <th style="width: 20%">Room Type</th>
+                    <th style="width: 20%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let member of members; let index = index;">
+                    <td>{{index + 1}}</td>
+                    <td>{{member.knownAs}}</td>
+                    <td>{{member.roomNumber}}</td>
+                    <td>{{member.roomType}}</td>
+                    <td><button class="btn btn-warning" style="color: white;">Edit User</button></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

@@ -19,14 +19,17 @@
                 </tab>
                 <tab heading="Bill Management" *appHasRole="['Admin', 'Moderator']">
                     <div class="container ps-0 ms-3 mt-3">
-                        <!-- <app-photo-management></app-photo-management> -->
                         <app-bill-management></app-bill-management>
                     </div>
                 </tab>
                 <tab heading="Payment Management" *appHasRole="['Admin', 'Moderator']">
                     <div class="container ps-0 ms-3 mt-3">
-                        <!-- <app-photo-management></app-photo-management> -->
                         <app-payment-management></app-payment-management>
+                    </div>
+                </tab>
+                <tab heading="Room Management" *appHasRole="['Admin', 'Moderator']">
+                    <div class="container ps-0 ms-3 mt-3">
+                        <app-room-management></app-room-management>
                     </div>
                 </tab>
             </tabset>

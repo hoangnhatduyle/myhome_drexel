@@ -36,7 +36,84 @@
                         <tabset class="member-tabset">
                             <tab heading="Settings">
                                 <div class="container ps-0 ms-3 mt-3">
-                                    
+                                    <!-- Profile Edit Form -->
+                                    <form #editForm="ngForm" (ngSubmit)="updateMember()">
+                                        <div class="row mb-3">
+                                            <label for="profileImage" class="col-md-4 col-lg-3 col-form-label">Profile
+                                                Image</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <img src="{{member.photoUrl || './assets/user.png'}}" alt="Profile">
+                                                <div class="pt-4 pb-3">
+                                                    <button type="button" class="btn btn-secondary" routerLink="/main/profile"
+                                                    [queryParams]="{tab: 'Photo Management'}">Change Photo</button>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="about" class="col-md-4 col-lg-3 col-form-label">Room Number</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="company" type="text" readonly class="form-control-plaintext" id="company"
+                                                    value={{member.roomNumber}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="company"
+                                                class="col-md-4 col-lg-3 col-form-label">Room Type</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="company" type="text" readonly class="form-control-plaintext" id="company"
+                                                    value={{member.roomType}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="Job" class="col-md-4 col-lg-3 col-form-label">Lease End</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="job" type="text" readonly class="form-control-plaintext" id="Job"
+                                                    value={{member.leaseEnd}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="knownAs" class="col-md-4 col-lg-3 col-form-label">Full
+                                                Name</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="knownAs" type="text" class="form-control" [(ngModel)]="member.knownAs"
+                                                    value={{member.knownAs}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="city"
+                                                class="col-md-4 col-lg-3 col-form-label">City</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="city" type="text" class="form-control" [(ngModel)]="member.city"
+                                                    value={{member.city}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="phoneNumber"
+                                                class="col-md-4 col-lg-3 col-form-label">Phone</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="phoneNumber" type="text" class="form-control" [(ngModel)]="member.phoneNumber"
+                                                value={{member.phoneNumber}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="Email" class="col-md-4 col-lg-3 col-form-label">Email</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="email" type="email" class="form-control" [(ngModel)]="member.email"
+                                                    value={{member.email}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="text-center">
+                                            <button type="submit" class="btn btn-primary" [disabled]="!editForm.dirty">Save Changes</button>
+                                        </div>
+                                    </form><!-- End Profile Edit Form -->
                                 </div>
                             </tab>
                         </tabset>

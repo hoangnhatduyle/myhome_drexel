@@ -1,8 +1,7 @@
-import { ApplicationRef, ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Member } from '../_models/member';
 import { Pagination } from '../_models/pagination';
-import { UserParams } from '../_models/userParams';
 import { MembersService } from '../_services/members.service';
 
 @Component({
@@ -13,11 +12,9 @@ import { MembersService } from '../_services/members.service';
 export class ReisdentSumComponent implements OnInit {
   members: Member[] = [];
   pagination: Pagination | undefined;
-  userParams: UserParams | undefined;
   isVisible: boolean = true;
 
   constructor(private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) {
-    this.userParams = this.memberService.getUserParams();
   }
 
   ngOnInit(): void {

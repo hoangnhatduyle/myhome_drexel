@@ -12,9 +12,11 @@ import { MembersService } from '../_services/members.service';
   providedIn: 'root'
 })
 export class MemberDetailedResolver implements Resolve<Member> {
-  constructor(private memberService: MembersService) {}
+  constructor(private memberService: MembersService) { }
 
   resolve(route: ActivatedRouteSnapshot): Observable<Member> {
-    return this.memberService.getMember(route.paramMap.get('username')!);
+    var retrievedObject = localStorage.getItem('user');
+
+    return this.memberService.getMember(JSON.parse(retrievedObject!).userName);
   }
 }
