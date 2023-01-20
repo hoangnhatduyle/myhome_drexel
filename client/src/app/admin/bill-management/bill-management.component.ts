@@ -1,10 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { BillsModalComponent } from '../modals/bills-modal/bills-modal.component';
-import { RolesModalComponent } from '../modals/roles-modal/roles-modal.component';
-import { Bill } from '../_models/bill';
-import { BillService } from '../_services/bill.service';
+import { BillsModalComponent } from 'src/app/modals/bills-modal/bills-modal.component';
+import { Bill } from 'src/app/_models/bill';
+import { BillService } from 'src/app/_services/bill.service';
 
 @Component({
   selector: 'app-bill-management',

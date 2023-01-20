@@ -1,9 +1,9 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { PaymentModalComponent } from '../modals/payment-modal/payment-modal.component';
-import { Payment } from '../_models/payment';
-import { PaymentService } from '../_services/payment.service';
+import { PaymentModalComponent } from 'src/app/modals/payment-modal/payment-modal.component';
+import { Payment } from 'src/app/_models/payment';
+import { PaymentService } from 'src/app/_services/payment.service';
 
 @Component({
   selector: 'app-payment-management',
