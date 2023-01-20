@@ -2,6 +2,7 @@ using API.DTOs;
 using API.Entities;
 using API.Interfaces;
 using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -41,7 +42,7 @@ namespace API.Controllers
             // await _context.SaveChangesAsync();
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
-            if (!result.Succeeded) return BadRequest(result.Errors);            
+            if (!result.Succeeded) return BadRequest(result.Errors);
 
             var roleResult = await _userManager.AddToRoleAsync(user, "Member");
 
@@ -84,6 +85,30 @@ namespace API.Controllers
                 KnownAs = user.KnownAs,
                 Gender = user.Gender
             };
+        }
+
+        [Authorize]
+        [HttpPut("changepassword")]
+        public async Task<ActionResult<UserDto>> ChangePassword(ChangePasswordDto changePasswordDto)
+        {
+            var user = await _userManager.Users.Include(p => p.Photos).SingleOrDefaultAsync(user => user.UserName == changePasswordDto.Username);
+            if (user == null) return Unauthorized("Username not Found");
+
+            var result = await _userManager.CheckPasswordAsync(user, changePasswordDto.OldPassword);
+            if (!result) return Unauthorized("Invalid Password");
+
+            var changeResult = await _userManager.ChangePasswordAsync(user, changePasswordDto.OldPassword, changePasswordDto.NewPassword);
+            if (changeResult.Succeeded)
+                return new UserDto
+                {
+                    UserName = user.UserName,
+                    Token = await _tokenService.CreateToken(user),
+                    PhotoUrl = user.Photos.FirstOrDefault(x => x.IsMain)?.Url,
+                    KnownAs = user.KnownAs,
+                    Gender = user.Gender
+                };
+
+            return BadRequest("Unable to reset password");
         }
 
         private async Task<bool> UserExists(string username)

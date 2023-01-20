@@ -54,4 +54,15 @@ export class AccountService {
   getDecodedToken(token: string) {
     return JSON.parse(atob(token.split('.')[1]));
   }
+
+  changePassword(model: any) {
+    return this.http.put<User>(this.baseUrl + "account/changepassword", model).pipe(
+      map((response: User) => {
+        const user = response;
+        if (user) {
+          this.setCurrentUser(user);
+        }
+      })
+    );
+  }
 }
