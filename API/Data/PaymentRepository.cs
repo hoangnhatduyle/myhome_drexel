@@ -34,6 +34,20 @@ namespace API.Data
             }).ToListAsync();
         }
 
+        public async Task<IEnumerable<PaymentForApprovalDto>> GetPastPayment()
+        {
+           return await _context.Payments.Where(p => p.PaymentStatus != "Pending").Select(u => new PaymentForApprovalDto
+            {
+                Id = u.Id,
+                Username = u.AppUser.UserName,              
+                PaymentStatus = u.PaymentStatus,
+                Method = u.Method,
+                Amount = u.Amount,
+                PayDate = u.PayDate,
+                PayMonth = u.PayMonth
+            }).ToListAsync();
+        }
+
         public void RemovePayment(Payment payment)
         {
             _context.Payments.Remove(payment);

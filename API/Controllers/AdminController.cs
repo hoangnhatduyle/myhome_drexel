@@ -53,6 +53,13 @@ namespace API.Controllers
             return Ok(await _unitOfWork.PaymentRepository.GetUnapprovedPayment());
         }
 
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpGet("past-payment/")]
+        public async Task<ActionResult<PaymentForApprovalDto>> GetPastPayments()
+        {
+            return Ok(await _unitOfWork.PaymentRepository.GetPastPayment());
+        }
+
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
         public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles)

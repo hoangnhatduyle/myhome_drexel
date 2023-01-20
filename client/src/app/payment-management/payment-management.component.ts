@@ -34,7 +34,34 @@ export class PaymentManagementComponent implements OnInit {
   constructor(private paymentService: PaymentService, private modalService: BsModalService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.paymentService.getAllPayments().subscribe({
+    this.getPendingPayments();
+  }
+
+  getPendingPayments() {
+    this.paymentService.getPendingPayments().subscribe({
+      next: payment => {
+        if (payment) {
+          this.payments = payment;
+          this.jan = this.payments.filter(x => x.payMonth == 1);
+          this.feb = this.payments.filter(x => x.payMonth == 2);
+          this.mar = this.payments.filter(x => x.payMonth == 3);
+          this.apr = this.payments.filter(x => x.payMonth == 4);
+          this.may = this.payments.filter(x => x.payMonth == 5);
+          this.jun = this.payments.filter(x => x.payMonth == 6);
+          this.jul = this.payments.filter(x => x.payMonth == 7);
+          this.aug = this.payments.filter(x => x.payMonth == 8);
+          this.sep = this.payments.filter(x => x.payMonth == 9);
+          this.oct = this.payments.filter(x => x.payMonth == 10);
+          this.nov = this.payments.filter(x => x.payMonth == 11);
+          this.dec = this.payments.filter(x => x.payMonth == 12);
+          this.selectedPayment = this.payments;
+        }
+      }
+    })
+  }
+
+  getPastPayments() {
+    this.paymentService.getPastPayments().subscribe({
       next: payment => {
         if (payment) {
           this.payments = payment;
@@ -95,6 +122,10 @@ export class PaymentManagementComponent implements OnInit {
       case "12":
         this.selectedPayment = this.dec;
         break;
+      default:
+        this.selectedPayment = this.payments;
+        break;
+
     }
   }
 

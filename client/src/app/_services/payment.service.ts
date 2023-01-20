@@ -11,8 +11,12 @@ export class PaymentService {
 
   constructor(private http: HttpClient) { }
 
-  getAllPayments() {
+  getPendingPayments() {
     return this.http.get<Payment[]>(this.baseUrl + 'admin/payment-to-approve');
+  }
+
+  getPastPayments() {
+    return this.http.get<Payment[]>(this.baseUrl + 'admin/past-payment');
   }
 
   approvePayment(id: number) {
