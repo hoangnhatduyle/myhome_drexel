@@ -1,1 +1,48 @@
-<p>room-modal works!</p>
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Room for {{knownAs}}</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form #billsForm="ngForm" id="billsForm">
+        <div class="form-group row">
+            <label for="memId" class="col-sm-5 col-form-label me-0 pe-0">ID</label>
+            <div class="col-sm-7 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" id="memId" value={{ID}}>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="roomNumber" class="col-sm-5 col-form-label me-0 pe-0">Room Number</label>
+            <div class="col-sm-7 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" id="roomNumber" value={{roomNumber}}>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="roomType" class="col-sm-5 col-form-label me-0 pe-0">Room Type</label>
+            <div class="col-sm-7 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" id="roomType" value={{roomType}}>
+            </div>
+        </div>
+
+
+        <div class="form-group row">
+            <label for="room" class="col-sm-5 col-form-label me-0 pe-0">Select Room</label>
+            <div class="col-sm-7 me-0 pe-0">
+                <select class="form-select" name="room" [(ngModel)]="selectedRoom">
+                    <option value="" disabled selected>Room...</option>
+                    <option *ngFor="let room of roomList; let index = index;" value={{room}}>
+                        Room {{room}}
+                    </option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="bsModalRef.hide()">Submit</button>
+</div>

@@ -162,5 +162,17 @@ namespace API.Controllers
             await _unitOfWork.Complete();
             return Ok();
         }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPut("change-room/{username}/{roomId}")]
+        public async Task<ActionResult> ChangeRoom(string username, int roomId)
+        {
+            var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == username);
+
+            user.RoomId = roomId;
+
+            await _unitOfWork.Complete();
+            return Ok();
+        }
     }
 }

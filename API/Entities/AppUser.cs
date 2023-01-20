@@ -17,9 +17,7 @@ namespace API.Entities
         public string Interests { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public string RoomType { get; set; }
         public string Address { get; set; }
-        public int RoomNumber { get; set; }
         public int RentalFee { get; set; }
         public int LastRentalFee { get; set; }
         public List<Photo> Photos { get; set; } = new();
@@ -34,5 +32,7 @@ namespace API.Entities
         public List<Message> MessageSent { get; set; }
         public List<Message> MessageReceived { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
+        public int? RoomId { get; set; }
+        public virtual Room Room { get; set; }
     }
 }

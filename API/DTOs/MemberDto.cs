@@ -1,3 +1,5 @@
+using API.Entities;
+
 namespace API.DTOs
 {
     public class MemberDto
@@ -18,12 +20,11 @@ namespace API.DTOs
         public List<PhotoDto> Photos { get; set; }
         public List<PaymentDto> Payment { get; set; }
         public DateOnly LeaseEnd { get; set; }
-        public string RoomType { get; set; }
         public string Address { get; set; }
-        public int RoomNumber { get; set; }
         public int RentalFee { get; set; }
         public int LastRentalFee { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
+        public Room Room { get; set; }
     }
 }

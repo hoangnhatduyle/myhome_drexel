@@ -32,4 +32,8 @@ export class AdminService {
   rejectPhoto(photoId: number) {
     return this.http.post(this.baseUrl + 'admin/reject-photo/' + photoId, {});
   }
+
+  changeRoom(username: string, roomNumber: number) {
+    return this.http.put(this.baseUrl + 'admin/change-room/' + username + "/" + roomNumber, {});
+  }
 }

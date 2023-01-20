@@ -1,5 +1,6 @@
 import { Payment } from "./payment";
 import { Photo } from "./photo";
+import { Room } from "./room";
 
 
 export interface Member {
@@ -18,9 +19,8 @@ export interface Member {
     country: string;
     photos: Photo[];
     payments: Payment[];
+    room: Room;
     leaseEnd: Date;
-    roomType: string;
-    roomNumber: number;
     address: string;
     rentalFee: number;
     lastRentalFee: number;

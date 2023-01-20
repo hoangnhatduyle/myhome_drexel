@@ -19,12 +19,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="let member of members; let index = index;">
+                <tr *ngFor="let member of selectedMember; let index = index;">
                     <td>{{index + 1}}</td>
                     <td>{{member.knownAs}}</td>
-                    <td>{{member.roomNumber}}</td>
-                    <td>{{member.roomType}}</td>
-                    <td><button class="btn btn-warning" style="color: white;">Edit User</button></td>
+                    <td>{{member.room.roomNumber}}</td>
+                    <td>{{member.room.roomType}}</td>
+                    <td><button (click)="openRoomModal(member)" class="btn btn-warning" style="color: white;">Edit User</button></td>
                 </tr>
             </tbody>
         </table>

@@ -17,6 +17,7 @@ namespace API.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<UserLike> Likes { get; set; }
         public DbSet<Message> Messages { get; set; }
+        public DbSet<Room> Rooms { get; set; }
         public DbSet<Bills> Bills { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Connection> Connections { get; set; }
