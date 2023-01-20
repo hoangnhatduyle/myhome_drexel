@@ -1,11 +1,11 @@
 <main id="main" class="main" *ngIf="member">
 
     <div class="pagetitle">
-        <h1 style="font-weight: 400; color: rgb(82, 14, 14);">Profile</h1>
+        <h1 style="font-weight: 400; color: rgb(82, 14, 14);">Settings</h1>
         <nav>
             <ol class="breadcrumb">
                 <li class="breadcrumb-item"><a style="font-weight: 400;">Home</a></li>
-                <li class="breadcrumb-item active" style="font-weight: 400;">Profile</li>
+                <li class="breadcrumb-item active" style="font-weight: 400;">Settings</li>
             </ol>
         </nav>
     </div><!-- End Page Title -->
@@ -17,7 +17,8 @@
                 <div class="card">
                     <div class="card-body profile-card pt-4 pb-3 d-flex flex-column align-items-center">
 
-                        <img src="{{member.photoUrl || './assets/images/user.png'}}" alt="Profile" class="rounded-circle">
+                        <img src="{{member.photoUrl || './assets/images/user.png'}}" alt="Profile"
+                            class="rounded-circle">
                         <h2>{{member.knownAs}}</h2>
                         <h3 *appHasRole="['Member']">House Member</h3>
                         <h3 *appHasRole="['Admin', 'Moderator']">Admin</h3>
@@ -33,19 +34,9 @@
                 <div class="card pb-2">
                     <div class="card-body pt-4">
                         <tabset class="member-tabset">
-                            <tab heading="Overview">
+                            <tab heading="Settings">
                                 <div class="container ps-0 ms-3 mt-3">
-                                    <app-myhome-member-overview [member]="member"></app-myhome-member-overview>
-                                </div>
-                            </tab>
-                            <tab heading="Photo Management">
-                                <div class="container ps-0 ms-3 mt-3">
-                                    <app-photo-editor [member]="member"></app-photo-editor>
-                                </div>
-                            </tab>
-                            <tab heading="Change Password">
-                                <div class="container ps-0 ms-3 mt-3">
-                                    <app-myhome-changepassword [user]="user"></app-myhome-changepassword>
+                                    
                                 </div>
                             </tab>
                         </tabset>

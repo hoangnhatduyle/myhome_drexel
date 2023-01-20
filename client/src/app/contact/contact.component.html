@@ -1,0 +1,66 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 style="font-weight: 400; color: rgb(82, 14, 14);">Contact</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a style="font-weight: 400;">Home</a></li>
+                <li class="breadcrumb-item active" style="font-weight: 400;">Contact</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+    <section class="section contact">
+        <div class="row gy-4">
+            <div class="col-xl-6">
+                <div class="row">
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <fa-icon [icon]="['fas', 'map-marker-alt']" class="me-2" style="font-size: 38px;"></fa-icon>
+                            <h3>Address</h3>
+                            <p>3201 Avondale Avenue,<br>Toledo, OH 43607</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <fa-icon [icon]="['fas', 'mobile-alt']" class="me-2" style="font-size: 38px;"></fa-icon>
+                            <h3>Call Us</h3>
+                            <p>+1 419 699 9535<br>+1 419 699 9534</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <fa-icon [icon]="['far', 'envelope']" class="me-2" style="font-size: 38px;"></fa-icon>
+                            <h3>Email Us</h3>
+                            <p>lehoangnhatduy2000@gmail.com<br>lehoangbaoduy2000@gmail.com</p>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="info-box card">
+                            <fa-icon [icon]="['far', 'address-book']" class="me-2" style="font-size: 38px;"></fa-icon>
+                            <h3>Social Media</h3>
+                            <p>Lê Hoàng Nhật Duy - Facebook<br>lhnduy - Instagram</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-xl-6">
+                <div class="card p-4">
+                    <form action="forms/contact.php" method="post" class="php-email-form">
+                        <div class="row gy-4">
+                            <div class="col-md-6"> <input type="text" name="name" class="form-control"
+                                    placeholder="Your Name" required=""></div>
+                            <div class="col-md-6 "> <input type="email" class="form-control" name="email"
+                                    placeholder="Your Email" required=""></div>
+                            <div class="col-md-12"> <input type="text" class="form-control" name="subject"
+                                    placeholder="Subject" required=""></div>
+                            <div class="col-md-12"><textarea class="form-control" name="message" rows="6"
+                                    placeholder="Message" required=""></textarea></div>
+                            <div class="col-md-12 text-center">
+                                <button type="button" class="btn btn-warning">Send Message</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
