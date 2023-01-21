@@ -22,7 +22,7 @@
                 <div class="card-body pt-2 pb-3">
                     <p>Member Since: {{member.created | date:'mediumDate'}}</p>
                     <p>Last Day: {{member.leaseEnd | date:'mediumDate'}}</p>
-                    <button class="btn btn-warning">Message</button>
+                    <button type="button" class="btn btn-warning" routerLink="/main/profile/{{member.userName}}">View</button>
                 </div>
             </mat-expansion-panel>
         </div>

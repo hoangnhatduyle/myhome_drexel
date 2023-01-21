@@ -84,6 +84,14 @@
                                         </div>
 
                                         <div class="row mb-3">
+                                            <label for="introduction" class="col-md-4 col-lg-3 col-form-label">Introduction</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="introduction" type="text" class="form-control"
+                                                    [(ngModel)]="member.introduction" value={{member.introduction}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
                                             <label for="knownAs" class="col-md-4 col-lg-3 col-form-label">Full
                                                 Name</label>
                                             <div class="col-md-8 col-lg-9">
@@ -117,7 +125,7 @@
                                             </div>
                                         </div>
 
-                                        <div class="text-center">
+                                        <div class="text-center pb-3 pt-2">
                                             <button type="submit" class="btn btn-primary"
                                                 [disabled]="!editForm.dirty">Save Changes</button>
                                         </div>

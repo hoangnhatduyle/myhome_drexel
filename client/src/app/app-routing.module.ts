@@ -4,6 +4,8 @@ import { AdminPanelComponent } from './admin/admin-panel/admin-panel.component';
 import { ContactComponent } from './contact/contact.component';
 import { NotFoundComponent } from './errors/not-found/not-found.component';
 import { ServerErrorComponent } from './errors/server-error/server-error.component';
+import { MemberEditResolver } from './_resolvers/member-edit.resolver';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MemberEditComponent } from './members/member-edit/member-edit.component';
 import { MyhomeDashboardComponent } from './myhome-dashboard/myhome-dashboard.component';
 import { MyhomeLoginComponent } from './myhome-login/myhome-login.component';
@@ -21,9 +23,8 @@ const routes: Routes = [
     runGuardsAndResolvers: 'always',
     canActivate: [AuthGuard],
     children: [
-      { path: 'member/edit', component: MemberEditComponent, canDeactivate: [PreventUnsavedChangesGuard] },
       {
-        path: 'main', component: MyhomeNavComponent, 
+        path: 'main', component: MyhomeNavComponent,
         children: [
           {
             path: 'dashboard',
@@ -35,7 +36,7 @@ const routes: Routes = [
           },
           {
             path: 'profile',
-            component: MemberEditComponent, resolve: { member: MemberDetailedResolver }
+            component: MemberEditComponent, resolve: { member: MemberEditResolver }
           },
           {
             path: 'settings',
@@ -44,7 +45,8 @@ const routes: Routes = [
           {
             path: 'contact',
             component: ContactComponent
-          }
+          },
+          { path: 'profile/:username', component: MemberDetailComponent, resolve: { member: MemberDetailedResolver } },
         ]
       }
     ]

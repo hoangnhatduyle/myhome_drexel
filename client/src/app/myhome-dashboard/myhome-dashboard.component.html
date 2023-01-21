@@ -10,7 +10,7 @@
     </div><!-- End Page Title -->
 
     <section class="section dashboard" *appHasRole="['Member']">
-        <app-myhome-infocard [member]="member"></app-myhome-infocard>
+        <app-myhome-infocard [member]="member" (reloadMember)="reloadMemberInfo($event)"></app-myhome-infocard>
         <div class="row">
             <div class="col-lg-8" style="padding-right: 6px">
                 <app-bill-chart></app-bill-chart>

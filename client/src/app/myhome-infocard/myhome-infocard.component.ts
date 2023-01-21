@@ -1,4 +1,4 @@
-import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ToastrService } from 'ngx-toastr';
 import { Bill } from '../_models/bill';
 import { Member } from '../_models/member';
@@ -10,6 +10,7 @@ import { BillService } from '../_services/bill.service';
   styleUrls: ['./myhome-infocard.component.css']
 })
 export class MyhomeInfocardComponent implements OnInit {
+  @Output() reloadMember = new EventEmitter();
   @Input() member: Member | undefined;
   dueDate: string | undefined;
   isVisible: boolean = true;
@@ -61,6 +62,7 @@ export class MyhomeInfocardComponent implements OnInit {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
     this.getBill(this.currMonth);
+    this.reloadMember.emit(false);
     this.isVisible = true;
     this.toastr.success("Refresh successfully!");
   }

@@ -42,6 +42,7 @@ import { ContactComponent } from './contact/contact.component';
 import { MyhomeMemberSettingComponent } from './myhome-member-setting/myhome-member-setting.component';
 import { RoomManagementComponent } from './room-management/room-management.component';
 import { RoomModalComponent } from './modals/room-modal/room-modal.component';
+import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -78,7 +79,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     ContactComponent,
     MyhomeMemberSettingComponent,
     RoomManagementComponent,
-    RoomModalComponent
+    RoomModalComponent,
+    MemberDetailComponent
   ],
   imports: [
     BrowserModule,

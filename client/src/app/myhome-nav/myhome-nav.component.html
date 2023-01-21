@@ -86,23 +86,18 @@
                         </a>
                     </li><!-- End Search Icon-->
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link nav-icon" data-bs-toggle="dropdown">
-                            <fa-icon [icon]="['far', 'bell']"></fa-icon>
-                            <span class="badge bg-primary badge-number">4</span>
-                        </a>
+                    <li class="nav-item dropdown pe-2">
+                        <button type="button" class="pill" (click)="openModal(about)">About</button>
                     </li>
 
-                    <li class="nav-item dropdown">
-                        <a class="nav-link nav-icon" data-bs-toggle="dropdown">
-                            <fa-icon [icon]="['far', 'comment-dots']"></fa-icon>
-                            <span class="badge bg-success badge-number">3</span>
-                        </a>
+                    <li class="nav-item dropdown pe-2" *appHasRole="['Admin', 'Moderator']">
+                        <button type="button" class="pill" (click)="openModal(version)">Version</button>
                     </li>
 
                     <li class="nav-item dropdown pe-3">
 
-                        <div class="dropdown d-flex align-items-center pe-0" *ngIf="(accountService.currentUser$ | async) as user" dropdown>
+                        <div class="dropdown d-flex align-items-center pe-0"
+                            *ngIf="(accountService.currentUser$ | async) as user" dropdown>
                             <img src="{{user.photoUrl || './assets/images/user.png'}}" alt="user photo"
                                 class="dropdown-toggle rounded-circle" style="max-height: 36px;">
                             <a class="dropdown-toggle text-decoration-none d-block ps-2" style="color: rgb(82, 14, 14); font-size: 14px;
@@ -139,7 +134,7 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center">
+                                    <a class="dropdown-item d-flex align-items-center" routerLink="/main/settings">
                                         <fa-icon [icon]="['fas', 'cog']"></fa-icon>
                                         <span class="ms-3">Account Settings</span>
                                     </a>
@@ -149,7 +144,7 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center">
+                                    <a class="dropdown-item d-flex align-items-center" (click)="openModal(faq)">
                                         <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
                                         <span class="ms-3">Need Help?</span>
                                     </a>
@@ -190,3 +185,54 @@
         </footer><!-- End Footer -->
     </div>
 </ng-sidebar-container>
+
+<ng-template #about>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">ABOUT THIS WEBSITE</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        myHOME website is advanced website designed to be completely self-contained with a powerful property management
+        database, integrated accounting, contact management, work orders, marketing solutions, and much more. With these
+        diverse capabilities, it will improve your experience when renting my house.
+    </div>
+    <div class="modal-footer" style="justify-content: flex-start">
+        Please help me to improve the website by <a routerLink="/main/contact" (click)="modalRef?.hide()">giving me
+            feedback</a>
+    </div>
+</ng-template>
+
+<ng-template #version>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">VERSIONS</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Version 1.1: Front End designed and finalized for the website.
+        Version 2.1: Back End finalized and Database construction.
+    </div>
+    <div class="modal-footer" style="justify-content: flex-start">
+        Current Version: 2.1
+    </div>
+</ng-template>
+
+<ng-template #faq>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Frequently Asked Questions</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        FAQ Page has not been constructed. If you have any question, please let me know directly or through Contact
+        Page. If the question applies for other residents, I will post the question when I build the FAQ Page. Thank you
+        for reaching out.
+    </div>
+    <div class="modal-footer" style="justify-content: flex-start">
+        Sorry for any inconvenience 😔😔
+    </div>
+</ng-template>

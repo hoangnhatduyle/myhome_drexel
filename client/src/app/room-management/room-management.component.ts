@@ -71,6 +71,7 @@ export class RoomManagementComponent implements OnInit {
       next: () => {
         const username = member.userName;
         const roomNumber = this.bsModalRef.content!.selectedRoom;
+        if (roomNumber == member.room.roomNumber || roomNumber == 0) return;
         this.adminService.changeRoom(username, roomNumber).subscribe({
           next: _ => {
             let roomType = 'Single';

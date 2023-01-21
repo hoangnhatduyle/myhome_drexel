@@ -1,6 +1,7 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit, TemplateRef } from '@angular/core';
 import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { take } from 'rxjs';
 import { Member } from '../_models/member';
 import { User } from '../_models/user';
@@ -16,19 +17,20 @@ export class MyhomeNavComponent implements OnInit {
   opened: boolean = true;
   search: boolean = false;
   autoCollapseWidth: number = 800;
+  modalRef?: BsModalRef;
 
   member: Member | undefined;
   user: User | null = null;
 
-  constructor(public accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, private cdref: ChangeDetectorRef) {
+  constructor(public accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, private modalService: BsModalService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
     this.titleService.setTitle("myHOME");
   }
 
-  ngAfterContentChecked() {
-    this.cdref.detectChanges();
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   ngOnInit(): void {

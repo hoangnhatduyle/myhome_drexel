@@ -1,0 +1,54 @@
+<main id="main" class="main">
+
+    <div class="pagetitle">
+        <h1 style="font-weight: 400; color: rgb(82, 14, 14);">Profile</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a style="font-weight: 400;">Home</a></li>
+                <li class="breadcrumb-item active" style="font-weight: 400;">Profile</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section profile">
+        <div class="row">
+            <div class="col-xl-4">
+
+                <div class="card">
+                    <div class="card-body profile-card pt-4 pb-3 d-flex flex-column align-items-center">
+
+                        <img src="{{member.photoUrl || './assets/images/user.png'}}" alt="Profile"
+                            class="rounded-circle">
+                        <h2>{{member.knownAs}}</h2>
+                        <h3 *appHasRole="['Member']">House Member</h3>
+                        <h3 *appHasRole="['Admin', 'Moderator']">Admin</h3>
+                        <h3 style="font-size: 12px; color: gray">Member since: {{member.created | date:'mediumDate'}}
+                        </h3>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-xl-8">
+                <div class="card pb-2">
+                    <div class="card-body pt-4">
+                        <tabset class="member-tabset" #profileTabs>
+                            <tab heading="Overview">
+                                <div class="container ps-0 ms-3 mt-3">
+                                    <app-myhome-member-overview [member]="member"></app-myhome-member-overview>
+                                </div>
+                            </tab>
+                            <tab heading="Photo Management">
+                                <div class="container ps-0 ms-3 mt-3">
+                                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                                </div>
+                            </tab>
+                        </tabset>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+</main><!-- End #main -->

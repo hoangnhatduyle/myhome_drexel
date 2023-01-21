@@ -33,4 +33,8 @@ export class MyhomeDashboardComponent implements OnInit {
       next: member => this.member = member
     })
   }
+
+  reloadMemberInfo(event: boolean) {
+    this.loadMember();
+  }
 }

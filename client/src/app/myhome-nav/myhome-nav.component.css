@@ -118,3 +118,19 @@ img {
 .is-collapsed {
     margin-left: 300px;
 }
+
+.pill {
+    padding: 5px 15px;
+    font-weight: 600;
+    border-radius: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #fff;
+}
+
+.pill:hover {
+    color: white;
+    background-color: #dc7d35;
+    cursor: pointer;
+}
