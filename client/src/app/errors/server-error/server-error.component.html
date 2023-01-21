@@ -1,13 +1,36 @@
-<h4>Internal Server Error - Refreshing the page will make the error disapear</h4>
-<ng-container *ngIf="error">
-    <h5 class="text-danger">Error: {{error.message}}</h5>
-    <p class="font-weight-bold">Note: I you are seeing this then angular is probably not to blame</p>
-    <p>What to do next?</p>
-    <ol>
-        <li>Open chrome dev tools! Then check the failing request in the network tab</li>
-        <li>Examine the request URL - what API endpoint are you requesting?</li>
-        <li>Reproduce the problem in Postman - if we get the same error then Angular is 100% not the problem</li>
-    </ol>
-    <p style="font-weight: bold;">Following is the stack trace - the first few lines will tell you which line of code caused the issue in the API</p>
-    <code class="mt-5" style="background-color: whitesmoke;">{{error.details}}</code>
-</ng-container>
+<div class="container">
+    <ng-container *ngIf="error">
+        <section class="section error-404 min-vh-100 d-flex flex-column align-items-center justify-content-center"
+            style="height: 100vh;">
+            <h2 style="color: rgb(255, 200, 1);">Internal Server Error - Refreshing the page will make the error
+                disapear.</h2>
+            <div class="d-flex">
+                <a class="btn me-2" style="background-color: rgb(255, 200, 1);" routerLink="/">Back to home</a>
+                <a *appHasRole="['Admin', 'Moderator']" class="btn ms-2" style="background-color: rgb(255, 200, 1);"
+                    (click)="openModal(faq)">View Error</a>
+            </div>
+            <img src="assets/images/server-error.jpg" class="img-fluid py-5" style="height: 80vh;" alt="Page Not Found">
+        </section>
+    </ng-container>
+</div>
+
+<ng-template #faq>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Internal Server Error</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h5 class="text-danger">Error: {{error.message}}</h5>
+        <p>Steps to Debug:</p>
+        <ol>
+            <li>Open chrome dev tools! Then check the failing request in the network tab</li>
+            <li>Examine the request URL - what API endpoint are you requesting?</li>
+            <li>Reproduce the problem in Postman - if we get the same error then Angular is 100% not the problem</li>
+        </ol>
+        <p style="font-weight: bold;">Following is the stack trace - the first few lines will tell you which line of
+            code caused the issue in the API</p>
+        <code class="mt-5" style="background-color: whitesmoke;">{{error.details}}</code>
+    </div>
+</ng-template>

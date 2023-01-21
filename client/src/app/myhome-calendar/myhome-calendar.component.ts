@@ -34,9 +34,14 @@ export class MyhomeCalendarComponent implements OnInit {
 
       for (let i = 1; i <= lastDateofMonth; i++) { // creating li of all days of current month
         // adding active class to li if the current day, month, and year matched
-        let isToday = i === date.getDate() && currMonth === new Date().getMonth()
-          && currYear === new Date().getFullYear() ? "active" : "";
-        liTag += `<li class="${isToday}">${i}</li>`;
+        let isToday = i === date.getDate() && currMonth === new Date().getMonth() && currYear === new Date().getFullYear() ? "active" : "";
+        if (i == 15)
+        {
+          liTag += `<li class="${isToday} due-date" title="Due Date">${i}</li>`;
+        }
+        else {
+          liTag += `<li class="${isToday}">${i}</li>`;
+        }
       }
 
       for (let i = lastDayofMonth; i < 6; i++) { // creating li of next month first days

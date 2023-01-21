@@ -10,6 +10,7 @@ export class PaymentModalComponent implements OnInit {
   id: number = 0
   method: string = '';
   month: string = '';
+  username: string = '';
   payDate: Date | undefined
   amount: number = 0;
   approve = true;

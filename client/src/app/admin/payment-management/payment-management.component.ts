@@ -3,6 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentModalComponent } from 'src/app/modals/payment-modal/payment-modal.component';
 import { Payment } from 'src/app/_models/payment';
+import { AdminService } from 'src/app/_services/admin.service';
 import { PaymentService } from 'src/app/_services/payment.service';
 
 @Component({
@@ -31,7 +32,7 @@ export class PaymentManagementComponent implements OnInit {
 
   selectedPayment: Payment[] = [];
 
-  constructor(private paymentService: PaymentService, private modalService: BsModalService, private toastr: ToastrService) { }
+  constructor(private paymentService: PaymentService, private modalService: BsModalService, private toastr: ToastrService, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.getPendingPayments();
@@ -139,7 +140,8 @@ export class PaymentManagementComponent implements OnInit {
         method: payment.method,
         month: months[payment.payMonth - 1],
         payDate: payment.payDate,
-        amount: payment.amount
+        amount: payment.amount,
+        username: payment.username
       }
     }
     this.bsModalRef = this.modalService.show(PaymentModalComponent, config);
