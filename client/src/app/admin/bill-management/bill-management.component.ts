@@ -3,7 +3,9 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { BillsModalComponent } from 'src/app/modals/bills-modal/bills-modal.component';
 import { Bill } from 'src/app/_models/bill';
+import { Member } from 'src/app/_models/member';
 import { BillService } from 'src/app/_services/bill.service';
+import { MembersService } from 'src/app/_services/members.service';
 
 @Component({
   selector: 'app-bill-management',
@@ -19,10 +21,12 @@ export class BillManagementComponent implements OnInit {
   gas: Bill[] = [];
   electricity: Bill[] = [];
   selectedBills: Bill[] = [];
+  members: Member[] = [];
+  usernames: string[] = [];
 
   selectedBill = '';
 
-  constructor(private billService: BillService, private modalService: BsModalService, private toastr: ToastrService) { }
+  constructor(private memberService: MembersService, private billService: BillService, private modalService: BsModalService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     this.billService.getBills().subscribe({
@@ -36,6 +40,7 @@ export class BillManagementComponent implements OnInit {
         }
       }
     })
+    this.loadMembers();
   }
 
   onSelected(): void {
@@ -52,6 +57,17 @@ export class BillManagementComponent implements OnInit {
     else {
       this.selectedBills = this.bills;
     }
+  }
+
+  loadMembers() {
+    this.memberService.getMembersWithoutUserParam().subscribe({
+      next: members => {
+        if (members) {
+          this.members = members;
+          this.usernames = this.members.map(x => x.userName)
+        }
+      }
+    })
   }
 
   openBillModal(bill: Bill) {
@@ -71,7 +87,7 @@ export class BillManagementComponent implements OnInit {
       next: () => {
         const id = this.bsModalRef.content!.ID;
         const amount = this.bsModalRef.content!.amount;
-        this.billService.updateBill(id, amount).subscribe({
+        this.billService.updateBill(id, amount, this.usernames).subscribe({
           next: () => {
             bill.amount = amount;
             const index = this.selectedBills.indexOf(bill)

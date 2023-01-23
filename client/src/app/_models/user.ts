@@ -4,6 +4,6 @@ export interface User {
     photoUrl: string;
     knownAs: string;
     gender: string;
-    rentFee: any;
+    rentalFee: any;
     roles: string[];
 }

@@ -26,5 +26,6 @@ namespace API.DTOs
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public Room Room { get; set; }
+        public bool PaidThisMonth { get; set; }
     }
 }

@@ -16,5 +16,6 @@ namespace API.Interfaces
         Task<string> GetUserGender(string username);
         Task<AppUser> GetUserByPhotoIdAsync(int photoId);
         Task<AppUser> GetUserByPaymentIdAsync(int paymentId);
+        void UpdatePaidThisMonth(string[] usernames);
     }
 }

@@ -37,7 +37,7 @@ namespace API.Data
 
             var minDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MaxAge - 1));
             var maxDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MinAge));
-            
+
             query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
 
             query = userParams.OrderBy switch
@@ -47,8 +47,8 @@ namespace API.Data
             };
 
             return await PagedList<MemberDto>
-                                            .CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(), 
-                                                        userParams.PageNumber, 
+                                            .CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                                                        userParams.PageNumber,
                                                         userParams.PageSize);
         }
 
@@ -90,6 +90,17 @@ namespace API.Data
         public void Update(AppUser user)
         {
             _context.Entry(user).State = EntityState.Modified;
+        }
+
+        public async void UpdatePaidThisMonth(string[] usernames)
+        {
+            AppUser user;
+            foreach (string username in usernames)
+            {
+                user = await _context.Users.Where(user => user.UserName == username).FirstOrDefaultAsync();
+                user.PaidThisMonth = false;
+            }
+            return;
         }
     }
 }

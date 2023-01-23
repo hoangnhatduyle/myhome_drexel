@@ -15,6 +15,8 @@ import { AdminGuard } from './_guards/admin.guard';
 import { AuthGuard } from './_guards/auth.guard';
 import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.guard';
 import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
+import { MyhomeMyroomComponent } from './myhome-myroom/myhome-myroom.component';
+import { MyhomeDocumnetComponent } from './myhome-documnet/myhome-documnet.component';
 
 const routes: Routes = [
   { path: '', component: MyhomeLoginComponent },
@@ -47,6 +49,14 @@ const routes: Routes = [
             component: ContactComponent
           },
           { path: 'profile/:username', component: MemberDetailComponent, resolve: { member: MemberDetailedResolver } },
+          {
+            path: 'room',
+            component: MyhomeMyroomComponent
+          },
+          {
+            path: 'document',
+            component: MyhomeDocumnetComponent
+          }
         ]
       }
     ]

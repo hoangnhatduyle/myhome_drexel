@@ -26,4 +26,5 @@ export interface Member {
     lastRentalFee: number;
     phoneNumber: string;
     email: string;
+    paidThisMonth: boolean;
 }

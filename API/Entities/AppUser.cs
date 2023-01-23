@@ -22,17 +22,9 @@ namespace API.Entities
         public int LastRentalFee { get; set; }
         public List<Photo> Photos { get; set; } = new();
         public List<Payment> Payment { get; set; } = new();
-
-        // public int GetAge()
-        // {
-        //     return DateOfBirth.CalculateAge();
-        // }
-        public List<UserLike> LikedByUsers { get; set; }
-        public List<UserLike> LikedUsers { get; set; }
-        public List<Message> MessageSent { get; set; }
-        public List<Message> MessageReceived { get; set; }
         public ICollection<AppUserRole> UserRoles { get; set; }
         public int? RoomId { get; set; }
         public virtual Room Room { get; set; }
+        public bool PaidThisMonth { get; set; }
     }
 }

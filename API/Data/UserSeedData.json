@@ -1,240 +1,175 @@
 [
     {
-        "UserName": "Dale",
+        "UserName": "Thao",
         "Gender": "male",
-        "DateOfBirth": "1966-07-14",
-        "KnownAs": "Dale",
-        "LeaseEnd": "1971-01-26",
-        "Created": "2020-02-09",
-        "LastActive": "2020-05-07",
-        "Introduction": "Laborum voluptate ullamco ea reprehenderit excepteur ipsum proident cupidatat voluptate quis do ipsum. Id elit consequat ad fugiat eu aliquip aliqua ad mollit culpa. Excepteur amet irure et mollit pariatur.\r\n",
-        "LookingFor": "Ea id enim consectetur eu. Nostrud do est nulla adipisicing consectetur laborum. Id ut veniam tempor esse incididunt. Ex eu ea ullamco magna proident irure laborum proident. Id deserunt sunt nulla Lorem ex ipsum nisi.\r\n",
-        "Interests": "Esse Lorem eiusmod minim dolore ea.",
-        "City": "Onton",
-        "Country": "French Polynesia",
-        "Address": "400 Rutledge Street, Boykin, Guam, 7989",
-        "RentalFee": 379,
-        "LastRentalFee": 400,
-        "PhoneNumber": "+1 (954) 471-3092",
-        "Email": "dalehouston@medesign.com",
+        "DateOfBirth": "1995-02-04",
+        "KnownAs": "Thao",
+        "LeaseEnd": "2023-05-06",
+        "Created": "2020-03-01",
+        "Introduction": "Intro goes here",
+        "City": "Toledo",
+        "Country": "USA",
+        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "RentalFee": 350,
+        "LastRentalFee": 505,
+        "PhoneNumber": "+1 (469) 478-0577",
+        "Email": "thao.cao@rockets.utoledo.edu",
+        "PaidThisMonth": false,
+        "Photos": [],
         "Room": {
             "RoomNumber": 1,
             "RoomType": "Single",
             "IsOccupied": true
         },
-        "Photos": [
-            {
-                "Url": "https://randomuser.me/api/portraits/men/9.jpg",
-                "isMain": true
-            }
-        ],
         "Payment": [
             {
                 "Method": "Zelle",
-                "PayDate": "2020-02-29",
-                "PaymentStatus": "Pending",
-                "Amount": 414,
+                "PayDate": "2023-01-19",
+                "PaymentStatus": "Approve",
+                "Amount": 480,
                 "PayMonth": 1
-            },
-            {
-                "Method": "Cash",
-                "PayDate": "2021-08-14",
-                "PaymentStatus": "Pending",
-                "Amount": 313,
-                "PayMonth": 2
-            },
-            {
-                "Method": "Cash",
-                "PayDate": "2022-06-10",
-                "PaymentStatus": "Pending",
-                "Amount": 290,
-                "PayMonth": 3
             }
         ]
     },
     {
-        "UserName": "jake",
+        "UserName": "Rick",
         "Gender": "male",
-        "DateOfBirth": "1966-07-14",
-        "KnownAs": "Jake",
-        "LeaseEnd": "1971-01-26",
-        "Created": "2020-02-09",
-        "LastActive": "2020-05-07",
-        "Introduction": "Laborum voluptate ullamco ea reprehenderit excepteur ipsum proident cupidatat voluptate quis do ipsum. Id elit consequat ad fugiat eu aliquip aliqua ad mollit culpa. Excepteur amet irure et mollit pariatur.\r\n",
-        "LookingFor": "Ea id enim consectetur eu. Nostrud do est nulla adipisicing consectetur laborum. Id ut veniam tempor esse incididunt. Ex eu ea ullamco magna proident irure laborum proident. Id deserunt sunt nulla Lorem ex ipsum nisi.\r\n",
-        "Interests": "Esse Lorem eiusmod minim dolore ea.",
-        "City": "Onton",
-        "Country": "French Polynesia",
-        "Address": "400 Rutledge Street, Boykin, Guam, 7989",
-        "RentalFee": 379,
-        "LastRentalFee": 400,
-        "PhoneNumber": "+1 (954) 471-3092",
-        "Email": "jakehouston@medesign.com",
+        "DateOfBirth": "1988-05-11",
+        "KnownAs": "Rick",
+        "LeaseEnd": "2023-08-01",
+        "Created": "2022-08-01",
+        "Introduction": "Intro goes here",
+        "City": "Toledo",
+        "Country": "USA",
+        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "RentalFee": 400,
+        "LastRentalFee": 500,
+        "PhoneNumber": "+1 (908) 290-8133",
+        "Email": "ricardo.cabrera@rockets.utoledo.edu",
+        "PaidThisMonth": false,
+        "Photos": [],
         "Room": {
             "RoomNumber": 2,
             "RoomType": "Single",
             "IsOccupied": true
         },
-        "Photos": [
-            {
-                "Url": "https://randomuser.me/api/portraits/men/28.jpg",
-                "isMain": true
-            }
-        ],
         "Payment": [
             {
                 "Method": "Zelle",
-                "PayDate": "2019-07-25",
-                "PaymentStatus": "Pending",
-                "Amount": 315,
+                "PayDate": "2023-01-18",
+                "PaymentStatus": "Approve",
+                "Amount": 490,
                 "PayMonth": 1
             }
         ]
     },
     {
-        "UserName": "Pratt",
+        "UserName": "Khang",
         "Gender": "male",
-        "DateOfBirth": "1975-10-08",
-        "KnownAs": "Pratt",
-        "LeaseEnd": "1994-06-20",
-        "Created": "2019-08-19",
-        "LastActive": "2020-05-01",
-        "Introduction": "Amet in magna velit cillum commodo do. Irure qui minim qui officia ut consectetur quis elit voluptate nostrud nulla. Voluptate ex amet aute aute sit cillum. Ex aute amet ea mollit eu amet.\r\n",
-        "LookingFor": "Velit culpa ex proident deserunt adipisicing laborum adipisicing adipisicing sunt aliqua amet. In qui nisi incididunt anim ipsum tempor reprehenderit velit aute commodo ex. Irure est deserunt nostrud est labore eu voluptate et non mollit ad duis ad et. Aliquip voluptate eu irure elit sit nisi excepteur esse deserunt. Dolore esse proident in id mollit.\r\n",
-        "Interests": "Incididunt occaecat mollit mollit nisi exercitation culpa do ad commodo.",
-        "City": "Oley",
-        "Country": "Finland",
-        "Address": "746 Rochester Avenue, Gardiner, Nebraska, 2094",
-        "RentalFee": 398,
-        "LastRentalFee": 400,
-        "PhoneNumber": "+1 (804) 413-3509",
-        "Email": "pratthouston@medesign.com",
+        "DateOfBirth": "2002-07-01",
+        "KnownAs": "Khang",
+        "LeaseEnd": "2024-01-01",
+        "Created": "2023-01-01",
+        "Introduction": "Intro goes here",
+        "City": "Toledo",
+        "Country": "USA",
+        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "RentalFee": 350,
+        "LastRentalFee": 0,
+        "PhoneNumber": "+1 (419) 770-7299",
+        "Email": "duykhang.hua@rockets.utoledo.edu",
+        "PaidThisMonth": false,
+        "Photos": [],
         "Room": {
             "RoomNumber": 3,
             "RoomType": "Double",
             "IsOccupied": true
         },
-        "Photos": [
-            {
-                "Url": "https://randomuser.me/api/portraits/men/64.jpg",
-                "isMain": true
-            }
-        ],
         "Payment": [
             {
-                "Method": "Zelle",
-                "PayDate": "2020-06-26",
-                "PaymentStatus": "Pending",
-                "Amount": 440,
+                "Method": "Cash",
+                "PayDate": "2023-01-21",
+                "PaymentStatus": "Approve",
+                "Amount": 300,
                 "PayMonth": 1
             }
         ]
     },
     {
-        "UserName": "Christensen",
+        "UserName": "Dang",
         "Gender": "male",
-        "DateOfBirth": "1988-06-12",
-        "KnownAs": "Christensen",
-        "LeaseEnd": "1960-03-21",
-        "Created": "2019-10-31",
-        "LastActive": "2020-05-07",
-        "Introduction": "Veniam labore est enim occaecat occaecat eu id do cillum. Sint amet dolor et cillum cillum enim ad velit esse in ut. Anim consequat dolore elit do esse excepteur sint. Adipisicing qui sint minim exercitation. Velit ut tempor irure tempor quis adipisicing est in proident dolor elit commodo et nisi.\r\n",
-        "LookingFor": "Eiusmod nostrud velit dolore in aute amet sit ad culpa non sit. Irure Lorem ad dolore est adipisicing aliqua aute pariatur aliqua. Ut adipisicing nisi esse pariatur. Enim proident tempor incididunt ad aute.\r\n",
-        "Interests": "Est anim nostrud in eu occaecat commodo ad ipsum consequat deserunt anim nostrud.",
-        "City": "Idamay",
-        "Country": "Kenya",
-        "Address": "649 Menahan Street, Glidden, Kentucky, 2777",
-        "RentalFee": 378,
-        "LastRentalFee": 440,
-        "PhoneNumber": "+1 (898) 581-2378",
-        "Email": "christensenhouston@medesign.com",
-        "Photos": [
-            {
-                "Url": "https://randomuser.me/api/portraits/men/12.jpg",
-                "isMain": true
-            }
-        ],
+        "DateOfBirth": "2002-08-12",
+        "KnownAs": "Dang",
+        "LeaseEnd": "2024-01-01",
+        "Created": "2023-01-01",
+        "Introduction": "Intro goes here",
+        "City": "Toledo",
+        "Country": "USA",
+        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "RentalFee": 400,
+        "LastRentalFee": 0,
+        "PhoneNumber": "+1 (314) 850-8225",
+        "Email": "thanhdang.huynh@rockets.utoledo.edu",
+        "PaidThisMonth": false,
+        "Photos": [],
         "Payment": [
             {
                 "Method": "Zelle",
-                "PayDate": "2020-01-23",
-                "PaymentStatus": "Pending",
-                "Amount": 428,
+                "PayDate": "2023-01-18",
+                "PaymentStatus": "Approve",
+                "Amount": 350,
                 "PayMonth": 1
             }
         ]
     },
     {
-        "UserName": "Neal",
+        "UserName": "Thang",
         "Gender": "male",
-        "DateOfBirth": "1955-01-31",
-        "KnownAs": "Neal",
-        "LeaseEnd": "1988-02-19",
-        "Created": "2019-09-12",
-        "LastActive": "2020-06-03",
-        "Introduction": "Velit quis velit enim eu aliquip ullamco. Enim ea quis incididunt mollit eiusmod aliqua do Lorem ex velit nulla non cillum. Enim officia enim incididunt commodo labore exercitation sint. Labore consequat culpa amet esse aliquip aliquip ut.\r\n",
-        "LookingFor": "Nostrud quis culpa veniam sint et commodo ex velit do. Consectetur ipsum cillum labore aliqua. Laborum esse officia nisi sunt nostrud velit voluptate magna non amet sunt.\r\n",
-        "Interests": "Consequat qui culpa aliqua duis culpa ad ad cupidatat amet do duis veniam.",
-        "City": "Interlochen",
-        "Country": "Lebanon",
-        "Address": "125 Fane Court, Brandywine, Illinois, 5899",
-        "RentalFee": 367,
-        "LastRentalFee": 440,
-        "PhoneNumber": "+1 (830) 487-3467",
-        "Email": "nealhouston@medesign.com",
+        "DateOfBirth": "2000-10-29",
+        "KnownAs": "Thang",
+        "LeaseEnd": "2025-01-01",
+        "Created": "2021-08-20",
+        "Introduction": "Intro goes here",
+        "City": "Toledo",
+        "Country": "USA",
+        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "RentalFee": 340,
+        "LastRentalFee": 537,
+        "PhoneNumber": "+1 (419) 699-9537",
+        "Email": "thang.tran@rockets.utoledo.edu",
+        "PaidThisMonth": false,
+        "Photos": [],
         "Room": {
             "RoomNumber": 4,
             "RoomType": "Double",
             "IsOccupied": true
         },
-        "Photos": [
-            {
-                "Url": "https://randomuser.me/api/portraits/men/37.jpg",
-                "isMain": true
-            }
-        ],
         "Payment": [
             {
                 "Method": "Zelle",
-                "PayDate": "2019-08-09",
-                "PaymentStatus": "Pending",
-                "Amount": 344,
+                "PayDate": "2023-01-18",
+                "PaymentStatus": "Approve",
+                "Amount": 512,
                 "PayMonth": 1
             }
         ]
     },
     {
-        "UserName": "Richard",
+        "UserName": "Bao",
         "Gender": "male",
-        "DateOfBirth": "1978-09-23",
-        "KnownAs": "Richard",
-        "LeaseEnd": "1980-12-30",
-        "Created": "2019-03-27",
-        "LastActive": "2020-05-30",
-        "Introduction": "Deserunt mollit qui consequat est duis nulla nulla quis cillum deserunt sint reprehenderit fugiat. Cillum laboris qui enim laboris voluptate fugiat minim amet incididunt. Consequat laboris mollit anim nulla ea occaecat sint cupidatat qui. Proident eu mollit anim dolor consectetur eu veniam labore duis tempor. Nisi elit pariatur nostrud proident nostrud cupidatat consequat sit cupidatat elit dolor. Veniam ullamco do exercitation dolore voluptate nostrud dolor irure quis est et mollit minim incididunt. Pariatur qui id voluptate est sint.\r\n",
-        "LookingFor": "Esse sit voluptate nisi aliquip aliquip cillum non ullamco Lorem exercitation et elit. Duis dolor qui velit eu amet duis proident est tempor. Cillum eiusmod cupidatat nostrud cillum do culpa laboris. Commodo ex cupidatat dolor magna aliquip sunt sint ut.\r\n",
-        "Interests": "Laboris commodo voluptate consequat excepteur in id.",
-        "City": "Brooktrails",
-        "Country": "Macedonia",
-        "Address": "787 Beaver Street, Knowlton, Texas, 2194",
-        "RentalFee": 370,
-        "LastRentalFee": 460,
-        "PhoneNumber": "+1 (878) 515-2249",
-        "Email": "richardhouston@medesign.com",
-        "Photos": [
-            {
-                "Url": "https://randomuser.me/api/portraits/men/26.jpg",
-                "isMain": true
-            }
-        ],
-        "Payment": [
-            {
-                "Method": "Zelle",
-                "PayDate": "2019-08-28",
-                "PaymentStatus": "Pending",
-                "Amount": 322,
-                "PayMonth": 1
-            }
-        ]
+        "DateOfBirth": "2000-08-24",
+        "KnownAs": "Bao",
+        "LeaseEnd": "9999-01-01",
+        "Created": "2019-08-01",
+        "Introduction": "Intro goes here",
+        "City": "Toledo",
+        "Country": "USA",
+        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "RentalFee": 0,
+        "LastRentalFee": 0,
+        "PhoneNumber": "+1 (419) 699-9534",
+        "Email": "hoangbaoduy.le@rockets.utoledo.edu",
+        "PaidThisMonth": false,
+        "Photos": []
     }
 ]

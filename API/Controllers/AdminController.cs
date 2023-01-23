@@ -32,7 +32,7 @@ namespace API.Controllers
             {
                 u.Id,
                 UserName = u.UserName,
-                RentFee = u.RentalFee,
+                RentalFee = u.RentalFee,
                 Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
             }).ToListAsync();
 
@@ -134,6 +134,8 @@ namespace API.Controllers
 
             _mapper.Map(billUpdateDto, bill);
 
+            if (billUpdateDto.Usernames != null && billUpdateDto.Usernames.Length > 0) _unitOfWork.UserRepository.UpdatePaidThisMonth(billUpdateDto.Usernames);
+
             if (await _unitOfWork.Complete()) return Ok(billUpdateDto.Amount);
 
             return BadRequest("Failed to update bill");
@@ -170,6 +172,19 @@ namespace API.Controllers
             var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == username);
 
             user.RoomId = roomId;
+
+            await _unitOfWork.Complete();
+            return Ok();
+        }
+
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPut("update-rental-fee/{username}/{amount}")]
+        public async Task<ActionResult> ChangeAmount(string username, int amount)
+        {
+            var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == username);
+
+            user.LastRentalFee = amount;
+            user.PaidThisMonth = true;
 
             await _unitOfWork.Complete();
             return Ok();

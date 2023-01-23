@@ -153,8 +153,12 @@ export class PaymentManagementComponent implements OnInit {
         if (approve) {
           this.paymentService.approvePayment(id).subscribe({
             next: _ => {
-              this.toastr.success("You have approved the payment");
-              this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === id), 1);
+              this.adminService.updateLastRentalFee(payment.username, payment.amount).subscribe({
+                next: _ => {
+                  this.toastr.success("You have approved the payment");
+                  this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === id), 1);
+                }
+              })
             }
           })
         }
