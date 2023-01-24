@@ -1,7 +1,9 @@
 import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { take } from 'rxjs';
+import { NewPaymentModalComponent } from '../new-payment-modal/new-payment-modal.component';
 import { Member } from '../_models/member';
 import { Payment } from '../_models/payment';
 import { User } from '../_models/user';
@@ -19,9 +21,11 @@ export class RecentPaymentComponent implements OnInit {
   member: Member | undefined;
   user: User | null = null;
   payments: Payment[] = [];
+  bsModalRef: BsModalRef<NewPaymentModalComponent> = new BsModalRef<NewPaymentModalComponent>();
+  months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   constructor(private accountService: AccountService, private router: Router,
-    private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) {
+    private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private modalService: BsModalService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
@@ -57,5 +61,27 @@ export class RecentPaymentComponent implements OnInit {
     this.loadMember();
     this.isVisible = true;
     this.toastr.success("Refresh successfully!");
+  }
+
+  openNewPaymentModal() {
+    const config = {
+      class: 'modal-dialog-centered',
+      initialState: {}
+    }
+    this.bsModalRef = this.modalService.show(NewPaymentModalComponent, config);
+    this.bsModalRef.onHide?.subscribe({
+      next: () => {
+        const values = this.bsModalRef.content!.values;
+        this.memberService.addNewPayment(values).subscribe({
+          next: (payment: Payment) => {
+            this.toastr.success("Payment has been added successfully");
+            this.rerender();
+          },
+          error: error => {
+            this.toastr.error(error);
+          }
+        })
+      }
+    })
   }
 }

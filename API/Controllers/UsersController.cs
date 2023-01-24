@@ -1,5 +1,3 @@
-using System.Security.Claims;
-using API.Data;
 using API.DTOs;
 using API.Entities;
 using API.Extensions;
@@ -8,7 +6,6 @@ using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace API.Controllers
 {
@@ -22,11 +19,11 @@ namespace API.Controllers
         {
             _unitOfWork = unitOfWork;
             _photoService = photoService;
-            _mapper = mapper;    
+            _mapper = mapper;
         }
 
         [HttpGet]
-        public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery]UserParams userParams)
+        public async Task<ActionResult<PagedList<MemberDto>>> GetUsers([FromQuery] UserParams userParams)
         {
             var gender = await _unitOfWork.UserRepository.GetUserGender(User.GetUsername());
             userParams.CurrentUsername = User.GetUsername();
@@ -86,9 +83,9 @@ namespace API.Controllers
 
             user.Photos.Add(photo);
 
-            if (await _unitOfWork.Complete()) 
+            if (await _unitOfWork.Complete())
             {
-                return CreatedAtAction(nameof(GetSpecificUser), new {username = user.UserName}, _mapper.Map<PhotoDto>(photo));
+                return CreatedAtAction(nameof(GetSpecificUser), new { username = user.UserName }, _mapper.Map<PhotoDto>(photo));
             }
 
             return BadRequest("Problem adding photo");
@@ -130,7 +127,7 @@ namespace API.Controllers
 
             if (photo.IsMain) return BadRequest("You cannot delete your main photo");
 
-            if (photo.PublicId != null) 
+            if (photo.PublicId != null)
             {
                 var result = await _photoService.DeletePhotoAsync(photo.PublicId);
                 if (result.Error != null) return BadRequest(result.Error.Message);
@@ -141,6 +138,32 @@ namespace API.Controllers
             if (await _unitOfWork.Complete()) return Ok();
 
             return BadRequest("Problem deleting selected photo");
+        }
+
+        [HttpPost("add-new-payment")]
+        public async Task<ActionResult<PaymentDto>> AddNewPayment(NewPaymentDto newPaymentDto)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            if (user == null) return NotFound();
+
+            var newPayment = new Payment
+            {
+                Method = newPaymentDto.Method,
+                PayDate = newPaymentDto.PayDate,
+                PayMonth = newPaymentDto.PayMonth,
+                PaymentStatus = "Pending",
+                Amount = newPaymentDto.Amount
+            };
+
+            user.Payment.Add(newPayment);
+
+            if (await _unitOfWork.Complete())
+            {
+                return CreatedAtAction(nameof(GetSpecificUser), new { username = user.UserName }, _mapper.Map<PaymentDto>(newPayment));
+            }
+
+            return BadRequest("Problem adding payment");
         }
     }
 }

@@ -1,12 +1,11 @@
-import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { map, of, take } from 'rxjs';
+import { map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
-import { PaginatedResult } from '../_models/pagination';
+import { Payment } from '../_models/payment';
 import { User } from '../_models/user';
 import { AccountService } from './account.service';
-import { getPaginationHeaders, getPaginatedResult } from './paginationHelper';
 
 @Injectable({
   providedIn: 'root'
@@ -51,5 +50,9 @@ export class MembersService {
 
   deletePhoto(photoId: number) {
     return this.http.delete(this.baseUrl + 'users/delete-photo/' + photoId, {});
+  }
+
+  addNewPayment(model: any) {
+    return this.http.post<Payment>(this.baseUrl + "users/add-new-payment", model);
   }
 }

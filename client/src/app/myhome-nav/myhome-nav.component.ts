@@ -22,7 +22,8 @@ export class MyhomeNavComponent implements OnInit {
   member: Member | undefined;
   user: User | null = null;
 
-  constructor(public accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, private modalService: BsModalService) {
+  constructor(public accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, 
+    private modalService: BsModalService, private cdref: ChangeDetectorRef) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
@@ -55,5 +56,9 @@ export class MyhomeNavComponent implements OnInit {
   logout() {
     this.accountService.logout();
     this.router.navigateByUrl("/");
+  }
+
+  ngAfterContentChecked() {
+    this.cdref.detectChanges();
   }
 }

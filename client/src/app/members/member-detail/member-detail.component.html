@@ -38,9 +38,10 @@
                                     <app-myhome-member-overview [member]="member"></app-myhome-member-overview>
                                 </div>
                             </tab>
-                            <tab heading="Photo Management">
+                            <tab heading="Photo Gallery">
                                 <div class="container ps-0 ms-3 mt-3">
-                                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                                    <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery" *ngIf="galleryImages.length > 0"></ngx-gallery>
+                                    <p *ngIf="galleryImages.length == 0">This person has not uploaded any photo.</p>
                                 </div>
                             </tab>
                         </tabset>

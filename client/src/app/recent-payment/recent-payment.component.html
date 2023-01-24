@@ -1,7 +1,9 @@
 <div class="card recent-sales overflow-auto" *ngIf="member">
 
     <div class="filter">
-        <button class="btn-success btn me-3">Add</button>
+        <a class="icon pe-1 me-1" style="cursor: pointer;">
+            <fa-icon [icon]="['fas', 'plus']" (click)="openNewPaymentModal()"></fa-icon>
+        </a>
         <a class="icon" style="cursor: pointer;">
             <fa-icon [icon]="['fas', 'sync']" (click)="rerender()"></fa-icon>
         </a>
@@ -26,11 +28,14 @@
                     <th scope="row">{{index}}</th>
                     <td>{{payment.method}}</td>
                     <td>{{payment.payDate}}</td>
-                    <td>{{payment.payMonth}}</td>
+                    <td>{{months[payment.payMonth - 1]}}</td>
                     <td>{{payment.amount}}</td>
-                    <td *ngIf="payment.paymentStatus == 'Approve'"><span class="badge bg-success">{{payment.paymentStatus}}</span></td>
-                    <td *ngIf="payment.paymentStatus == 'Pending'"><span class="badge bg-warning">{{payment.paymentStatus}}</span></td>
-                    <td *ngIf="payment.paymentStatus == 'Reject'"><span class="badge bg-danger">{{payment.paymentStatus}}</span></td>
+                    <td *ngIf="payment.paymentStatus == 'Approve'"><span
+                            class="badge bg-success">{{payment.paymentStatus}}</span></td>
+                    <td *ngIf="payment.paymentStatus == 'Pending'"><span
+                            class="badge bg-warning">{{payment.paymentStatus}}</span></td>
+                    <td *ngIf="payment.paymentStatus == 'Reject'"><span
+                            class="badge bg-danger">{{payment.paymentStatus}}</span></td>
                 </tr>
             </tbody>
         </table>

@@ -1,0 +1,52 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Add New Payment</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="newPaymentForm" autocomplete="off">
+        <div class="mb-3">
+            <label style="margin-right: 10px">Method: </label>
+            <label class="form-check-label">
+                <input type="radio" class="form-check-input" value="Zelle" formControlName="method"> Zelle
+            </label>
+            <label class="form-check-label ms-3">
+                <input type="radio" class="form-check-input" value="Cash" formControlName="method"> Cash
+            </label>
+        </div>
+
+        <app-date-picker [formControl]="$any(newPaymentForm.controls['payDate'])"
+            [label]="'Pay Date'"></app-date-picker>
+        <app-text-input [formControl]="$any(newPaymentForm.controls['amount'])" [label]="'Amount'"></app-text-input>
+
+        <div class="mb-3">
+            <select class="form-select" [formControl]="$any(newPaymentForm.controls['payMonth'])">
+                <option value="0" selected>Rent Month</option>
+                <option value="1">Jan</option>
+                <option value="2">Feb</option>
+                <option value="3">Mar</option>
+                <option value="4">Apr</option>
+                <option value="5">May</option>
+                <option value="6">Jun</option>
+                <option value="7">Jul</option>
+                <option value="8">Aug</option>
+                <option value="9">Sep</option>
+                <option value="10">Oct</option>
+                <option value="11">Nov</option>
+                <option value="12">Dec</option>
+            </select>
+
+            <div class="invalid-feedback" *ngIf="newPaymentForm.hasError('required')">Month is required</div>
+        </div>
+
+        <div class="row" *ngIf="validationErrors">
+            <ul class="text-danger">
+                <li *ngFor="let error of validationErrors">{{error}}</li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn btn-success mb-3" style="float: right;" [disabled]="!newPaymentForm.valid"
+            (click)="bsModalRef.hide(); saveValues()">Submit</button>
+    </form>
+</div>
