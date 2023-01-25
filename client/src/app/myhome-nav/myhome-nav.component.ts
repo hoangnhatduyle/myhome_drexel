@@ -19,7 +19,6 @@ export class MyhomeNavComponent implements OnInit {
   autoCollapseWidth: number = 800;
   modalRef?: BsModalRef;
 
-  member: Member | undefined;
   user: User | null = null;
 
   constructor(public accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, 
@@ -35,14 +34,7 @@ export class MyhomeNavComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.loadMember()
-  }
-
-  loadMember() {
-    if (!this.user) return;
-    this.memberService.getMember(this.user.userName).subscribe({
-      next: member => this.member = member
-    })
+    
   }
 
   toggleOpened(): void {

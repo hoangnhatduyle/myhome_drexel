@@ -5,8 +5,6 @@ import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
 import { Message } from '../_models/message';
 import { Payment } from '../_models/payment';
-import { User } from '../_models/user';
-import { AccountService } from './account.service';
 
 @Injectable({
   providedIn: 'root'
@@ -14,25 +12,55 @@ import { AccountService } from './account.service';
 export class MembersService {
   baseUrl = environment.apiUrl;
   members: Member[] = [];
-  memberCache = new Map();
-  user: User | undefined;
+  member: Member | undefined;
 
-  constructor(private http: HttpClient, private accountService: AccountService) {
+  constructor(private http: HttpClient) {
 
   }
 
-  getMembersWithoutUserParam() {
-    return this.http.get<Member[]>(this.baseUrl + 'users');
+  getMembersWithoutUserParam(refetch: boolean = false) {
+    if (refetch) {
+      return this.http.get<Member[]>(this.baseUrl + 'users').pipe(
+        map(members => {
+          this.members = members;
+          return members;
+        })
+      )
+    }
+    else {
+      if (this.members.length > 0) return of(this.members);
+      return this.http.get<Member[]>(this.baseUrl + 'users').pipe(
+        map(members => {
+          this.members = members;
+          return members;
+        })
+      )
+    }
   }
 
-  getMember(username: string) {
-    // const member = this.members.find(x => x.userName == username);
-    // if (member) return of(member);
+  getMember(username: string, refetch = false) {
+    if (refetch) {
+      return this.http.get<Member>(this.baseUrl + 'users/' + username).pipe(
+        map(member => {
+          this.member = member;
+          return member;
+        })
+      )
+    }
+    else {
+      const member = this.member;
+      if (member) return of(member);
 
-    const member = [...this.memberCache.values()].reduce((arr, elem) => arr.concat(elem.result), []).find((member: Member) => member.userName === username);
+      return this.http.get<Member>(this.baseUrl + 'users/' + username).pipe(
+        map(member => {
+          this.member = member;
+          return member;
+        })
+      )
+    }
+  }
 
-    if (member) return of(member);
-
+  getMemberForResolver(username: string) {
     return this.http.get<Member>(this.baseUrl + 'users/' + username)
   }
 
@@ -58,6 +86,6 @@ export class MembersService {
   }
 
   addNewMessage(model: any) {
-    return this.http.post<Message>(this.baseUrl + "users/add-new-message", model);    
+    return this.http.post<Message>(this.baseUrl + "users/add-new-message", model);
   }
 }

@@ -19,8 +19,8 @@ export class ReisdentSumComponent implements OnInit {
     this.loadMembers();
   }
 
-  loadMembers() {
-    this.memberService.getMembersWithoutUserParam().subscribe({
+  loadMembers(refetch = false) {
+    this.memberService.getMembersWithoutUserParam(refetch).subscribe({
       next: members => {
         if (members) {
           this.members = members;
@@ -33,7 +33,7 @@ export class ReisdentSumComponent implements OnInit {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
     this.isVisible = true;
-    this.loadMembers();
+    this.loadMembers(true);
     this.toastr.success("Refresh successfully!");
   }
 }

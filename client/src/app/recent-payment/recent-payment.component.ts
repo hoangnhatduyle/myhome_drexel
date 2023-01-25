@@ -1,13 +1,10 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { take } from 'rxjs';
 import { NewPaymentModalComponent } from '../new-payment-modal/new-payment-modal.component';
 import { Member } from '../_models/member';
 import { Payment } from '../_models/payment';
 import { User } from '../_models/user';
-import { AccountService } from '../_services/account.service';
 import { MembersService } from '../_services/members.service';
 
 @Component({
@@ -16,9 +13,11 @@ import { MembersService } from '../_services/members.service';
   styleUrls: ['./recent-payment.component.css']
 })
 export class RecentPaymentComponent implements OnInit {
+  @Input() member: Member | undefined;
+  @Output() reloadMember = new EventEmitter();
+
   dtOptions: DataTables.Settings = {};
   isVisible: boolean = true;
-  member: Member | undefined;
   user: User | null = null;
   payments: Payment[] = [];
   bsModalRef: BsModalRef<NewPaymentModalComponent> = new BsModalRef<NewPaymentModalComponent>();
@@ -27,11 +26,14 @@ export class RecentPaymentComponent implements OnInit {
   months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   today: string = '';
 
-  constructor(private accountService: AccountService, private router: Router,
-    private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private modalService: BsModalService) {
-    this.accountService.currentUser$.pipe(take(1)).subscribe({
-      next: user => this.user = user
-    })
+  constructor(private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private modalService: BsModalService) {
+
+  }
+
+  ngOnChanges() {
+    if (this.member) {
+      this.payments = this.member.payment;
+    }
   }
 
   ngOnInit(): void {
@@ -45,24 +47,14 @@ export class RecentPaymentComponent implements OnInit {
         [5, 10, 25, 'All'],
       ]
     };
-    this.loadMember();
-    this.today = (this.date.getMonth() + 1) + "/" + this.date.getDate() + "/" + this.date.getFullYear()
-  }
 
-  loadMember() {
-    if (!this.user) return;
-    this.memberService.getMember(this.user.userName).subscribe({
-      next: member => {
-        this.member = member
-        this.payments = member.payment;
-      }
-    })
+    this.today = (this.date.getMonth() + 1) + "/" + this.date.getDate() + "/" + this.date.getFullYear()
   }
 
   rerender(): void {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
-    this.loadMember();
+    this.reloadMember.emit(false);
     this.isVisible = true;
     this.toastr.success("Refresh successfully!");
   }

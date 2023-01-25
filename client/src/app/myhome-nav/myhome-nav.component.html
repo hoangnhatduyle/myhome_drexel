@@ -1,4 +1,4 @@
-<ng-sidebar-container style="height: 100vh" *ngIf="member">
+<ng-sidebar-container style="height: 100vh" *ngIf="user">
     <ng-sidebar style="margin-top: 62px;" [(opened)]="opened" [autoCollapseWidth]="autoCollapseWidth">
         <div style="position: relative; height: 100%; width: 320px;">
             <div class="sidebar">
@@ -101,11 +101,11 @@
                             <img src="{{user.photoUrl || './assets/images/user.png'}}" alt="user photo"
                                 class="dropdown-toggle rounded-circle" style="max-height: 36px;">
                             <a class="dropdown-toggle text-decoration-none d-block ps-2" style="color: rgb(82, 14, 14); font-size: 14px;
-                                font-weight: 500;" dropdownToggle>{{member.knownAs}}</a>
+                                font-weight: 500;" dropdownToggle>{{user.knownAs}}</a>
                             <ul class="dropdown-menu dropdown-menu-end dropdown-menu-arrow profile"
                                 style="margin-top: 2.5rem" *dropdownMenu>
                                 <li class="dropdown-header">
-                                    <h6 style="font-weight: 400;">{{member.knownAs}}</h6>
+                                    <h6 style="font-weight: 400;">{{user.knownAs}}</h6>
                                     <span *appHasRole="['Member']">House Member</span>
                                     <span *appHasRole="['Admin', 'Moderator']">Admin</span>
                                 </li>

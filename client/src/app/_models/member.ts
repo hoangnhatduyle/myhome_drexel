@@ -19,7 +19,7 @@ export interface Member {
     city: string;
     country: string;
     photos: Photo[];
-    payments: Payment[];
+    payment: Payment[];
     messages: Message[];
     room: Room;
     leaseEnd: Date;

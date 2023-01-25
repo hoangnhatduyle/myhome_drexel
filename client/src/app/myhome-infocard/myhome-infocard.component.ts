@@ -2,7 +2,6 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { ToastrService } from 'ngx-toastr';
 import { Bill } from '../_models/bill';
 import { Member } from '../_models/member';
-import { BillService } from '../_services/bill.service';
 
 @Component({
   selector: 'app-myhome-infocard',
@@ -12,9 +11,10 @@ import { BillService } from '../_services/bill.service';
 export class MyhomeInfocardComponent implements OnInit {
   @Output() reloadMember = new EventEmitter();
   @Input() member: Member | undefined;
+  @Input() bills: Bill[] | undefined;
+
   dueDate: string | undefined;
   isVisible: boolean = true;
-  bills: Bill[] = [];
   water: number = 0;
   gas: number = 0;
   electricity: number = 0;
@@ -25,41 +25,33 @@ export class MyhomeInfocardComponent implements OnInit {
   currMonth = this.date.getMonth();
   month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private billService: BillService) { }
+  constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
+
+  ngOnChanges() {
+    if (this.member && this.bills && this.bills.length > 0) {
+      this.water = this.bills!.filter(x => x.type == 'water' && x.month == this.currMonth + 1)[0].amount;
+      this.gas = this.bills!.filter(x => x.type == 'gas' && x.month == this.currMonth + 1)[0].amount;
+      this.electricity = this.bills!.filter(x => x.type == 'electricity' && x.month == this.currMonth + 1)[0].amount;
+
+      this.total = 0;
+
+      this.total = Math.round(this.water / 6 + this.gas / 6 + this.electricity / 6 + this.member.rentalFee);
+      this.percentChange = Math.abs((this.total - this.member.lastRentalFee) / this.member.lastRentalFee * 100).toFixed(2);
+
+      if (this.total > this.member.lastRentalFee) this.higher = true;
+      else this.higher = false;
+    }
+  }
 
   ngOnInit(): void {
     // const currentDate = document.querySelector("#due_date");
-
     let dueDate = this.month[this.currMonth] + " - 15";
-
     this.dueDate = dueDate;
-    this.getBill(this.currMonth);
-  }
-
-  getBill(currMonth: number) {
-    this.billService.getBills().subscribe({
-      next: bills => {
-        if (bills) {
-          this.water = bills.filter(x => x.type == 'water' && x.month == currMonth + 1)[0].amount;
-          this.gas = bills.filter(x => x.type == 'gas' && x.month == currMonth + 1)[0].amount;
-          this.electricity = bills.filter(x => x.type == 'electricity' && x.month == currMonth + 1)[0].amount;
-        }
-
-        this.total = 0;
-
-        this.total = Math.round(this.water / 6 + this.gas / 6 + this.electricity / 6 + this.member!.rentalFee);
-        this.percentChange = Math.abs((this.total - this.member!.lastRentalFee) / this.member!.lastRentalFee * 100).toFixed(2);
-
-        if (this.total > this.member!.lastRentalFee) this.higher = true;
-        else this.higher = false;
-      }
-    })
   }
 
   rerender(): void {
     this.isVisible = false;
     this.changeDetectorRef.detectChanges();
-    this.getBill(this.currMonth);
     this.reloadMember.emit(false);
     this.isVisible = true;
     this.toastr.success("Refresh successfully!");

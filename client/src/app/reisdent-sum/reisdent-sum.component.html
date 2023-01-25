@@ -1,5 +1,5 @@
 <!-- Reports -->
-<div class="card">
+<div class="card" *ngIf="members">
     <div class="filter">
         <a class="icon" style="cursor: pointer;">
             <fa-icon [icon]="['fas', 'sync']" (click)="rerender()"></fa-icon>

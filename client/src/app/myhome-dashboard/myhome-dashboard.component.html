@@ -10,31 +10,31 @@
     </div><!-- End Page Title -->
 
     <section class="section dashboard" *appHasRole="['Member']">
-        <app-myhome-infocard [member]="member" (reloadMember)="reloadMemberInfo($event)"></app-myhome-infocard>
+        <app-myhome-infocard [member]="member" [bills]="bills" (reloadMember)="reloadMemberInfo($event)"></app-myhome-infocard>
         <div class="row">
             <div class="col-lg-8" style="padding-right: 6px">
-                <app-bill-chart></app-bill-chart>
+                <app-bill-chart [bills]="bills" (reloadMember)="reloadMemberInfo($event)"></app-bill-chart>
             </div>
             <div class="col-lg-4">
-                <app-payment-pie-chart [member]="member"></app-payment-pie-chart>
+                <app-payment-pie-chart [member]="member" [bills]="bills" (reloadMember)="reloadMemberInfo($event)"></app-payment-pie-chart>
             </div>
         </div>
         <div class="row">
             <div class="col-lg-8">
-                <app-recent-payment></app-recent-payment>
+                <app-recent-payment [member]="member" (reloadMember)="reloadMemberInfo($event)"></app-recent-payment>
             </div>
             <div class="col-lg-4">
                 <app-reisdent-sum></app-reisdent-sum>
             </div>
         </div>
     </section>
-    <section class="section dashboard" *appHasRole="['Admin', 'Moderator']">
+    <section class="section dashboard" *appHasRole="['Admin']">
         <div class="row">
             <div class="col-lg-8" style="padding-right: 6px">
-                <app-bill-chart></app-bill-chart>
+                <app-bill-chart [bills]="bills" (reloadMember)="reloadMemberInfo($event)"></app-bill-chart>
             </div>
             <div class="col-lg-4">
-                <app-payment-pie-chart [member]="member"></app-payment-pie-chart>
+                <app-payment-pie-chart [member]="member" [bills]="bills" (reloadMember)="reloadMemberInfo($event)"></app-payment-pie-chart>
             </div>
         </div>
     </section>
