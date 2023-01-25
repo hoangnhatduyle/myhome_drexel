@@ -22,7 +22,10 @@ export class RecentPaymentComponent implements OnInit {
   user: User | null = null;
   payments: Payment[] = [];
   bsModalRef: BsModalRef<NewPaymentModalComponent> = new BsModalRef<NewPaymentModalComponent>();
+  date = new Date();
+  currMonth = this.date.getMonth();
   months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  today: string = '';
 
   constructor(private accountService: AccountService, private router: Router,
     private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private modalService: BsModalService) {
@@ -43,6 +46,7 @@ export class RecentPaymentComponent implements OnInit {
       ]
     };
     this.loadMember();
+    this.today = (this.date.getMonth() + 1) + "/" + this.date.getDate() + "/" + this.date.getFullYear()
   }
 
   loadMember() {

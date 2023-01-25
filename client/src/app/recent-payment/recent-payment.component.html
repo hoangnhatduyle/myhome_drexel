@@ -10,7 +10,7 @@
     </div>
 
     <div class="card-body">
-        <h5 class="card-title">Recent Payments <span>| Today</span></h5>
+        <h5 class="card-title">Recent Payments <span>| {{today}}</span></h5>
 
         <table datatable [dtOptions]="dtOptions" class="row-border hover" *ngIf="isVisible">
             <thead>
@@ -25,11 +25,11 @@
             </thead>
             <tbody>
                 <tr *ngFor="let payment of payments; let index = index;">
-                    <th scope="row">{{index}}</th>
+                    <th scope="row">{{index + 1}}</th>
                     <td>{{payment.method}}</td>
                     <td>{{payment.payDate}}</td>
                     <td>{{months[payment.payMonth - 1]}}</td>
-                    <td>{{payment.amount}}</td>
+                    <td>${{payment.amount}}</td>
                     <td *ngIf="payment.paymentStatus == 'Approve'"><span
                             class="badge bg-success">{{payment.paymentStatus}}</span></td>
                     <td *ngIf="payment.paymentStatus == 'Pending'"><span

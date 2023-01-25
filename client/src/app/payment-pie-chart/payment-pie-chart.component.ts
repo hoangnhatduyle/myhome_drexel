@@ -45,7 +45,7 @@ export class PaymentPieChartComponent implements OnInit {
           },
           data: [{
             type: "doughnut",
-            yValueFormatString: "#,###.##'$'",
+            yValueFormatString: "'$'#,###.##",
             indexLabel: "{name}",
             dataPoints: [
               { y: this.member!.rentalFee, name: "Room" },

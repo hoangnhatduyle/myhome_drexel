@@ -23,14 +23,14 @@ export class MyhomeInfocardComponent implements OnInit {
   total = 0;
   date = new Date();
   currMonth = this.date.getMonth();
+  month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService, private billService: BillService) { }
 
   ngOnInit(): void {
-    const month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     // const currentDate = document.querySelector("#due_date");
 
-    let dueDate = month[this.currMonth] + " - 15";
+    let dueDate = this.month[this.currMonth] + " - 15";
 
     this.dueDate = dueDate;
     this.getBill(this.currMonth);

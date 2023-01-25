@@ -11,7 +11,8 @@
             </div>
 
             <div class="card-body">
-                <h5 class="card-title" style="font-weight: 600;">Room # <span>| N/A</span></h5>
+                <h5 class="card-title" style="font-weight: 600;">Room # <span *ngIf="member.room.roomNumber <= 2">|
+                        Downstairs</span><span *ngIf="member.room.roomNumber > 2">| Upstairs</span></h5>
 
                 <div class="d-flex align-items-center" *ngIf="isVisible">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
@@ -30,6 +31,34 @@
         </div>
     </div><!-- End Sales Card -->
 
+    <div class="col-xl-3 col-lg-6">
+
+        <div class="card info-card">
+
+            <div class="filter">
+                <a class="icon" style="cursor: pointer;">
+                    <fa-icon [icon]="['fas', 'sync']" (click)="rerender()"></fa-icon>
+                </a>
+            </div>
+
+            <div class="card-body">
+                <h5 class="card-title" style="font-weight: 600;">Residents <span>| As of now</span></h5>
+
+                <div class="d-flex align-items-center" *ngIf="isVisible">
+                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
+                        style="background-color: rgb(185, 252, 252);">
+                        <fa-icon [icon]="['fas', 'users']" style="color: #007bff"></fa-icon>
+                    </div>
+                    <div class="ps-3">
+                        <h6>6 housemates</h6>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div><!-- End Customers Card -->
+
     <!-- Revenue Card -->
     <div class="col-xl-3 col-lg-6">
         <div class="card info-card">
@@ -41,7 +70,8 @@
             </div>
 
             <div class="card-body">
-                <h5 class="card-title" style="font-weight: 600;">Rent Fee <span>| This Month</span></h5>
+                <h5 class="card-title" style="font-weight: 600;">Rent Fee <span>| {{month[currMonth]}} -
+                        {{date.getFullYear()}}</span></h5>
 
                 <div class="d-flex align-items-center" *ngIf="isVisible && member.paidThisMonth == false">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
@@ -49,7 +79,7 @@
                         <fa-icon [icon]="['fas', 'money-bill-alt']" style="color: #28a745"></fa-icon>
                     </div>
                     <div class="ps-3">
-                        <h6>{{total}}$</h6>
+                        <h6>${{total}}</h6>
                         <span class="small pt-1 fw-bold" [class.text-success]="!higher"
                             [class.text-danger]="higher">{{percentChange}}%</span>
                         <span class="text-muted small pt-2 ps-1" *ngIf="higher">increase</span>
@@ -84,39 +114,8 @@
             </div>
 
             <div class="card-body">
-                <h5 class="card-title" style="font-weight: 600;">Residents <span>| This Month</span></h5>
-
-                <div class="d-flex align-items-center" *ngIf="isVisible">
-                    <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
-                        style="background-color: rgb(185, 252, 252);">
-                        <fa-icon [icon]="['fas', 'users']" style="color: #007bff"></fa-icon>
-                    </div>
-                    <div class="ps-3">
-                        <h6>6</h6>
-                        <span class="text-success small pt-1 fw-bold">0</span> <span
-                            class="text-muted small pt-2 ps-1">change</span>
-
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
-    </div><!-- End Customers Card -->
-
-    <!-- Customers Card -->
-    <div class="col-xl-3 col-lg-6">
-
-        <div class="card info-card">
-
-            <div class="filter">
-                <a class="icon" style="cursor: pointer;">
-                    <fa-icon [icon]="['fas', 'sync']" (click)="rerender()"></fa-icon>
-                </a>
-            </div>
-
-            <div class="card-body">
-                <h5 class="card-title" style="font-weight: 600;">Due Date <span>| This Month</span></h5>
+                <h5 class="card-title" style="font-weight: 600;">Due Date <span>| {{month[currMonth]}} -
+                        {{date.getFullYear()}}</span></h5>
 
                 <div class="d-flex align-items-center" *ngIf="isVisible">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"

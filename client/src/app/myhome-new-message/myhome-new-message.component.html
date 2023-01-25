@@ -10,7 +10,7 @@
         </thead>
         <tbody>
             <tr *ngFor="let message of member.messages; let index = index;">
-                <th style="font-weight: 400; vertical-align: middle;">{{index}}</th>
+                <th style="font-weight: 400; vertical-align: middle;">{{index + 1}}</th>
                 <th style="font-weight: 400; vertical-align: middle;">{{message.subject}}</th>
                 <th style="font-weight: 400; vertical-align: middle;">{{message.sentDate | date}}</th>
                 <th style="font-weight: 400; vertical-align: middle;"><button class="btn btn-warning"
