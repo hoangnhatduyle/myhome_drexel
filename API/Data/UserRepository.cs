@@ -43,7 +43,7 @@ namespace API.Data
             query = userParams.OrderBy switch
             {
                 "created" => query.OrderByDescending(u => u.Created),
-                _ => query.OrderByDescending(u => u.LastActive)
+                _ => query.OrderByDescending(u => u.Room.RoomNumber)
             };
 
             return await PagedList<MemberDto>

@@ -1,0 +1,22 @@
+<div *ngIf="member">
+    <table class="table mt-3" *ngIf="member.messages && member.messages.length > 0">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Subject</th>
+                <th>Sent Date</th>
+                <th>Content</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr *ngFor="let message of member.messages; let index = index;">
+                <th style="font-weight: 400; vertical-align: middle;">{{index}}</th>
+                <th style="font-weight: 400; vertical-align: middle;">{{message.subject}}</th>
+                <th style="font-weight: 400; vertical-align: middle;">{{message.sentDate | date}}</th>
+                <th style="font-weight: 400; vertical-align: middle;"><button class="btn btn-warning"
+                        (click)="openMessageModal(message.content)">View Content</button></th>
+            </tr>
+        </tbody>
+    </table>
+    <p *ngIf="member.messages && member.messages.length == 0" class="mb-0">You have not submitted any message.</p>
+</div>

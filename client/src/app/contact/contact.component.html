@@ -44,23 +44,44 @@
             </div>
             <div class="col-xl-6">
                 <div class="card p-4">
-                    <form (submit)="sendEmail($event)">
-                        <div class="row gy-4">
-                            <div class="col-md-6"> <input type="text" name="name" class="form-control"
-                                    placeholder="Your Name" required=""></div>
-                            <div class="col-md-6 "> <input type="email" class="form-control" name="email"
-                                    placeholder="Your Email" required=""></div>
-                            <div class="col-md-6"> <input type="text" class="form-control" name="phone"
-                                    placeholder="Phone Number" required=""></div>
-                            <div class="col-md-6"> <input type="text" class="form-control" name="subject"
-                                    placeholder="Subject" required=""></div>
-                            <div class="col-md-12"><textarea class="form-control" name="message" rows="6"
-                                    placeholder="Message" required=""></textarea></div>
-                            <div class="col-md-12 text-center">
-                                <button type="submit" class="btn btn-warning">Send Message</button>
+                    <tabset class="contact-tabset" #contactTabs>
+                        <tab heading="New Message">
+                            <div class="container ps-0 ms-3 mt-3">
+                                <form (submit)="sendEmail($event)" #messageForm="ngForm">
+                                    <div class="row gy-4">
+                                        <div class="col-md-6">
+                                            <input type="text" name="name" class="form-control" placeholder="Your Name"
+                                                required="">
+                                        </div>
+                                        <div class="col-md-6 ">
+                                            <input type="email" class="form-control" name="email"
+                                                placeholder="Your Email" required="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="phone"
+                                                placeholder="Phone Number" required="">
+                                        </div>
+                                        <div class="col-md-6">
+                                            <input type="text" class="form-control" name="subject" placeholder="Subject"
+                                                [(ngModel)]="model.subject">
+                                        </div>
+                                        <div class="col-md-12">
+                                            <textarea class="form-control" name="content" rows="6" placeholder="Message"
+                                            [(ngModel)]="model.content"></textarea>
+                                        </div>
+                                        <div class="col-md-12 text-center">
+                                            <button type="submit" class="btn btn-warning">Send Message</button>
+                                        </div>
+                                    </div>
+                                </form>
                             </div>
-                        </div>
-                    </form>
+                        </tab>
+                        <tab heading="Sent Message">
+                            <div class="container ps-0 ms-3 mt-3">
+                                <app-myhome-new-message></app-myhome-new-message>
+                            </div>
+                        </tab>
+                    </tabset>
                 </div>
             </div>
         </div>

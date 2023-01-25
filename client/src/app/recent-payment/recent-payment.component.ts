@@ -72,6 +72,7 @@ export class RecentPaymentComponent implements OnInit {
     this.bsModalRef.onHide?.subscribe({
       next: () => {
         const values = this.bsModalRef.content!.values;
+        if (Object.keys(values).length === 0) return;
         this.memberService.addNewPayment(values).subscribe({
           next: (payment: Payment) => {
             this.toastr.success("Payment has been added successfully");

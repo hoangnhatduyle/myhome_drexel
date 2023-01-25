@@ -1,0 +1,12 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Content</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <p>{{content}}</p>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-danger" (click)="bsModalRef.hide()">Close</button>
+</div>

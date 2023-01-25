@@ -1,3 +1,4 @@
+import { Message } from "./message";
 import { Payment } from "./payment";
 import { Photo } from "./photo";
 import { Room } from "./room";
@@ -19,6 +20,7 @@ export interface Member {
     country: string;
     photos: Photo[];
     payments: Payment[];
+    messages: Message[];
     room: Room;
     leaseEnd: Date;
     address: string;

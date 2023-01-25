@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import emailjs, { EmailJSResponseStatus } from '@emailjs/browser';
 import { ToastrService } from 'ngx-toastr';
+import { MembersService } from '../_services/members.service';
 
 @Component({
   selector: 'app-contact',
@@ -9,8 +10,9 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./contact.component.css']
 })
 export class ContactComponent implements OnInit {
+  model: any = {};
 
-  constructor(private toastr: ToastrService) { }
+  constructor(private toastr: ToastrService, private memberService: MembersService) { }
 
   ngOnInit(): void {
   }
@@ -19,7 +21,14 @@ export class ContactComponent implements OnInit {
     e.preventDefault();
     emailjs.sendForm('service_posa4p3', 'template_uloyl25', e.target as HTMLFormElement, 'YX7ijBeJSEuuOp_FO')
       .then((result: EmailJSResponseStatus) => {
-        this.toastr.success("Thanks for contacting. I will reply soon.")
+        this.memberService.addNewMessage(this.model).subscribe({
+          next: _ => {
+            this.toastr.success("Thanks for contacting. I will reply soon.")
+          },
+          error: error => {
+            this.toastr.error(error)
+          }
+        })
       }, (error) => {
         this.toastr.error("There was am error sending the email. Please try again.")
       });

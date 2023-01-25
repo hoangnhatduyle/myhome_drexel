@@ -165,5 +165,29 @@ namespace API.Controllers
 
             return BadRequest("Problem adding payment");
         }
+
+        [HttpPost("add-new-message")]
+        public async Task<ActionResult<MessageDto>> AddNewMessage(MessageDto messageDto)
+        {
+            var user = await _unitOfWork.UserRepository.GetUserByUsernameAsync(User.GetUsername());
+
+            if (user == null) return NotFound();
+
+            var newMessage = new Message
+            {
+                Subject = messageDto.Subject,
+                Content = messageDto.Content,
+                SentDate = messageDto.SentDate
+            };
+
+            user.Messages.Add(newMessage);
+
+            if (await _unitOfWork.Complete())
+            {
+                return CreatedAtAction(nameof(GetSpecificUser), new { username = user.UserName }, _mapper.Map<MessageDto>(newMessage));
+            }
+
+            return BadRequest("Problem adding message");
+        }
     }
 }

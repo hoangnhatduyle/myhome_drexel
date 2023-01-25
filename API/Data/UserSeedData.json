@@ -25,7 +25,7 @@
             {
                 "Method": "Zelle",
                 "PayDate": "2023-01-19",
-                "PaymentStatus": "Approve",
+                "PaymentStatus": "Pending",
                 "Amount": 480,
                 "PayMonth": 1
             }
@@ -57,7 +57,7 @@
             {
                 "Method": "Zelle",
                 "PayDate": "2023-01-18",
-                "PaymentStatus": "Approve",
+                "PaymentStatus": "Pending",
                 "Amount": 490,
                 "PayMonth": 1
             }
@@ -89,7 +89,7 @@
             {
                 "Method": "Cash",
                 "PayDate": "2023-01-21",
-                "PaymentStatus": "Approve",
+                "PaymentStatus": "Pending",
                 "Amount": 300,
                 "PayMonth": 1
             }
@@ -116,7 +116,7 @@
             {
                 "Method": "Zelle",
                 "PayDate": "2023-01-18",
-                "PaymentStatus": "Approve",
+                "PaymentStatus": "Pending",
                 "Amount": 350,
                 "PayMonth": 1
             }
@@ -148,7 +148,7 @@
             {
                 "Method": "Zelle",
                 "PayDate": "2023-01-18",
-                "PaymentStatus": "Approve",
+                "PaymentStatus": "Pending",
                 "Amount": 512,
                 "PayMonth": 1
             }

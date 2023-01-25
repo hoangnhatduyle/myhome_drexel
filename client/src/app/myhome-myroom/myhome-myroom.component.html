@@ -9,7 +9,104 @@
         </nav>
     </div><!-- End Page Title -->
 
-    <section class="section myroom">
+    <section class="section myroom" *ngIf="member">
+        <div class="row">
+            <div class="col-lg-6">
 
+                <div class="card">
+                    <div class="card-body profile-card pt-4 pb-3 d-flex flex-column align-items-center">
+                        <!-- <ngx-gallery [options]="galleryOptions" [images]="galleryImages"
+                            class="ngx-gallery"></ngx-gallery> -->
+                            Your room images will be here once available.
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="col-lg-6">
+
+                <div class="card pb-2">
+                    <div class="card-body pt-4 pb-3">
+                        <div class="tab-pane fade show active profile-overview" *ngIf="member">
+                            <h5 class="card-title pt-0 pb-3 mb-0">About</h5>
+                            <p *ngIf="member.room.roomType == 'Single'" class="mb-3">
+                                Our single rooms have one single size bed and are slightly smaller than our double
+                                rooms. Sizes vary between 15 and 20 sq m.
+                            </p>
+                            <p *ngIf="member.room.roomType == 'Double'" class="mb-3">
+                                Our double rooms can contain up to 2 single size beds and are slightly larger than our
+                                double
+                                rooms. Sizes vary between 15 and 40 sq m.
+                            </p>
+
+                            <h5 class="card-title pt-0 pb-3 mb-0">Room Details</h5>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-4 label ">Address</div>
+                                <div class="col-lg-9 col-md-8">{{member.address}}</div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-4 label">Room Number</div>
+                                <div class="col-lg-9 col-md-8">{{member.room.roomNumber}}</div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-4 label">Room Type</div>
+                                <div class="col-lg-9 col-md-8">{{member.room.roomType}}</div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-4 label">Floor</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="floor == 1">First Floor</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="floor == 2">Second Floor</div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-4 label">WiFi</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="floor == 1">3201-2-EXT2</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="floor == 2">3201-5.0</div>
+                            </div>
+
+                            <div class="row mb-2">
+                                <div class="col-lg-3 col-md-4 label">WiFi Password</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="floor == 1">3201DownStairs</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="floor == 2">3201UpStairs</div>
+                            </div>
+
+                            <div class="row mb-3">
+                                <div class="col-lg-3 col-md-4 label">Roommate(s)</div>
+                                <div class="col-lg-9 col-md-8" *ngIf="roomMembers.length > 0"><span
+                                        *ngFor="let username of roomMembers; let isLast=last">{{username.charAt(0).toUpperCase() +
+                                        username.slice(1)}}{{isLast ? '' : ', '}} </span></div>
+                                <div class="col-lg-9 col-md-8" *ngIf="roomMembers.length == 0">N/A</div>
+                            </div>
+
+                            <h5 class="card-title pt-0 pb-3 mb-0">Amenities</h5>
+
+                            <div>
+                                <div class="row" style="justify-content: space-between;">
+                                    <div class="col-md-6">
+                                        <ul>
+                                            <li>Internet included</li>
+                                            <li>Bike storage</li>
+                                            <li>Close to UT campus</li>
+                                        </ul>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <ul>
+                                            <li>Fully equipped kitchens</li>
+                                            <li>Parking included</li>
+                                            <li>Friendly residents</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
     </section>
 </main>

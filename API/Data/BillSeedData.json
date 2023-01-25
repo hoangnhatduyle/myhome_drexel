@@ -62,7 +62,7 @@
     {
         "Type": "gas",
         "Month": 1,
-        "Amount": 186
+        "Amount": 240
     },
     {
         "Type": "gas",
@@ -122,7 +122,7 @@
     {
         "Type": "electricity",
         "Month": 1,
-        "Amount": 163
+        "Amount": 180
     },
     {
         "Type": "electricity",

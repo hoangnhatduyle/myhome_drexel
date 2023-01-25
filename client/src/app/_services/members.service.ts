@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, of } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { Member } from '../_models/member';
+import { Message } from '../_models/message';
 import { Payment } from '../_models/payment';
 import { User } from '../_models/user';
 import { AccountService } from './account.service';
@@ -54,5 +55,9 @@ export class MembersService {
 
   addNewPayment(model: any) {
     return this.http.post<Payment>(this.baseUrl + "users/add-new-payment", model);
+  }
+
+  addNewMessage(model: any) {
+    return this.http.post<Message>(this.baseUrl + "users/add-new-message", model);    
   }
 }
