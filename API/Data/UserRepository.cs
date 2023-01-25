@@ -25,7 +25,7 @@ namespace API.Data
 
             if (isCurrentUser) query = query.IgnoreQueryFilters();
 
-            return await query.FirstOrDefaultAsync();
+            return await query.AsSplitQuery().FirstOrDefaultAsync();
         }
 
         public async Task<PagedList<MemberDto>> GetMembersAsync(UserParams userParams)
@@ -47,7 +47,7 @@ namespace API.Data
             };
 
             return await PagedList<MemberDto>
-                                            .CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking(),
+                                            .CreateAsync(query.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsSplitQuery().AsNoTracking(),
                                                         userParams.PageNumber,
                                                         userParams.PageSize);
         }
