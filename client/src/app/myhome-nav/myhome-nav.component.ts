@@ -3,10 +3,8 @@ import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { take } from 'rxjs';
-import { Member } from '../_models/member';
 import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
-import { MembersService } from '../_services/members.service';
 
 @Component({
   selector: 'app-myhome-nav',
@@ -21,7 +19,7 @@ export class MyhomeNavComponent implements OnInit {
 
   user: User | null = null;
 
-  constructor(public accountService: AccountService, private router: Router, private memberService: MembersService, private titleService: Title, 
+  constructor(public accountService: AccountService, private router: Router, private titleService: Title, 
     private modalService: BsModalService, private cdref: ChangeDetectorRef) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user

@@ -1,7 +1,7 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output, TemplateRef } from '@angular/core';
 import { FormGroup, FormBuilder, Validators, ValidatorFn, AbstractControl } from '@angular/forms';
-import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { AccountService } from '../_services/account.service';
 
@@ -16,8 +16,10 @@ export class MyhomeRegisterComponent implements OnInit {
   registerForm: FormGroup = new FormGroup({});
   maxDate: Date = new Date();
   validationErrors: string[] | undefined;
+  modalRef?: BsModalRef;
 
-  constructor(private accountService: AccountService, private toastr: ToastrService, private fb: FormBuilder, private router: Router) {
+  constructor(private accountService: AccountService, private toastr: ToastrService, private fb: FormBuilder,
+    private modalService: BsModalService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -26,12 +28,6 @@ export class MyhomeRegisterComponent implements OnInit {
   }
 
   initializeForm() {
-    // this.registerForm = new FormGroup({
-    //   username: new FormControl('', Validators.required),
-    //   password: new FormControl('', [Validators.required, Validators.minLength(4), Validators.maxLength(8)]),
-    //   confirmPassword: new FormControl('', [Validators.required, this.matchValues('password')])
-    // })
-
     this.registerForm = this.fb.group({
       gender: ['male'],
       username: ['', Validators.required],
@@ -72,6 +68,10 @@ export class MyhomeRegisterComponent implements OnInit {
 
   cancel() {
     this.cancelRegister.emit(false);
+  }
+
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template);
   }
 
   private getDateOnly(dob: string | undefined) {

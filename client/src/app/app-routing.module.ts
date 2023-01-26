@@ -17,9 +17,11 @@ import { PreventUnsavedChangesGuard } from './_guards/prevent-unsaved-changes.gu
 import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { MyhomeMyroomComponent } from './myhome-myroom/myhome-myroom.component';
 import { MyhomeDocumnetComponent } from './myhome-documnet/myhome-documnet.component';
+import { MyhomeForgotPasswordComponent } from './myhome-forgot-password/myhome-forgot-password.component';
 
 const routes: Routes = [
   { path: '', component: MyhomeLoginComponent },
+  { path: 'forgot-password', component: MyhomeForgotPasswordComponent },
   {
     path: '',
     runGuardsAndResolvers: 'always',

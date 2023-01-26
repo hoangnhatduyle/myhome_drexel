@@ -63,8 +63,9 @@
                                         </div>
                                     </div>
                                     <div class="col-12">
-                                        <button class="btn btn-warning w-100" type="submit"
-                                            [disabled]="!registerForm.valid || !isChecked">Register</button>
+                                        <button class="btn btn-warning w-100" type="button"
+                                            [disabled]="!registerForm.valid || !isChecked"
+                                            (click)="openModal(registerModal)">Register</button>
                                     </div>
                                     <div class="col-12">
                                         <p class="small mb-0">Already have an account?
@@ -84,3 +85,20 @@
         </section>
     </div>
 </main>
+
+<ng-template #registerModal>
+    <div class="modal-header">
+        <h4 class="modal-title pull-left">Register New Account</h4>
+        <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="modalRef?.hide()">
+            <span aria-hidden="true" class="visually-hidden">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        Due to current limitations, Register Function is not currently available. Please let me know if you want to
+        register a new account
+    </div>
+    <div class="modal-footer" style="justify-content: flex-start">
+        Email: lehoangnhatduy2000@gmail.com <br>
+        Phone: 419 699 9535
+    </div>
+</ng-template>

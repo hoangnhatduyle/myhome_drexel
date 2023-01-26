@@ -48,6 +48,7 @@ import { MyhomeDocumnetComponent } from './myhome-documnet/myhome-documnet.compo
 import { NewPaymentModalComponent } from './modals/new-payment-modal/new-payment-modal.component';
 import { MyhomeNewMessageComponent } from './myhome-new-message/myhome-new-message.component';
 import { NewMessageComponent } from './modals/new-message/new-message.component';
+import { MyhomeForgotPasswordComponent } from './myhome-forgot-password/myhome-forgot-password.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -90,7 +91,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     MyhomeDocumnetComponent,
     NewPaymentModalComponent,
     MyhomeNewMessageComponent,
-    NewMessageComponent
+    NewMessageComponent,
+    MyhomeForgotPasswordComponent
   ],
   imports: [
     BrowserModule,
