@@ -1,7 +1,7 @@
 import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { NewPaymentModalComponent } from '../new-payment-modal/new-payment-modal.component';
+import { NewPaymentModalComponent } from '../modals/new-payment-modal/new-payment-modal.component';
 import { Member } from '../_models/member';
 import { Payment } from '../_models/payment';
 import { User } from '../_models/user';

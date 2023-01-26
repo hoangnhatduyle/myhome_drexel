@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AbstractControl, FormBuilder, FormGroup, ValidatorFn, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
-import { MembersService } from '../_services/members.service';
+import { MembersService } from '../../_services/members.service';
 
 @Component({
   selector: 'app-new-payment-modal',

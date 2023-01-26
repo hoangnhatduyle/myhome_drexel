@@ -45,7 +45,7 @@ import { RoomModalComponent } from './modals/room-modal/room-modal.component';
 import { MemberDetailComponent } from './members/member-detail/member-detail.component';
 import { MyhomeMyroomComponent } from './myhome-myroom/myhome-myroom.component';
 import { MyhomeDocumnetComponent } from './myhome-documnet/myhome-documnet.component';
-import { NewPaymentModalComponent } from './new-payment-modal/new-payment-modal.component';
+import { NewPaymentModalComponent } from './modals/new-payment-modal/new-payment-modal.component';
 import { MyhomeNewMessageComponent } from './myhome-new-message/myhome-new-message.component';
 import { NewMessageComponent } from './modals/new-message/new-message.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
