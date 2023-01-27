@@ -62,4 +62,26 @@ export class AccountService {
       })
     );
   }
+
+  forgotPassword(email: string) {
+    return this.http.post(this.baseUrl + "account/forgot-password" + '?email=' + email, {}).pipe(
+      map((obj: any) => {
+        if (obj) {
+          localStorage.setItem('emailToken', JSON.stringify(obj.token));
+          return obj;
+        }
+      })
+    );
+  }
+
+  resetPassword(model: any) {
+    return this.http.post(this.baseUrl + "account/reset-password", model).pipe(
+      map((obj: any) => {
+        if (obj) {
+          localStorage.removeItem('emailToken');
+          return obj;
+        }
+      })
+    );
+  }
 }

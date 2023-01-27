@@ -23,7 +23,8 @@ export class ContactComponent implements OnInit {
       .then((result: EmailJSResponseStatus) => {
         this.memberService.addNewMessage(this.model).subscribe({
           next: _ => {
-            this.toastr.success("Thanks for contacting. I will reply soon.")
+            this.toastr.success("Thanks for contacting. I will reply soon.");
+            this.model = {};
           },
           error: error => {
             this.toastr.error(error)

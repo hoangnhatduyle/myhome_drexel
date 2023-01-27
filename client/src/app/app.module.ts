@@ -49,6 +49,7 @@ import { NewPaymentModalComponent } from './modals/new-payment-modal/new-payment
 import { MyhomeNewMessageComponent } from './myhome-new-message/myhome-new-message.component';
 import { NewMessageComponent } from './modals/new-message/new-message.component';
 import { MyhomeForgotPasswordComponent } from './myhome-forgot-password/myhome-forgot-password.component';
+import { MyhomeResetPasswordComponent } from './myhome-reset-password/myhome-reset-password.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -92,7 +93,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     NewPaymentModalComponent,
     MyhomeNewMessageComponent,
     NewMessageComponent,
-    MyhomeForgotPasswordComponent
+    MyhomeForgotPasswordComponent,
+    MyhomeResetPasswordComponent
   ],
   imports: [
     BrowserModule,

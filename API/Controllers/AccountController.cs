@@ -1,5 +1,7 @@
+using System.ComponentModel.DataAnnotations;
 using API.DTOs;
 using API.Entities;
+using API.Entities.Email;
 using API.Interfaces;
 using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
@@ -11,16 +13,16 @@ namespace API.Controllers
 {
     public class AccountController : BaseApiController
     {
-        // private readonly DataContext _context;
         private readonly ITokenService _tokenService;
         private readonly IMapper _mapper;
         private readonly UserManager<AppUser> _userManager;
-        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper)
+        private readonly IEmailService _emailService;
+        public AccountController(UserManager<AppUser> userManager, ITokenService tokenService, IMapper mapper, IEmailService emailService)
         {
+            _emailService = emailService;
             _userManager = userManager;
             _mapper = mapper;
             _tokenService = tokenService;
-            // _context = context;
         }
 
         [HttpPost("register")]  //POST: api/account/register
@@ -31,15 +33,9 @@ namespace API.Controllers
 
             var user = _mapper.Map<AppUser>(registerDto);
 
-            // using var hmac = new HMACSHA512();
-
             user.UserName = registerDto.UserName;
-            // user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(registerDto.Password));
-            // user.PasswordSalt = hmac.Key;
+            user.Email = registerDto.Email;
 
-            // _context.Users.Add(user);
-
-            // await _context.SaveChangesAsync();
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
             if (!result.Succeeded) return BadRequest(result.Errors);
@@ -67,15 +63,6 @@ namespace API.Controllers
             var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
 
             if (!result) return Unauthorized("Invalid Password");
-
-            // using var hmac = new HMACSHA512(user.PasswordSalt);
-
-            // var computedHash = hmac.ComputeHash(Encoding.UTF8.GetBytes(loginDto.Password));
-
-            // for (int i = 0; i < computedHash.Length; i++)
-            // {
-            //     if (computedHash[i] != user.PasswordHash[i]) return Unauthorized("Invalid Password");
-            // }
 
             return new UserDto
             {
@@ -109,6 +96,47 @@ namespace API.Controllers
                 };
 
             return BadRequest("Unable to reset password");
+        }
+
+        [HttpPost("forgot-password")]
+        [AllowAnonymous]
+        public async Task<ActionResult> ForgotPassword([Required][FromQuery] string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (user == null)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "Your email is not registered. Please try again." });
+            }
+
+            var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+            // var forgotPasswordLink = Url.Action(nameof(ResetPassword), "Account", new { token, email = user.Email }, Request.Scheme);
+
+            var message = new EmailMessage(new string[] { user.Email }, "Forgot Password Request", token);
+
+            _emailService.SendEmail(message);
+            return StatusCode(StatusCodes.Status200OK, new { Status = "Success", Token = token, Message = $"We just sent a code to your email. Please use the code to reset your password." });
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [Route("reset-password")]
+        public async Task<ActionResult> ResetPassword(ResetPassword resetPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+
+            if (user == null)
+            {
+                return StatusCode(StatusCodes.Status400BadRequest, new { Status = "Error", Message = "Could not reset password. Please try again." });
+            }
+
+            var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
+            if (!resetPassResult.Succeeded)
+            {
+                return BadRequest(resetPassResult.Errors);
+            }
+
+            return StatusCode(StatusCodes.Status200OK, new { Status = "Success", Message = $"Password has been changed." });
         }
 
         private async Task<bool> UserExists(string username)

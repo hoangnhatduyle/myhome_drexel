@@ -51,6 +51,9 @@ export class RoomManagementComponent implements OnInit {
     else if (this.selectedRoom == "4") {
       this.selectedMember = this.members.filter(x => x.room.roomNumber == 4);
     }
+    else if (this.selectedRoom == "5") {
+      this.selectedMember = this.members.filter(x => x.room.roomNumber == 5);
+    }
     else {
       this.selectedMember = this.members
     }

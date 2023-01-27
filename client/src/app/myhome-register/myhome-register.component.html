@@ -32,6 +32,10 @@
                                             [label]="'Full Name'"></app-text-input>
                                         <app-text-input [formControl]="$any(registerForm.controls['username'])"
                                             [label]="'Username'"></app-text-input>
+                                        <app-text-input [formControl]="$any(registerForm.controls['email'])" [label]='"Email"'
+                                            [type]='"email"'></app-text-input>
+                                        <app-text-input [formControl]="$any(registerForm.controls['confirmEmail'])"
+                                            [label]='"Confirm Email"' [type]='"email"'></app-text-input>
                                         <app-date-picker [formControl]="$any(registerForm.controls['dateOfBirth'])"
                                             [label]="'Date Of Birth'" [maxDate]="maxDate"></app-date-picker>
                                         <app-text-input [formControl]="$any(registerForm.controls['city'])"

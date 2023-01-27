@@ -56,6 +56,8 @@ namespace API.Controllers
 
             _mapper.Map(memberUpdateDto, user);
 
+            user.NormalizedEmail = memberUpdateDto.Email.ToUpper();
+
             if (await _unitOfWork.Complete()) return NoContent();
 
             return BadRequest("Failed to update user");

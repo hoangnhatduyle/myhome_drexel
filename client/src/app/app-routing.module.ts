@@ -18,10 +18,13 @@ import { MemberDetailedResolver } from './_resolvers/member-detailed.resolver';
 import { MyhomeMyroomComponent } from './myhome-myroom/myhome-myroom.component';
 import { MyhomeDocumnetComponent } from './myhome-documnet/myhome-documnet.component';
 import { MyhomeForgotPasswordComponent } from './myhome-forgot-password/myhome-forgot-password.component';
+import { MyhomeResetPasswordComponent } from './myhome-reset-password/myhome-reset-password.component';
+import { ResetPasswordGuard } from './reset-password.guard';
 
 const routes: Routes = [
   { path: '', component: MyhomeLoginComponent },
   { path: 'forgot-password', component: MyhomeForgotPasswordComponent },
+  { path: 'reset-password', component: MyhomeResetPasswordComponent, canActivate: [ResetPasswordGuard] },
   {
     path: '',
     runGuardsAndResolvers: 'always',

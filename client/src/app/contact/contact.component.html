@@ -51,15 +51,15 @@
                                     <div class="row gy-4">
                                         <div class="col-md-6">
                                             <input type="text" name="name" class="form-control" placeholder="Your Name"
-                                                required="">
+                                                required="" [(ngModel)]="model.name">
                                         </div>
                                         <div class="col-md-6 ">
                                             <input type="email" class="form-control" name="email"
-                                                placeholder="Your Email" required="">
+                                                placeholder="Your Email" required="" [(ngModel)]="model.email">
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="phone"
-                                                placeholder="Phone Number" required="">
+                                                placeholder="Phone Number" required="" [(ngModel)]="model.phone">
                                         </div>
                                         <div class="col-md-6">
                                             <input type="text" class="form-control" name="subject" placeholder="Subject"
