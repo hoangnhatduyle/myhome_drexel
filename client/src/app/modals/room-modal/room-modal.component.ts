@@ -11,7 +11,7 @@ export class RoomModalComponent implements OnInit {
   knownAs: string = '';
   roomNumber: number = 0;
   roomType: string = '';
-  selectedRoom: number = 0;
+  selectedRoom: number = 99;
 
   roomList = [1, 2, 3, 4]
 

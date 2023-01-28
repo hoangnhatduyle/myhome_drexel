@@ -36,8 +36,4 @@ export class AdminService {
   changeRoom(username: string, roomNumber: number) {
     return this.http.put(this.baseUrl + 'admin/change-room/' + username + "/" + roomNumber, {});
   }
-
-  updateLastRentalFee(username: string, amount: number) {
-    return this.http.put(this.baseUrl + 'admin/update-rental-fee/' + username + "/" + amount, {});
-  }
 }

@@ -57,7 +57,19 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
   getUsersWithRoles() {
     this.adminService.getUsersWithRoles().subscribe({
-      next: users => this.users = users
+      next: users => {
+        let thang = users.find(x => x.userName == 'thang');
+        thang!.rentalFee += 60 + 42;
+
+        users[users.indexOf(users.find(x => x.userName == 'thang')!)] = thang!;
+
+        let thao = users.find(x => x.userName == 'thao');
+        thao!.rentalFee += 60;
+
+        users[users.indexOf(users.find(x => x.userName == 'thao')!)] = thao!;
+
+        this.users = users
+      }
     })
   }
 

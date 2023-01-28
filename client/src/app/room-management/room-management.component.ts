@@ -51,8 +51,8 @@ export class RoomManagementComponent implements OnInit {
     else if (this.selectedRoom == "4") {
       this.selectedMember = this.members.filter(x => x.room.roomNumber == 4);
     }
-    else if (this.selectedRoom == "5") {
-      this.selectedMember = this.members.filter(x => x.room.roomNumber == 5);
+    else if (this.selectedRoom == "0") {
+      this.selectedMember = this.members.filter(x => x.room.roomNumber == 0);
     }
     else {
       this.selectedMember = this.members
@@ -74,7 +74,7 @@ export class RoomManagementComponent implements OnInit {
       next: () => {
         const username = member.userName;
         const roomNumber = this.bsModalRef.content!.selectedRoom;
-        if (roomNumber == member.room.roomNumber || roomNumber == 0) return;
+        if (roomNumber == member.room.roomNumber || roomNumber == 99) return;
         this.adminService.changeRoom(username, roomNumber).subscribe({
           next: _ => {
             let roomType = 'Single';

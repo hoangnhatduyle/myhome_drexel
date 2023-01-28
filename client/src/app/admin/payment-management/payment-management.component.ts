@@ -149,16 +149,16 @@ export class PaymentManagementComponent implements OnInit {
       next: () => {
         const id = this.bsModalRef.content!.id;
         const approve = this.bsModalRef.content!.approve;
+        let model: any = {};
+        model.id = id;
+        model.amount = payment.amount;
+        model.username = payment.username;
 
         if (approve) {
-          this.paymentService.approvePayment(id).subscribe({
+          this.paymentService.approvePayment(model).subscribe({
             next: _ => {
-              this.adminService.updateLastRentalFee(payment.username, payment.amount).subscribe({
-                next: _ => {
-                  this.toastr.success("You have approved the payment");
-                  this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === id), 1);
-                }
-              })
+              this.toastr.success("You have approved the payment");
+              this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === id), 1);
             }
           })
         }

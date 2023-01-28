@@ -19,8 +19,8 @@ export class PaymentService {
     return this.http.get<Payment[]>(this.baseUrl + 'admin/past-payment');
   }
 
-  approvePayment(id: number) {
-    return this.http.put(this.baseUrl + 'admin/approve-payment/' + id, {});
+  approvePayment(model: any) {
+    return this.http.put(this.baseUrl + 'admin/approve-payment/', model);
   }
 
   rejectPayment(id: number) {

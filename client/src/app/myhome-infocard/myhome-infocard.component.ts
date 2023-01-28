@@ -36,6 +36,15 @@ export class MyhomeInfocardComponent implements OnInit {
       this.total = 0;
 
       this.total = Math.round(this.water / 6 + this.gas / 6 + this.electricity / 6 + this.member.rentalFee);
+
+      if (this.member.userName == "thao" || this.member.userName == "thang") {
+        this.total += 60;
+      }
+
+      if (this.member.userName == "thang") {
+        this.total += 42;
+      }
+
       this.percentChange = Math.abs((this.total - this.member.lastRentalFee) / this.member.lastRentalFee * 100).toFixed(2);
 
       if (this.total > this.member.lastRentalFee) this.higher = true;

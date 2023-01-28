@@ -142,10 +142,14 @@ namespace API.Controllers
         }
 
         [Authorize(Policy = "ModeratePhotoRole")]
-        [HttpPut("approve-payment/{paymentId}")]
-        public async Task<ActionResult> ApprovePayment(int paymentId)
+        [HttpPut("approve-payment")]
+        public async Task<ActionResult> ApprovePayment(PaymentForApprovalDto paymentForApprovalDto)
         {
-            var payment = await _unitOfWork.PaymentRepository.GetPaymentById(paymentId);
+            var payment = await _unitOfWork.PaymentRepository.GetPaymentById(paymentForApprovalDto.Id);
+            var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == paymentForApprovalDto.Username);
+
+            user.LastRentalFee = paymentForApprovalDto.Amount;
+            user.PaidThisMonth = true;            
 
             payment.PaymentStatus = "Approve";
 
@@ -171,20 +175,14 @@ namespace API.Controllers
         {
             var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == username);
 
-            user.RoomId = roomId;
-
-            await _unitOfWork.Complete();
-            return Ok();
-        }
-
-        [Authorize(Policy = "ModeratePhotoRole")]
-        [HttpPut("update-rental-fee/{username}/{amount}")]
-        public async Task<ActionResult> ChangeAmount(string username, int amount)
-        {
-            var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == username);
-
-            user.LastRentalFee = amount;
-            user.PaidThisMonth = true;
+            if (roomId == 0)
+            {
+                user.RoomId = 5;
+            }
+            else
+            {
+                user.RoomId = roomId;
+            }
 
             await _unitOfWork.Complete();
             return Ok();

@@ -34,11 +34,11 @@
             <label for="room" class="col-sm-5 col-form-label me-0 pe-0">Select Room</label>
             <div class="col-sm-7 me-0 pe-0">
                 <select class="form-select" name="room" [(ngModel)]="selectedRoom">
-                    <option value="" disabled selected>Room...</option>
+                    <option value="99" disabled selected>Room...</option>
                     <option *ngFor="let room of roomList; let index = index;" value={{room}}>
                         Room {{room}}
                     </option>
-                    <option value="5">
+                    <option value="0">
                         Irrelevant
                     </option>
                 </select>
