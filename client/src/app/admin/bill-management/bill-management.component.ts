@@ -33,9 +33,9 @@ export class BillManagementComponent implements OnInit {
       next: bills => {
         if (bills) {
           this.bills = bills;
-          this.water = this.bills.filter(x => x.type == 'water');
-          this.gas = this.bills.filter(x => x.type == 'gas');
-          this.electricity = this.bills.filter(x => x.type == 'electricity');
+          this.water = this.bills.filter(x => x.type == 'water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+          this.gas = this.bills.filter(x => x.type == 'gas').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+          this.electricity = this.bills.filter(x => x.type == 'electricity').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
           this.selectedBills = this.bills;
         }
       }

@@ -170,6 +170,11 @@
         "PhoneNumber": "+1 (419) 699-9534",
         "Email": "kmktag904@gmail.com",
         "PaidThisMonth": false,
-        "Photos": []
+        "Photos": [],
+        "Room": {
+            "RoomNumber": 0,
+            "RoomType": "Irrelevant",
+            "IsOccupied": true
+        }
     }
 ]

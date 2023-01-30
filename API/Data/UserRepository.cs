@@ -92,7 +92,7 @@ namespace API.Data
             _context.Entry(user).State = EntityState.Modified;
         }
 
-        public async void UpdatePaidThisMonth(string[] usernames)
+        public async Task UpdatePaidThisMonth(string[] usernames)
         {
             AppUser user;
             foreach (string username in usernames)

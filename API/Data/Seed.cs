@@ -1,9 +1,9 @@
 using System.Security.Cryptography;
 using System.Text.Json;
-using Microsoft.Extensions.Configuration;
 using API.Entities;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Configuration;
 
 namespace API.Data
 {
@@ -39,18 +39,29 @@ namespace API.Data
                 using var hmac = new HMACSHA512();
 
                 user.UserName = user.UserName.ToLower();
-                // user.Photos.FirstOrDefault().IsApproved = true;
-                // user.Photos.FirstOrDefault().IsMain = true;
-                // user.PasswordHash = hmac.ComputeHash(Encoding.UTF8.GetBytes("Pa$$w0rd"));
-                // user.PasswordSalt = hmac.Key;
-
+                user.Created = DateTime.SpecifyKind(user.Created, DateTimeKind.Utc);
+                user.EmailConfirmed = true;
                 await userManager.CreateAsync(user, memberPassword);
                 await userManager.AddToRoleAsync(user, "Member");
+
+                if (user.UserName == "bao")
+                {
+                    await userManager.AddToRoleAsync(user, "Moderator");
+                }
             }
 
             var admin = new AppUser
             {
-                UserName = "admin"
+                UserName = "admin",
+                KnownAs = "SunShine",
+                Gender = "male",
+                Introduction = "Intro goes here",
+                City = "Toledo",
+                Country = "USA",
+                Address = "3201 Avondale Avenue, Toledo, Ohio 43607",
+                EmailConfirmed = true,
+                Email = "lehoangnhatduy2000@gmail.com",
+                PhoneNumber = "+1 (419) 699-9535"
             };
 
             await userManager.CreateAsync(admin, adminPassword);

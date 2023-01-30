@@ -134,9 +134,9 @@ namespace API.Controllers
 
             _mapper.Map(billUpdateDto, bill);
 
-            if (billUpdateDto.Usernames != null && billUpdateDto.Usernames.Length > 0) _unitOfWork.UserRepository.UpdatePaidThisMonth(billUpdateDto.Usernames);
+            if (billUpdateDto.Usernames != null && billUpdateDto.Usernames.Length > 0) await _unitOfWork.UserRepository.UpdatePaidThisMonth(billUpdateDto.Usernames);
 
-            if (await _unitOfWork.Complete()) return Ok(billUpdateDto.Amount);
+            if (await _unitOfWork.Complete()) return Ok();
 
             return BadRequest("Failed to update bill");
         }
