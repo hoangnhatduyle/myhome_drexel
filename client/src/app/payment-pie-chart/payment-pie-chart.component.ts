@@ -32,6 +32,8 @@ export class PaymentPieChartComponent implements OnInit {
       this.gas = this.bills.filter(x => x.type == 'gas' && x.month == this.currMonth + 1)[0].amount;
       this.electricity = this.bills.filter(x => x.type == 'electricity' && x.month == this.currMonth + 1)[0].amount;
 
+      this.data = [];
+
       this.data.push({ y: this.member!.rentalFee, name: "Room" });
       this.data.push({ y: this.electricity / 6, name: "Electricity" });
       this.data.push({ y: this.water / 6, name: "Water" });

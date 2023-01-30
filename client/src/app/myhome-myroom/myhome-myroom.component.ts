@@ -38,20 +38,8 @@ export class MyhomeMyroomComponent implements OnInit {
       }
     ]
 
-    this.galleryImages = this.getImages();
     this.loadMember()
     this.loadMembers();
-  }
-
-  getImages() {
-    const imagesUrls: any = [];
-    imagesUrls.push({
-      small: './assets/images/user.png',
-      medium: './assets/images/user.png',
-      big: './assets/images/user.png'
-    })
-
-    return imagesUrls;
   }
 
   loadMembers() {
