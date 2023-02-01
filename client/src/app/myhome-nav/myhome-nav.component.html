@@ -87,11 +87,15 @@
                     </li><!-- End Search Icon-->
 
                     <li class="nav-item dropdown pe-2">
-                        <button type="button" class="pill me-1" (click)="openModal(about)">About</button>
+                        <!-- <button type="button" class="pill me-1" (click)="openModal(about)">About</button> -->
+                        <!-- <fa-icon title="About" class="me-2" style="font-size: 30px; cursor: pointer;" [icon]="['fas', 'circle-info']" (click)="openModal(about)"></fa-icon> -->
+                        <i style="cursor: pointer;" class="material-icons me-1" (click)="openModal(about)">info_outline</i>
                     </li>
 
                     <li class="nav-item dropdown pe-2" *appHasRole="['Admin', 'Moderator']">
-                        <button type="button" class="pill me-1" (click)="openModal(version)">Version</button>
+                        <!-- <button type="button" class="pill me-1" (click)="openModal(version)">Version</button> -->
+                        <!-- <fa-icon title="Version" class="me-2" style="font-size: 30px; cursor: pointer;" [icon]="['far', 'file-code']" (click)="openModal(version)"></fa-icon> -->
+                        <i style="cursor: pointer;" class="material-icons me-1" (click)="openModal(version)">manage_history</i>
                     </li>
 
                     <li class="nav-item dropdown pe-3">

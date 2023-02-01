@@ -6,4 +6,5 @@ export interface User {
     gender: string;
     rentalFee: any;
     roles: string[];
+    paidThisMonth: boolean;
 }

@@ -33,7 +33,8 @@ namespace API.Controllers
                 u.Id,
                 UserName = u.UserName,
                 RentalFee = u.RentalFee,
-                Roles = u.UserRoles.Select(r => r.Role.Name).ToList()
+                Roles = u.UserRoles.Select(r => r.Role.Name).ToList(),
+                PaidThisMonth = u.PaidThisMonth
             }).ToListAsync();
 
             return Ok(users);

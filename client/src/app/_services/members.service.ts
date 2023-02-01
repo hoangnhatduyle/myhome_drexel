@@ -22,8 +22,8 @@ export class MembersService {
     if (refetch) {
       return this.http.get<Member[]>(this.baseUrl + 'users').pipe(
         map(members => {
-          this.members = members;
-          return members;
+          this.members = members.filter(x => x.userName != 'user');
+          return this.members;
         })
       )
     }
@@ -31,8 +31,8 @@ export class MembersService {
       if (this.members.length > 0) return of(this.members);
       return this.http.get<Member[]>(this.baseUrl + 'users').pipe(
         map(members => {
-          this.members = members;
-          return members;
+          this.members = members.filter(x => x.userName != 'user');
+          return this.members;
         })
       )
     }

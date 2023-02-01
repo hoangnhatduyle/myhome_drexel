@@ -67,7 +67,7 @@ export class MyhomeRegisterComponent implements OnInit {
 
     this.accountService.register(values).subscribe({
       next: () => {
-        this.router.navigateByUrl('/dashboard');
+        this.router.navigateByUrl('/main/dashboard');
       },
       error: error => {
         this.validationErrors = error;

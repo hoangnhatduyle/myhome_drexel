@@ -20,6 +20,10 @@ export class BillManagementComponent implements OnInit {
   water: Bill[] = [];
   gas: Bill[] = [];
   electricity: Bill[] = [];
+  insurance: Bill[] = [];
+  internet: Bill[] = [];
+  mobile: Bill[] = [];
+  
   selectedBills: Bill[] = [];
   members: Member[] = [];
   usernames: string[] = [];
@@ -36,6 +40,10 @@ export class BillManagementComponent implements OnInit {
           this.water = this.bills.filter(x => x.type == 'water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
           this.gas = this.bills.filter(x => x.type == 'gas').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
           this.electricity = this.bills.filter(x => x.type == 'electricity').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+          this.insurance = this.bills.filter(x => x.type == 'insurance').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+          this.internet = this.bills.filter(x => x.type == 'internet').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+          this.mobile = this.bills.filter(x => x.type == 'mobile').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+
           this.selectedBills = this.bills;
         }
       }
@@ -53,6 +61,15 @@ export class BillManagementComponent implements OnInit {
     }
     else if (this.selectedBill == "electricity") {
       this.selectedBills = this.electricity;
+    }
+    else if (this.selectedBill == "insurance") {
+      this.selectedBills = this.insurance;
+    }
+    else if (this.selectedBill == "internet") {
+      this.selectedBills = this.internet;
+    }
+    else if (this.selectedBill == "mobile") {
+      this.selectedBills = this.mobile;
     }
     else {
       this.selectedBills = this.bills;

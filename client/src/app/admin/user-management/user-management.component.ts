@@ -22,6 +22,8 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   gas: Bill[] = [];
   electricity: Bill[] = [];
   utility: number = 0;
+  total: number = 0;
+  totalOutcome: number = 0;
 
   date = new Date();
   currMonth = this.date.getMonth();
@@ -52,7 +54,6 @@ export class UserManagementComponent implements OnDestroy, OnInit {
       ]
     };
     this.getUsersWithRoles();
-    this.getBill();
   }
 
   getUsersWithRoles() {
@@ -68,7 +69,9 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
         users[users.indexOf(users.find(x => x.userName == 'thao')!)] = thao!;
 
-        this.users = users
+        this.users = users.filter(x => x.userName != 'user');
+
+        this.getBill();
       }
     })
   }
@@ -77,13 +80,27 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     this.billService.getBills().subscribe({
       next: bills => {
         if (bills) {
-          this.bills = bills.filter(x => x.amount != 0);
+          this.bills = bills.filter(x => x.amount != 0 && x.month == this.currMonth + 1);
+
+          let totalMem = this.users.length - 1; //exclude admin
+
           if (this.bills.length > 0) {
+
             this.water = this.bills.filter(x => x.type == 'water');
             this.gas = this.bills.filter(x => x.type == 'gas');
             this.electricity = this.bills.filter(x => x.type == 'electricity');
-            this.utility = parseInt((this.water[this.currMonth].amount / 6 + this.gas[this.currMonth].amount / 6 + this.electricity[this.currMonth].amount / 6).toFixed(2));
+            this.utility = parseInt((this.water[0].amount / totalMem + this.gas[0].amount / totalMem + this.electricity[0].amount / totalMem).toFixed(2));
           }
+
+          this.bills.forEach(bill => {
+            this.totalOutcome += bill.amount;
+          });
+
+          this.total += (this.gas[0]?.amount + this.water[0]?.amount + this.electricity[0]?.amount) * (totalMem - 1) / totalMem
+          this.users.forEach(user => {
+            this.total += user.rentalFee;
+          });
+          this.total = parseInt((Math.round(this.total * 100) / 100).toFixed(2))
         }
         this.dtTrigger.next(void 0);
       }
