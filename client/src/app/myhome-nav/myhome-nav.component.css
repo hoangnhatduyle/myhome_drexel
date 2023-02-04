@@ -115,8 +115,14 @@ img {
     border-radius: 5px;
 }
 
-.is-collapsed {
+.router-wrapper {
     margin-left: 300px;
+}
+
+@media (max-width: 750px) {
+    .router-wrapper {
+        margin-left: 0;
+    }
 }
 
 .pill {

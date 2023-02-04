@@ -23,6 +23,7 @@ export class BillManagementComponent implements OnInit {
   insurance: Bill[] = [];
   internet: Bill[] = [];
   mobile: Bill[] = [];
+  owed_water: Bill[] = [];
   
   selectedBills: Bill[] = [];
   members: Member[] = [];
@@ -43,8 +44,9 @@ export class BillManagementComponent implements OnInit {
           this.insurance = this.bills.filter(x => x.type == 'insurance').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
           this.internet = this.bills.filter(x => x.type == 'internet').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
           this.mobile = this.bills.filter(x => x.type == 'mobile').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+          this.owed_water = this.bills.filter(x => x.type == 'owed_water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
 
-          this.selectedBills = this.bills;
+          this.selectedBills = this.water;
         }
       }
     })
@@ -71,8 +73,8 @@ export class BillManagementComponent implements OnInit {
     else if (this.selectedBill == "mobile") {
       this.selectedBills = this.mobile;
     }
-    else {
-      this.selectedBills = this.bills;
+    else if (this.selectedBill == "owed_water") {
+      this.selectedBills = this.owed_water;
     }
   }
 

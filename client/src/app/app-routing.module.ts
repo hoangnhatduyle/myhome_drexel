@@ -20,6 +20,7 @@ import { MyhomeDocumnetComponent } from './myhome-documnet/myhome-documnet.compo
 import { MyhomeForgotPasswordComponent } from './myhome-forgot-password/myhome-forgot-password.component';
 import { MyhomeResetPasswordComponent } from './myhome-reset-password/myhome-reset-password.component';
 import { ResetPasswordGuard } from './reset-password.guard';
+import { MyhomeFaqComponent } from './myhome-faq/myhome-faq.component';
 
 const routes: Routes = [
   { path: '', component: MyhomeLoginComponent },
@@ -48,6 +49,10 @@ const routes: Routes = [
           {
             path: 'settings',
             component: MyhomeMemberSettingComponent, canDeactivate: [PreventUnsavedChangesGuard]
+          },
+          {
+            path: 'faq',
+            component: MyhomeFaqComponent
           },
           {
             path: 'contact',

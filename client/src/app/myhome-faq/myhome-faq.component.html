@@ -1,0 +1,133 @@
+<main id="main" class="main">
+    <div class="pagetitle">
+        <h1 style="font-weight: 400; color: rgb(82, 14, 14);">Frequently Asked Questions</h1>
+        <nav>
+            <ol class="breadcrumb">
+                <li class="breadcrumb-item"><a style="font-weight: 400;">Home</a></li>
+                <li class="breadcrumb-item active" style="font-weight: 400;">Frequently Asked Questions</li>
+            </ol>
+        </nav>
+    </div><!-- End Page Title -->
+
+    <section class="section faq">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="card basic">
+                    <div class="card-body">
+                        <h5 style="color: rgb(82, 14, 14);" class="card-title">Basic Questions</h5>
+                        <div>
+                            <h6 style="font-weight: 400; color: rgb(170, 61, 61);">1. When is our Trash Collection day
+                                in the week?</h6>
+                            <p style="color: rgb(69, 69, 69);">Garbage collection is handled by Republic Services and is
+                                collected <span style="font-weight: bold;">every Friday</span> weekly. All trash
+                                should be bagged and placed inside your gray refuse container which can be set out on
+                                the curb the night before your scheduled pickup and should be promptly put away once
+                                collection is complete.
+                            </p>
+                        </div>
+                        <div class="pt-2">
+                            <h6 style="font-weight: 400; color: rgb(170, 61, 61);">2. What are utilities that I am
+                                responsible for?</h6>
+                            <p style="color: rgb(69, 69, 69);">As we have agreed, you are responsible for paying these
+                                utilities: <span style="font-weight: bold;">Water</span>, <span
+                                    style="font-weight: bold;">Gas</span>, and <span
+                                    style="font-weight: bold;">Electricity</span>. Additionally, they are splited among
+                                all
+                                residents in the house so please make sure not to waste any utilities if you are not
+                                using them.
+                            </p>
+                        </div>
+                        <div class="pt-2">
+                            <h6 style="font-weight: 400; color: rgb(170, 61, 61);">3. What's the Neighborhood Like?
+                            </h6>
+                            <p style="color: rgb(69, 69, 69);">Our house is located in a walking-distance from the
+                                University of Toledo so please do not worry about your safety. Also, Toledo has some
+                                very nice parts about it. It has a good university and some nice public spaces like the
+                                art museum, the zoo, and the parks.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+                <div class="card basic">
+                    <div class="card-body pb-0">
+                        <h5 style="color: rgb(82, 14, 14);" class="card-title mb-2 pb-1">More Questions</h5>
+                    </div>
+
+                    <mat-accordion>
+                        <mat-expansion-panel class="mat-elevation-z0" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <p style="font-weight: 400; color: rgb(69, 69, 69);">What if my payment is
+                                        rejected?
+                                    </p>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p style="color: rgb(170, 61, 61); line-height: 2; font-size: 16px;">I am so sorry if your
+                                payment is rejected. Please submit
+                                a new
+                                payment with the correct information.</p>
+                        </mat-expansion-panel>
+
+                        <mat-expansion-panel class="mat-elevation-z0" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <p style="font-weight: 400; color: rgb(69, 69, 69);">What is the Guest Policy?
+                                    </p>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p style="color: rgb(170, 61, 61); line-height: 2; font-size: 16px;">Visitors should not be
+                                an issue, but your friend’s stay
+                                might only
+                                be limited to 3 consecutive nights and please make sure your friend's stay would not
+                                affect the other residents.</p>
+                        </mat-expansion-panel>
+
+                        <mat-expansion-panel class="mat-elevation-z0" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <p style="font-weight: 400; color: rgb(69, 69, 69);">How do maintenance requests
+                                        work?
+                                    </p>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p style="color: rgb(170, 61, 61); line-height: 2; font-size: 16px;">If you need something
+                                fixed, please let me know ASAP
+                                since other residents might need to use it as well. You can message me directly or
+                                through the Contact section of myHome website.</p>
+                        </mat-expansion-panel>
+
+                        <mat-expansion-panel class="mat-elevation-z0" (opened)="panelOpenState = true"
+                            (closed)="panelOpenState = false">
+                            <mat-expansion-panel-header>
+                                <mat-panel-title>
+                                    <p style="font-weight: 400; color: rgb(69, 69, 69);">What happens to my information
+                                        after my lease
+                                        ends?
+                                    </p>
+                                </mat-panel-title>
+                            </mat-expansion-panel-header>
+                            <p style="color: rgb(170, 61, 61); line-height: 2; font-size: 16px;">If you decide to sign
+                                another lease, thank you and I
+                                hope you have another wonderful time with us. Otherwise, I would set your account status
+                                to be inactive and your information will be stored in our database. If there is any
+                                other reason, please let me know and we can figure out a good way to handle your
+                                information.</p>
+                        </mat-expansion-panel>
+                    </mat-accordion>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Instructions on how to submit a payment</h5>
+                        <h6 class="mb-3">Click on each image to view instruction</h6>
+                        <ngx-gallery [options]="galleryOptions" [images]="galleryImages" class="ngx-gallery"></ngx-gallery>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>

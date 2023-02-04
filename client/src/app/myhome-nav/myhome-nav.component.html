@@ -6,7 +6,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
-                            routerLink="/main/dashboard">
+                            routerLink="/main/dashboard" (click)="closeNavBar()">
                             <fa-icon [icon]="['fas', 'home']" class="me-2"></fa-icon>
                             <span style="font-weight: 500;">Dashboard</span>
                         </a>
@@ -14,7 +14,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
-                            routerLink="/main/profile">
+                            routerLink="/main/profile" (click)="closeNavBar()">
                             <fa-icon [icon]="['fas', 'user']" class="me-2"></fa-icon>
                             <span style="font-weight: 500;">Profile</span>
                         </a>
@@ -22,7 +22,7 @@
 
                     <li class="nav-item">
                         <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
-                            routerLink="/main/room">
+                            routerLink="/main/room" (click)="closeNavBar()">
                             <fa-icon [icon]="['fas', 'door-closed']" class="me-2"></fa-icon>
                             <span style="font-weight: 500;">My Room</span>
                         </a>
@@ -30,14 +30,14 @@
 
                     <li class="nav-item">
                         <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
-                            routerLink="/main/document">
+                            routerLink="/main/document" (click)="closeNavBar()">
                             <fa-icon [icon]="['fas', 'folder-open']" class="me-2"></fa-icon>
                             <span style="font-weight: 500;">Document</span>
                         </a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
-                            routerLink="/main/settings">
+                            routerLink="/main/settings" (click)="closeNavBar()">
                             <fa-icon [icon]="['fas', 'cog']" class="me-2"></fa-icon>
                             <span style="font-weight: 500;">Settings</span>
                         </a>
@@ -45,7 +45,7 @@
 
                     <li class="nav-item" style="border-bottom: solid 1px rgb(82, 14, 14);">
                         <a class="nav-link" [routerLinkActiveOptions]="{exact: true}" [routerLinkActive]="['is-active']"
-                            routerLink="/main/contact">
+                            routerLink="/main/contact" (click)="closeNavBar()">
                             <fa-icon [icon]="['fas', 'phone']" class="me-2"></fa-icon>
                             <span style="font-weight: 500;">Contact</span>
                         </a>
@@ -89,13 +89,15 @@
                     <li class="nav-item dropdown pe-2">
                         <!-- <button type="button" class="pill me-1" (click)="openModal(about)">About</button> -->
                         <!-- <fa-icon title="About" class="me-2" style="font-size: 30px; cursor: pointer;" [icon]="['fas', 'circle-info']" (click)="openModal(about)"></fa-icon> -->
-                        <i style="cursor: pointer;" class="material-icons me-1" (click)="openModal(about)">info_outline</i>
+                        <i style="cursor: pointer;" class="material-icons me-1 mt-2"
+                            (click)="openModal(about)">info_outline</i>
                     </li>
 
-                    <li class="nav-item dropdown pe-2" *appHasRole="['Admin', 'Moderator']">
+                    <li class="nav-item dropdown pe-2 mt-2" *appHasRole="['Admin', 'Moderator']">
                         <!-- <button type="button" class="pill me-1" (click)="openModal(version)">Version</button> -->
                         <!-- <fa-icon title="Version" class="me-2" style="font-size: 30px; cursor: pointer;" [icon]="['far', 'file-code']" (click)="openModal(version)"></fa-icon> -->
-                        <i style="cursor: pointer;" class="material-icons me-1" (click)="openModal(version)">manage_history</i>
+                        <i style="cursor: pointer;" class="material-icons me-1"
+                            (click)="openModal(version)">manage_history</i>
                     </li>
 
                     <li class="nav-item dropdown pe-3">
@@ -149,7 +151,7 @@
                                 </li>
 
                                 <li>
-                                    <a class="dropdown-item d-flex align-items-center" (click)="openModal(faq)">
+                                    <a class="dropdown-item d-flex align-items-center" routerLink="/main/faq">
                                         <fa-icon [icon]="['far', 'question-circle']"></fa-icon>
                                         <span class="ms-3">Need Help?</span>
                                     </a>
@@ -172,8 +174,10 @@
             </nav>
         </header>
 
-        <section style="margin-top: 60px;" [class.is-collapsed]="opened">
-            <router-outlet></router-outlet>
+        <section style="margin-top: 60px;">
+            <div class="router-wrapper">
+                <router-outlet></router-outlet>
+            </div>
         </section>
 
         <footer id="footer" class="footer">

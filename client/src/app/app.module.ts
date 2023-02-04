@@ -50,6 +50,7 @@ import { MyhomeNewMessageComponent } from './myhome-new-message/myhome-new-messa
 import { NewMessageComponent } from './modals/new-message/new-message.component';
 import { MyhomeForgotPasswordComponent } from './myhome-forgot-password/myhome-forgot-password.component';
 import { MyhomeResetPasswordComponent } from './myhome-reset-password/myhome-reset-password.component';
+import { MyhomeFaqComponent } from './myhome-faq/myhome-faq.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -94,7 +95,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     MyhomeNewMessageComponent,
     NewMessageComponent,
     MyhomeForgotPasswordComponent,
-    MyhomeResetPasswordComponent
+    MyhomeResetPasswordComponent,
+    MyhomeFaqComponent
   ],
   imports: [
     BrowserModule,
