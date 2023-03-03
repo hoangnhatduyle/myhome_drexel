@@ -3,9 +3,11 @@ import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
 import { Bill } from 'src/app/_models/bill';
+import { Payment } from 'src/app/_models/payment';
 import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
 import { BillService } from 'src/app/_services/bill.service';
+import { PaymentService } from 'src/app/_services/payment.service';
 
 @Component({
   selector: 'app-user-management',
@@ -21,11 +23,14 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   water: Bill[] = [];
   gas: Bill[] = [];
   electricity: Bill[] = [];
+  payments: Payment[] = [];
   utility: number = 0;
   total: number = 0;
+  totalReceived: number = 0;
   totalOutcome: number = 0;
 
   date = new Date();
+  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   currMonth = this.date.getMonth();
 
   bsModalRef: BsModalRef<RolesModalComponent> = new BsModalRef<RolesModalComponent>();
@@ -35,7 +40,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     'Member'
   ]
 
-  constructor(private adminService: AdminService, private modalService: BsModalService, private billService: BillService) { }
+  constructor(private adminService: AdminService, private modalService: BsModalService, private billService: BillService, private paymentService: PaymentService) { }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -54,6 +59,15 @@ export class UserManagementComponent implements OnDestroy, OnInit {
       ]
     };
     this.getUsersWithRoles();
+    this.paymentService.getPastPayments().subscribe({
+      next: payments => {
+        this.payments = payments
+        this.payments = this.payments.filter(x => x.payMonth == this.currMonth + 1 && x.paymentStatus == 'Approve');
+        this.payments.forEach(x => {
+          this.totalReceived = x.amount;
+        })
+      }
+    })
   }
 
   getUsersWithRoles() {
