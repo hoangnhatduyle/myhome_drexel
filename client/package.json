@@ -37,6 +37,7 @@
     "font-awesome": "^4.7.0",
     "jquery": "^3.6.3",
     "ng-sidebar": "^9.4.3",
+    "ng-toggle-button": "^1.5.0",
     "ng2-file-upload": "^3.0.0",
     "ngx-bootstrap": "^9.0.0",
     "ngx-extended-pdf-viewer": "^16.0.0-alpha.3",

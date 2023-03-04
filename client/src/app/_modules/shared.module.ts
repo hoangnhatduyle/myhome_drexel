@@ -18,6 +18,7 @@ import { far } from '@fortawesome/free-regular-svg-icons';
 import {MatExpansionModule} from '@angular/material/expansion';
 import { DataTablesModule } from "angular-datatables";
 import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
+import { NgToggleModule } from 'ng-toggle-button';
 @NgModule({
   declarations: [],
   imports: [
@@ -39,7 +40,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     MatExpansionModule,
     ModalModule.forRoot(),
     DataTablesModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    NgToggleModule.forRoot()
   ],
   exports: [
     BsDropdownModule,
@@ -57,7 +59,8 @@ import { NgxExtendedPdfViewerModule } from 'ngx-extended-pdf-viewer';
     FontAwesomeModule,
     MatExpansionModule,
     DataTablesModule,
-    NgxExtendedPdfViewerModule
+    NgxExtendedPdfViewerModule,
+    NgToggleModule
   ]
 })
 export class SharedModule {

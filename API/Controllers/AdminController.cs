@@ -142,6 +142,25 @@ namespace API.Controllers
             return BadRequest("Failed to update bill");
         }
 
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPut("edit-bill-status/{id}/{paid}")]
+        public async Task<ActionResult> EditBillPaidStatus(int id, bool paid)
+        {
+            var bill = await _unitOfWork.BillRepository.GetBill(id);
+
+            if (bill == null) return NotFound();
+
+            var paymentStatus = paid ? "paid" : "unpaid";
+
+            if (bill.Paid == paid) return BadRequest("BIll is already " + paymentStatus + ".");
+            
+            bill.Paid = paid;
+
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to update bill payment status");
+        }
+
         [Authorize(Policy = "ModeratePhotoRole")]
         [HttpPut("approve-payment")]
         public async Task<ActionResult> ApprovePayment(PaymentForApprovalDto paymentForApprovalDto)
@@ -150,7 +169,7 @@ namespace API.Controllers
             var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == paymentForApprovalDto.Username);
 
             user.LastRentalFee = paymentForApprovalDto.Amount;
-            user.PaidThisMonth = true;            
+            user.PaidThisMonth = true;
 
             payment.PaymentStatus = "Approve";
 

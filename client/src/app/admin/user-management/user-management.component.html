@@ -1,10 +1,9 @@
 <div class="row">
     <div class="mb-4 mt-2">
         <p style="font-size: 24px; font-weight: 500;">{{months[currMonth]}} summary</p>
-        <p style="font-size: 17px;">Total Received: <span style="font-weight: bold; font-size: 17px;">${{totalReceived}}</span></p>
-        <p style="font-size: 17px;">Total Income: <span style="font-weight: bold; font-size: 17px;">${{total}}</span></p>
-        <p style="font-size: 17px;">Total Outcome: <span style="font-weight: bold; font-size: 17px;">${{totalOutcome}}</span></p>
-        <p style="font-size: 17px; margin-bottom: 0;">Net Income: <span style="font-weight: bold; font-size: 17px;">${{total - totalOutcome}}</span></p>
+        <p style="font-size: 17px;">Total Received/Total Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived}} / ${{total}}</span></p>
+        <p style="font-size: 17px;">Total Paid/Total Outcome: <span style="font-weight: 600; font-size: 17px;">${{totalPaid}} / ${{totalOutcome}}</span></p>
+        <p style="font-size: 17px; margin-bottom: 0;">Net Income: <span style="font-weight: 600; font-size: 17px;">${{total - totalOutcome}}</span></p>
     </div>
     <div style="border: 0.5px solid rgb(162, 162, 162);" class="p-3">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">

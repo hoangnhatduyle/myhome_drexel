@@ -13,11 +13,12 @@
         <table class="table mt-3">
             <thead>
                 <tr>
-                    <th style="width: 20%">#</th>
-                    <th style="width: 20%">Type</th>
-                    <th style="width: 20%">Month</th>
-                    <th style="width: 20%">Amount</th>
-                    <th style="width: 20%"></th>
+                    <th style="width: 10%">#</th>
+                    <th style="width: 18%">Type</th>
+                    <th style="width: 18%">Month</th>
+                    <th style="width: 18%">Amount</th>
+                    <th style="width: 18%">Paid Status</th>
+                    <th style="width: 18%"></th>
                 </tr>
             </thead>
             <tbody>
@@ -26,6 +27,12 @@
                     <td>{{bill.type}}</td>
                     <td>{{bill.month}}</td>
                     <td>{{bill.amount}}</td>
+                    <td style="vertical-align: middle;">
+                        <ng-toggle [(ngModel)]="bill.paid" [width]="config.width" [height]="config.height"
+                            [margin]="config.margin" [labels]="config.labels" [color]="config.color"
+                            [switchColor]="config.switchColor" [fontColor]="config.fontColor"
+                            [fontSize]="config.fontSize" (change)="changePaidStatus(bill)" required></ng-toggle>
+                    </td>
                     <td><button (click)="openBillModal(bill)" class="btn btn-warning" style="color: white;">Edit
                             Bill</button></td>
                 </tr>

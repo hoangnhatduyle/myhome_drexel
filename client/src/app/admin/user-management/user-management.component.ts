@@ -27,6 +27,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   utility: number = 0;
   total: number = 0;
   totalReceived: number = 0;
+  totalPaid: number = 0;
   totalOutcome: number = 0;
 
   date = new Date();
@@ -108,6 +109,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
           this.bills.forEach(bill => {
             this.totalOutcome += bill.amount;
+            if (bill.paid) this.totalPaid += bill.amount;
           });
 
           this.total += (this.gas[0]?.amount + this.water[0]?.amount + this.electricity[0]?.amount) * (totalMem - 1) / totalMem

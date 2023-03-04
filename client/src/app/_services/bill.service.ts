@@ -37,11 +37,15 @@ export class BillService {
     return this.http.get<Bill[]>(this.baseUrl + 'bill/' + type);
   }
 
-  updateBill(id: number, amount: number, usernames: string[]) {
+  updateBillAmount(id: number, amount: number, usernames: string[]) {
     return this.http.put(this.baseUrl + 'admin/edit-bill-amount/' + id, { "amount": amount, "usernames": usernames })
   }
 
   removeBill(id: number) {
     return this.http.delete(this.baseUrl + 'bill/' + id);
+  }
+
+  updateBillStatus(id: number, billStatus: boolean) {
+    return this.http.put(this.baseUrl + 'admin/edit-bill-status/' + id + '/' + billStatus, {});    
   }
 }

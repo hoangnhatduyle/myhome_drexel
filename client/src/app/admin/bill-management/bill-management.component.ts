@@ -24,12 +24,37 @@ export class BillManagementComponent implements OnInit {
   internet: Bill[] = [];
   mobile: Bill[] = [];
   owed_water: Bill[] = [];
-  
+
   selectedBills: Bill[] = [];
   members: Member[] = [];
   usernames: string[] = [];
 
   selectedBill = '';
+  checked: boolean | undefined;
+
+  config = {
+    height: 25,
+    width: 55,
+    margin: 3,
+    fontSize: 10,
+    speed: 300,
+    color: {
+      checked: '#48b557',
+      unchecked: '#dd6464',
+    },
+    switchColor: {
+      checked: '#F0F1EC',
+      unchecked: 'F0F1EC',
+    },
+    labels: {
+      unchecked: 'No',
+      checked: 'Yes',
+    },
+    fontColor: {
+      checked: '#fafafa',
+      unchecked: '#ffffff',
+    },
+  };
 
   constructor(private memberService: MembersService, private billService: BillService, private modalService: BsModalService, private toastr: ToastrService) { }
 
@@ -106,7 +131,7 @@ export class BillManagementComponent implements OnInit {
       next: () => {
         const id = this.bsModalRef.content!.ID;
         const amount = this.bsModalRef.content!.amount;
-        this.billService.updateBill(id, amount, this.usernames).subscribe({
+        this.billService.updateBillAmount(id, amount, this.usernames).subscribe({
           next: () => {
             bill.amount = amount;
             const index = this.selectedBills.indexOf(bill)
@@ -115,6 +140,14 @@ export class BillManagementComponent implements OnInit {
           }
         })
 
+      }
+    })
+  }
+
+  changePaidStatus(bill: Bill) {
+    this.billService.updateBillStatus(bill.id, bill.paid).subscribe({
+      next: () => {
+        this.toastr.success("Bill has been updated successfully");
       }
     })
   }

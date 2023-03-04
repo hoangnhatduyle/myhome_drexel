@@ -18,5 +18,6 @@ namespace API.Entities
         public string Type { get; set; }
         public int Month { get; set; }
         public int Amount { get; set; }
+        public bool Paid { get; set; }
     }
 }
