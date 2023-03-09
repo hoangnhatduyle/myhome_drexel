@@ -1,0 +1,9 @@
+#button_container {
+    float: right
+}
+
+@media (max-width: 767px) {
+    #button_container {
+        float: none;
+    }
+}

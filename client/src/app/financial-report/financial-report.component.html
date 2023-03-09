@@ -1,1 +1,50 @@
-<p>financial-report works!</p>
+<div>
+    <div class="row justify-content-between">
+        <div class="col-md-4">
+            <select class="form-select w-25" #yearSelection (change)="onSelected()">
+                <option default value="2023">2023</option>
+                <option [value]="year" *ngFor="let year of listOfYear">{{year}}</option>
+            </select>
+        </div>
+        <div class="col-md-5 mt-3 mt-md-0 pe-3">
+            <div id="button_container">
+                <button class="btn btn-success ms-1" type="button" (click)="addNewData()">Add New Data</button>
+                <button class="btn btn-danger ms-1" type="button" (click)="printPDF()">Print PDF</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="mt-4" id="html2Pdf">
+        <div class="card info-card">
+            <div class="px-4">
+                <h2 class="text-center mb-1 mt-4 pb-2" style="border-bottom: 2px solid gray;">Financial Report -
+                    {{currYear}}</h2>
+            </div>
+            <div class="px-4 mt-3">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%">#</th>
+                            <th style="width: 18%">Month</th>
+                            <th style="width: 18%">Total Income</th>
+                            <th style="width: 18%">Total Outcome</th>
+                            <th style="width: 18%">Net Income</th>
+                            <th style="width: 18%"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let finance of financeReport; let index = index;">
+                            <td>{{index + 1}}</td>
+                            <td>{{months[finance.month - 1]}}</td>
+                            <td>${{finance.totalIncome}}</td>
+                            <td>${{finance.totalOutcome}}</td>
+                            <td>${{finance.netIncome}}</td>
+                            <td><button class="btn btn-warning" (click)="openReportModal(finance)"
+                                    style="color: white;">View Details</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

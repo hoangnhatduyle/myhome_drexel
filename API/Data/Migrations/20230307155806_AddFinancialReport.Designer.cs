@@ -3,6 +3,7 @@ using System;
 using API.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
@@ -11,9 +12,11 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace API.Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230307155806_AddFinancialReport")]
+    partial class AddFinancialReport
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -207,37 +210,16 @@ namespace API.Data.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int>("ElectricityBill")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("GasBill")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("InsuranceBill")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("InternetBill")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("MobileBill")
-                        .HasColumnType("integer");
-
                     b.Property<int>("Month")
                         .HasColumnType("integer");
 
                     b.Property<int>("NetIncome")
                         .HasColumnType("integer");
 
-                    b.Property<int>("OwedWaterBill")
-                        .HasColumnType("integer");
-
                     b.Property<int>("TotalIncome")
                         .HasColumnType("integer");
 
                     b.Property<int>("TotalOutcome")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("WaterBill")
                         .HasColumnType("integer");
 
                     b.Property<int>("Year")

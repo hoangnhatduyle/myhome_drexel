@@ -61,6 +61,15 @@ namespace API.Controllers
             return Ok(await _unitOfWork.PaymentRepository.GetPastPayment());
         }
 
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpGet("get-financial-report/{year}")]
+        public async Task<ActionResult<PaymentForApprovalDto>> GetFinancialReportsByYear(int year)
+        {
+            if (year < 0) return BadRequest("Invalid Year");
+
+            return Ok(await _unitOfWork.FinancialReportRepository.GetFinancialReportsByYear(year));
+        }
+
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
         public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles)
@@ -125,6 +134,20 @@ namespace API.Controllers
             return Ok();
         }
 
+        [Authorize(Policy = "ModeratePhotoRole")]
+        [HttpPost("add-new-report")]
+        public async Task<ActionResult> AddNewFinancialReport(FinancialReportDto financialReportDto)
+        {
+            await _unitOfWork.FinancialReportRepository.AddNewFinancialReport(financialReportDto);
+
+            if (await _unitOfWork.Complete())
+            {
+                return Ok();
+            }
+
+            return BadRequest("Problem adding new report");
+        }
+
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPut("edit-bill-amount/{id}")]
         public async Task<ActionResult> EditBillAmount(int id, BillUpdateDto billUpdateDto)
@@ -153,7 +176,7 @@ namespace API.Controllers
             var paymentStatus = paid ? "paid" : "unpaid";
 
             if (bill.Paid == paid) return BadRequest("BIll is already " + paymentStatus + ".");
-            
+
             bill.Paid = paid;
 
             if (await _unitOfWork.Complete()) return Ok();

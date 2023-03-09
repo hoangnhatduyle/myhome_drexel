@@ -11,12 +11,13 @@ namespace API.Data
         {
             _mapper = mapper;
             _context = context;
-            
+
         }
         public IUserRepository UserRepository => new UserRepository(_context, _mapper);
         public IPhotoRepository PhotoRepository => new PhotoRepository(_context);
         public IBillRepository BillRepository => new BillsRepository(_context);
         public IPaymentRepository PaymentRepository => new PaymentRepository(_context, _mapper);
+        public IFinancialReportRepository FinancialReportRepository => new FinancialReportRepository(_context, _mapper);
 
         public async Task<bool> Complete()
         {

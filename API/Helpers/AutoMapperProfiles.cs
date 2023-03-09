@@ -15,6 +15,7 @@ namespace API.Helpers
             CreateMap<Photo, PhotoDto>();
             CreateMap<Payment, PaymentDto>();
             CreateMap<Message, MessageDto>();
+            CreateMap<FinancialReportDto, FinancialReport>();
             CreateMap<MemberUpdateDto, AppUser>();
             CreateMap<BillUpdateDto, Bills>();
             CreateMap<RegisterDto, AppUser>();

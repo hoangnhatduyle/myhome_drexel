@@ -52,6 +52,8 @@ import { MyhomeForgotPasswordComponent } from './myhome-forgot-password/myhome-f
 import { MyhomeResetPasswordComponent } from './myhome-reset-password/myhome-reset-password.component';
 import { MyhomeFaqComponent } from './myhome-faq/myhome-faq.component';
 import { FinancialReportComponent } from './financial-report/financial-report.component';
+import { FinancialModalComponent } from './financial-modal/financial-modal.component';
+import { NewFinancialReportModalComponent } from './new-financial-report-modal/new-financial-report-modal.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -98,7 +100,9 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     MyhomeForgotPasswordComponent,
     MyhomeResetPasswordComponent,
     MyhomeFaqComponent,
-    FinancialReportComponent
+    FinancialReportComponent,
+    FinancialModalComponent,
+    NewFinancialReportModalComponent
   ],
   imports: [
     BrowserModule,

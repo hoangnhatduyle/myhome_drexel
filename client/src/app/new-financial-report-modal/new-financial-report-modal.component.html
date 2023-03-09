@@ -1,0 +1,105 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Add New Report</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef2.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form [formGroup]="newReportForm" autocomplete="off">
+        <h2 style="font-size: 20px; color: rgb(59, 131, 255);" class="mb-2">Report Month</h2>
+        <div class="row mb-1">
+            <div class="col-sm-6">
+                <div class="mb-3">
+                    <select class="form-select" [formControl]="$any(newReportForm.controls['month'])">
+                        <option value="0" selected>Month</option>
+                        <option value="1">January</option>
+                        <option value="2">February</option>
+                        <option value="3">March</option>
+                        <option value="4">April</option>
+                        <option value="5">May</option>
+                        <option value="6">June</option>
+                        <option value="7">July</option>
+                        <option value="8">August</option>
+                        <option value="9">September</option>
+                        <option value="10">October</option>
+                        <option value="11">November</option>
+                        <option value="12">December</option>
+                    </select>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <app-text-input [formControl]="$any(newReportForm.controls['year'])" [label]="'Year'"></app-text-input>
+            </div>
+        </div>
+
+        <h2 style="font-size: 20px; color: rgb(59, 131, 255);" class="mb-2">Financial Summary</h2>
+        <div class="row mb-1">
+            <div class="col-sm-4">
+                <app-text-input [formControl]="$any(newReportForm.controls['totalIncome'])"
+                    [label]="'Total Income'"></app-text-input>
+            </div>
+            <div class="col-sm-4">
+                <app-text-input [formControl]="$any(newReportForm.controls['totalOutcome'])"
+                    [label]="'Total Outcome'"></app-text-input>
+            </div>
+            <div class="col-sm-4">
+                <app-text-input [formControl]="$any(newReportForm.controls['netIncome'])"
+                    [label]="'Net Income'"></app-text-input>
+            </div>
+        </div>
+
+        <h2 style="font-size: 20px; color: rgb(59, 131, 255);" class="mb-2">Bill Summary</h2>
+        <div class="row mb-1">
+            <div class="col-sm-6">
+                <label class="mb-2">Water Bill</label>
+                <app-text-input [formControl]="$any(newReportForm.controls['waterBill'])"
+                    [label]="'Enter amount'"></app-text-input>
+            </div>
+            <div class="col-sm-6">
+                <label class="mb-2">Electricity Bill</label>
+                <app-text-input [formControl]="$any(newReportForm.controls['electricityBill'])"
+                    [label]="'Enter amount'"></app-text-input>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-6">
+                <label class="mb-2">Gas Bill</label>
+                <app-text-input [formControl]="$any(newReportForm.controls['gasBill'])"
+                    [label]="'Enter amount'"></app-text-input>
+            </div>
+            <div class="col-sm-6">
+                <label class="mb-2">Mobile Bill</label>
+                <app-text-input [formControl]="$any(newReportForm.controls['mobileBill'])"
+                    [label]="'Enter amount'"></app-text-input>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-4">
+                <label class="mb-2">Internet Bill</label>
+                <app-text-input [formControl]="$any(newReportForm.controls['internetBill'])"
+                    [label]="'Enter amount'"></app-text-input>
+            </div>
+            <div class="col-sm-4">
+                <label class="mb-2">Insurance Bill</label>
+                <app-text-input [formControl]="$any(newReportForm.controls['insuranceBill'])"
+                    [label]="'Enter amount'"></app-text-input>
+            </div>
+            <div class="col-sm-4">
+                <label class="mb-2">Owed Water Bill</label>
+                <app-text-input [formControl]="$any(newReportForm.controls['owedWaterBill'])"
+                    [label]="'Enter amount'"></app-text-input>
+            </div>
+        </div>
+
+        <div class="row" *ngIf="validationErrors">
+            <ul class="text-danger">
+                <li *ngFor="let error of validationErrors">{{error}}</li>
+            </ul>
+        </div>
+
+        <button type="submit" class="btn btn-success mb-3" style="float: right;" [disabled]="!newReportForm.valid"
+            (click)="bsModalRef2.hide(); saveValues()">Submit</button>
+    </form>
+</div>

@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { RolesModalComponent } from '../modals/roles-modal/roles-modal.component';
+import { FinancialReport } from '../_models/financialReport';
 import { Photo } from '../_models/photo';
 import { User } from '../_models/user';
 
@@ -35,5 +36,13 @@ export class AdminService {
 
   changeRoom(username: string, roomNumber: number) {
     return this.http.put(this.baseUrl + 'admin/change-room/' + username + "/" + roomNumber, {});
+  }
+
+  getFinancialReport(year: number) {
+    return this.http.get<FinancialReport[]>(this.baseUrl + 'admin/get-financial-report/' + year);
+  }
+
+  addFinancialReport(model: any) {
+    return this.http.post(this.baseUrl + 'admin/add-new-report/', model);
   }
 }
