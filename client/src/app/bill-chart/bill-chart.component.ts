@@ -23,9 +23,9 @@ export class BillChartComponent implements OnInit {
   ngOnChanges() {
     if (this.bills && this.bills.length > 0) {
       this.bills = this.bills.filter(x => x.amount != 0);
-      this.water = this.bills.filter(x => x.type == 'water');
-      this.gas = this.bills.filter(x => x.type == 'gas');
-      this.electricity = this.bills.filter(x => x.type == 'electricity');
+      this.water = this.bills.filter(x => x.type == 'water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.gas = this.bills.filter(x => x.type == 'gas').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.electricity = this.bills.filter(x => x.type == 'electricity').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
 
       this.chartOptions = {
         animationEnabled: true,
@@ -56,39 +56,41 @@ export class BillChartComponent implements OnInit {
             e.chart.render();
           }
         },
-        data: [{
-          type: "line",
-          name: "Water",
-          showInLegend: true,
-          yValueFormatString: "$#,###",
-          dataPoints: [
-            ...this.processArray(this.water)
-          ]
-        },
-        {
-          type: "line",
-          name: "Electricity",
-          showInLegend: true,
-          yValueFormatString: "$#,###",
-          dataPoints: [
-            ...this.processArray(this.electricity)
-          ]
-        },
-        {
-          type: "line",
-          name: "Gas",
-          showInLegend: true,
-          yValueFormatString: "$#,###",
-          dataPoints: [
-            ...this.processArray(this.gas)
-          ]
-        }]
+        data: [
+          {
+            type: "line",
+            name: "Gas",
+            showInLegend: true,
+            yValueFormatString: "$#,###",
+            dataPoints: [
+              ...this.processArray(this.gas)
+            ]
+          },
+          {
+            type: "line",
+            name: "Electricity",
+            showInLegend: true,
+            yValueFormatString: "$#,###",
+            dataPoints: [
+              ...this.processArray(this.electricity)
+            ]
+          },
+          {
+            type: "line",
+            name: "Water",
+            showInLegend: true,
+            yValueFormatString: "$#,###",
+            dataPoints: [
+              ...this.processArray(this.water)
+            ]
+          }
+        ]
       }
     }
   }
 
   ngOnInit(): void {
-    
+
   }
 
   private processArray(input: Bill[]) {

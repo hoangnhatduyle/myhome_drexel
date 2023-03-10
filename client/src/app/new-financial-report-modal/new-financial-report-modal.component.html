@@ -35,16 +35,19 @@
         <h2 style="font-size: 20px; color: rgb(59, 131, 255);" class="mb-2">Financial Summary</h2>
         <div class="row mb-1">
             <div class="col-sm-4">
+                <label class="mb-2">Total Income</label>
                 <app-text-input [formControl]="$any(newReportForm.controls['totalIncome'])"
-                    [label]="'Total Income'"></app-text-input>
+                    [label]="'Enter Amount'"></app-text-input>
             </div>
             <div class="col-sm-4">
+                <label class="mb-2">Total Outcome</label>
                 <app-text-input [formControl]="$any(newReportForm.controls['totalOutcome'])"
-                    [label]="'Total Outcome'"></app-text-input>
+                    [label]="'Enter Amount'"></app-text-input>
             </div>
             <div class="col-sm-4">
+                <label class="mb-2">Net Income</label>
                 <app-text-input [formControl]="$any(newReportForm.controls['netIncome'])"
-                    [label]="'Net Income'"></app-text-input>
+                    [label]="'Enter Amount'"></app-text-input>
             </div>
         </div>
 
