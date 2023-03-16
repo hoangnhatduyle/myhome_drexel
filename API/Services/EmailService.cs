@@ -18,10 +18,6 @@ namespace API.Services
 
         private MimeMessage CreateEmailMessage(EmailMessage emailMessage)
         {
-            var fileName = "./Data/logo.png";
-            byte[] fileContent = File.ReadAllBytes(fileName);
-            string base64 = Convert.ToBase64String(fileContent);
-
             var mailMessage = new MimeMessage();
             mailMessage.From.Add(new MailboxAddress("myHome Customer Support", _emailConfig.From));
             mailMessage.To.AddRange(emailMessage.To);

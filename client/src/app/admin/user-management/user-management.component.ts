@@ -65,7 +65,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
         this.payments = payments
         this.payments = this.payments.filter(x => x.payMonth == this.currMonth + 1 && x.paymentStatus == 'Approve');
         this.payments.forEach(x => {
-          this.totalReceived = x.amount;
+          this.totalReceived += x.amount;
         })
       }
     })

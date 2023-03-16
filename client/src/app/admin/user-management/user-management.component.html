@@ -3,7 +3,7 @@
         <p style="font-size: 24px; font-weight: 500;">{{months[currMonth]}} summary</p>
         <p style="font-size: 17px;">Total Received/Total Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived}} / ${{total}}</span></p>
         <p style="font-size: 17px;">Total Paid/Total Outcome: <span style="font-weight: 600; font-size: 17px;">${{totalPaid}} / ${{totalOutcome}}</span></p>
-        <p style="font-size: 17px; margin-bottom: 0;">Net Income: <span style="font-weight: 600; font-size: 17px;">${{total - totalOutcome}}</span></p>
+        <p style="font-size: 17px; margin-bottom: 0;">Current Net Income/Total Net Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived - totalPaid}} / ${{total - totalOutcome}}</span></p>
     </div>
     <div style="border: 0.5px solid rgb(162, 162, 162);" class="p-3">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
