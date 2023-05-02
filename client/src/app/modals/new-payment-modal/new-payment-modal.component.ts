@@ -24,14 +24,13 @@ export class NewPaymentModalComponent implements OnInit {
     this.newPaymentForm = this.fb.group({
       method: ['Zelle'],
       amount: ['', Validators.required],
-      payDate: ['', Validators.required],
-      payMonth: ['0', Validators.required]
+      payDate: ['', Validators.required]
     })
   }
 
   saveValues() {
     const dob = this.getDateOnly(this.newPaymentForm.controls['payDate'].value);
-    this.values = { ...this.newPaymentForm.value, payDate: dob };
+    this.values = { ...this.newPaymentForm.value, payDate: dob, payMonth: this.newPaymentForm.controls['payDate'].value.getMonth() + 1 };
   }
 
   private getDateOnly(dob: string | undefined) {
