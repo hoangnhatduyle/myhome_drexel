@@ -12,10 +12,11 @@ import { PaymentService } from 'src/app/_services/payment.service';
   styleUrls: ['./payment-management.component.css']
 })
 export class PaymentManagementComponent implements OnInit {
-  @ViewChild('paymentSelection') paymentSelection!: ElementRef;
   bsModalRef: BsModalRef<PaymentModalComponent> = new BsModalRef<PaymentModalComponent>();
 
-  selectedMonth: any;
+  pendingPaymentView = true;
+  selectedMonth = "0";
+  allPastpayments: Payment[] = [];
   payments: Payment[] = [];
   jan: Payment[] = [];
   feb: Payment[] = [];
@@ -31,14 +32,22 @@ export class PaymentManagementComponent implements OnInit {
   dec: Payment[] = [];
 
   selectedPayment: Payment[] = [];
+  listOfYear: number[] = [];
+  date = new Date();
+  currYear = this.date.getFullYear();
+  selectedYear = this.currYear;
 
   constructor(private paymentService: PaymentService, private modalService: BsModalService, private toastr: ToastrService, private adminService: AdminService) { }
 
   ngOnInit(): void {
     this.getPendingPayments();
+    for (let i = 2024; i <= this.currYear; i++) {
+      this.listOfYear.push(i);
+    }
   }
 
   getPendingPayments() {
+    this.pendingPaymentView = true;
     this.paymentService.getPendingPayments().subscribe({
       next: payment => {
         if (payment) {
@@ -62,10 +71,12 @@ export class PaymentManagementComponent implements OnInit {
   }
 
   getPastPayments() {
+    this.pendingPaymentView = false;
     this.paymentService.getPastPayments().subscribe({
       next: payment => {
         if (payment) {
-          this.payments = payment;
+          this.allPastpayments = payment;
+          this.payments = this.allPastpayments.filter(x => this.getYearOfDate(x.payDate) == this.selectedYear);
           this.jan = this.payments.filter(x => x.payMonth == 1);
           this.feb = this.payments.filter(x => x.payMonth == 2);
           this.mar = this.payments.filter(x => x.payMonth == 3);
@@ -85,7 +96,6 @@ export class PaymentManagementComponent implements OnInit {
   }
 
   onSelected(): void {
-    this.selectedMonth = this.paymentSelection.nativeElement.value;
     switch (this.selectedMonth) {
       case "1":
         this.selectedPayment = this.jan;
@@ -130,6 +140,25 @@ export class PaymentManagementComponent implements OnInit {
     }
   }
 
+  onYearSelected() {
+    let year = this.selectedYear;
+
+    this.payments = this.allPastpayments.filter(x => this.getYearOfDate(x.payDate) == year);
+    this.jan = this.payments.filter(x => x.payMonth == 1);
+    this.feb = this.payments.filter(x => x.payMonth == 2);
+    this.mar = this.payments.filter(x => x.payMonth == 3);
+    this.apr = this.payments.filter(x => x.payMonth == 4);
+    this.may = this.payments.filter(x => x.payMonth == 5);
+    this.jun = this.payments.filter(x => x.payMonth == 6);
+    this.jul = this.payments.filter(x => x.payMonth == 7);
+    this.aug = this.payments.filter(x => x.payMonth == 8);
+    this.sep = this.payments.filter(x => x.payMonth == 9);
+    this.oct = this.payments.filter(x => x.payMonth == 10);
+    this.nov = this.payments.filter(x => x.payMonth == 11);
+    this.dec = this.payments.filter(x => x.payMonth == 12);
+    this.onSelected();
+  }
+
   openPaymentModal(payment: Payment) {
     const months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
@@ -172,5 +201,9 @@ export class PaymentManagementComponent implements OnInit {
         }
       }
     })
+  }
+
+  getYearOfDate(inputDate: Date) {
+    return new Date(inputDate).getFullYear();
   }
 }
