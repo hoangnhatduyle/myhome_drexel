@@ -25,7 +25,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   electricity: Bill[] = [];
   payments: Payment[] = [];
   utility: number = 0;
-  total: number = 0;
+  totalIncome: number = 0;
   totalReceived: number = 0;
   totalPaid: number = 0;
   totalOutcome: number = 0;
@@ -33,6 +33,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   date = new Date();
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   currMonth = this.date.getMonth();
+  currYear = this.date.getFullYear();
 
   bsModalRef: BsModalRef<RolesModalComponent> = new BsModalRef<RolesModalComponent>();
   availableRoles = [
@@ -63,7 +64,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     this.paymentService.getPastPayments().subscribe({
       next: payments => {
         this.payments = payments
-        this.payments = this.payments.filter(x => x.payMonth == this.currMonth + 1 && x.paymentStatus == 'Approve');
+        this.payments = this.payments.filter(x => x.payMonth == this.currMonth + 1 && this.getYearOfDate(x.payDate) == this.currYear && x.paymentStatus == 'Approve');
         this.payments.forEach(x => {
           this.totalReceived += x.amount;
         })
@@ -74,17 +75,10 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   getUsersWithRoles() {
     this.adminService.getUsersWithRoles().subscribe({
       next: users => {
+        this.users = users;
         let thang = users.find(x => x.userName == 'thang');
         thang!.rentalFee += 60 + 42;
-
         users[users.indexOf(users.find(x => x.userName == 'thang')!)] = thang!;
-
-        let thao = users.find(x => x.userName == 'thao');
-        thao!.rentalFee += 60;
-
-        users[users.indexOf(users.find(x => x.userName == 'thao')!)] = thao!;
-
-        this.users = users.filter(x => x.userName != 'user');
 
         this.getBill();
       }
@@ -97,7 +91,9 @@ export class UserManagementComponent implements OnDestroy, OnInit {
         if (bills) {
           this.bills = bills.filter(x => x.amount != 0 && x.month == this.currMonth + 1);
 
-          let totalMem = this.users.length - 1; //exclude admin
+          let totalMem = this.users.filter(x => x.userName != 'user' && x.active == true).length - 1; //exclude admin
+
+          this.users = this.users.filter(x => x.userName != 'user');
 
           if (this.bills.length > 0) {
 
@@ -112,11 +108,11 @@ export class UserManagementComponent implements OnDestroy, OnInit {
             if (bill.paid) this.totalPaid += bill.amount;
           });
 
-          this.total += (this.gas[0]?.amount + this.water[0]?.amount + this.electricity[0]?.amount) * (totalMem - 1) / totalMem
-          this.users.forEach(user => {
-            this.total += user.rentalFee;
+          this.totalIncome += (this.gas[0]?.amount + this.water[0]?.amount + this.electricity[0]?.amount) * (totalMem - 1) / totalMem
+          this.users.filter(x => x.active == true).forEach(user => {
+            this.totalIncome += user.rentalFee;
           });
-          this.total = parseInt((Math.round(this.total * 100) / 100).toFixed(2))
+          this.totalIncome = parseInt((Math.round(this.totalIncome * 100) / 100).toFixed(2))
         }
         this.dtTrigger.next(void 0);
       }
@@ -147,5 +143,9 @@ export class UserManagementComponent implements OnDestroy, OnInit {
 
   private arrayEqual(arr1: any[], arr2: any[]) {
     return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort());
+  }
+
+  private getYearOfDate(inputDate: Date) {
+    return new Date(inputDate).getFullYear();
   }
 }

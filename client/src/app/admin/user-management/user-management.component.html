@@ -1,9 +1,9 @@
 <div class="row">
     <div class="mb-4 mt-2">
         <p style="font-size: 24px; font-weight: 500;">{{months[currMonth]}} summary</p>
-        <p style="font-size: 17px;">Total Received/Total Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived}} / ${{total}}</span></p>
+        <p style="font-size: 17px;">Total Received/Total Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived}} / ${{totalIncome}}</span></p>
         <p style="font-size: 17px;">Total Paid/Total Outcome: <span style="font-weight: 600; font-size: 17px;">${{totalPaid}} / ${{totalOutcome}}</span></p>
-        <p style="font-size: 17px; margin-bottom: 0;">Current Net Income/Total Net Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived - totalPaid}} / ${{total - totalOutcome}}</span></p>
+        <p style="font-size: 17px; margin-bottom: 0;">Current Net Income/Total Net Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived - totalPaid}} / ${{totalIncome - totalOutcome}}</span></p>
     </div>
     <div style="border: 0.5px solid rgb(162, 162, 162);" class="p-3">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
@@ -18,16 +18,26 @@
             </thead>
             <tbody>
                 <tr *ngFor="let user of users">
-                    <td>{{user.userName}}</td>
-                    <td>{{user.roles.join(', ')}}</td>
-                    <td *ngIf="user.roles.includes('Member') && user.userName != 'bao'">${{user.rentalFee + utility}}
-                    </td>
-                    <td *ngIf="user.roles.includes('Member') && user.paidThisMonth">Paid</td>
-                    <td *ngIf="user.roles.includes('Member') && !user.paidThisMonth">Pending</td>
-                    <td *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">N/A</td>
-                    <td *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">N/A</td>
-                    <td><button (click)="openRolesModal(user)" class="btn btn-warning" style="color: white;">Edit
-                            Role</button></td>
+                    <ng-container *ngIf="user.active">
+                        <td>{{user.userName}}</td>
+                        <td>{{user.roles.join(', ')}}</td>
+                        <td *ngIf="user.roles.includes('Member') && user.userName != 'bao'">${{user.rentalFee + utility}}
+                        </td>
+                        <td *ngIf="user.roles.includes('Member') && user.paidThisMonth">Paid</td>
+                        <td *ngIf="user.roles.includes('Member') && !user.paidThisMonth">Pending</td>
+                        <td *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">N/A</td>
+                        <td *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">N/A</td>
+                        <td><button (click)="openRolesModal(user)" class="btn btn-warning" style="color: white;">Edit
+                                Role</button></td>
+                    </ng-container>
+                    <ng-container *ngIf="!user.active">
+                        <td>{{user.userName}}</td>
+                        <td>{{user.roles.join(', ')}}</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td><button (click)="openRolesModal(user)" class="btn btn-warning" style="color: white;">Edit
+                                Role</button></td>
+                    </ng-container>
                 </tr>
             </tbody>
         </table>

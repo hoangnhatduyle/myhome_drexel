@@ -7,4 +7,5 @@ export interface User {
     rentalFee: any;
     roles: string[];
     paidThisMonth: boolean;
+    active: boolean;
 }

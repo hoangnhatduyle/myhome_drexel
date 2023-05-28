@@ -2,6 +2,7 @@ import { ChangeDetectorRef, Component, EventEmitter, Input, OnInit, Output } fro
 import { ToastrService } from 'ngx-toastr';
 import { Bill } from '../_models/bill';
 import { Member } from '../_models/member';
+import { MembersService } from '../_services/members.service';
 
 @Component({
   selector: 'app-myhome-infocard',
@@ -13,6 +14,7 @@ export class MyhomeInfocardComponent implements OnInit {
   @Input() member: Member | undefined;
   @Input() bills: Bill[] | undefined;
 
+  members: Member[] = [];
   dueDate: string | undefined;
   isVisible: boolean = true;
   water: number = 0;
@@ -25,30 +27,11 @@ export class MyhomeInfocardComponent implements OnInit {
   currMonth = this.date.getMonth();
   month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-  constructor(private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
+  constructor(private memberService: MembersService, private changeDetectorRef: ChangeDetectorRef, private toastr: ToastrService) { }
 
   ngOnChanges() {
     if (this.member && this.bills && this.bills.length > 0) {
-      this.water = this.bills!.filter(x => x.type == 'water' && x.month == this.currMonth + 1)[0].amount;
-      this.gas = this.bills!.filter(x => x.type == 'gas' && x.month == this.currMonth + 1)[0].amount;
-      this.electricity = this.bills!.filter(x => x.type == 'electricity' && x.month == this.currMonth + 1)[0].amount;
-
-      this.total = 0;
-
-      this.total = Math.round(this.water / 6 + this.gas / 6 + this.electricity / 6 + this.member.rentalFee);
-
-      if (this.member.userName == "thao" || this.member.userName == "thang") {
-        this.total += 60;
-      }
-
-      if (this.member.userName == "thang") {
-        this.total += 42;
-      }
-
-      this.percentChange = Math.abs((this.total - this.member.lastRentalFee) / this.member.lastRentalFee * 100).toFixed(2);
-
-      if (this.total > this.member.lastRentalFee) this.higher = true;
-      else this.higher = false;
+      this.loadMembers();
     }
   }
 
@@ -64,5 +47,32 @@ export class MyhomeInfocardComponent implements OnInit {
     this.reloadMember.emit(false);
     this.isVisible = true;
     this.toastr.success("Refresh successfully!");
+  }
+
+  loadMembers(refetch = false) {
+    this.memberService.getMembersWithoutUserParam(refetch).subscribe({
+      next: members => {
+        if (members) {
+          this.members = members.filter(x => x.active);
+          
+          this.water = this.bills!.filter(x => x.type == 'water' && x.month == this.currMonth + 1)[0].amount;
+          this.gas = this.bills!.filter(x => x.type == 'gas' && x.month == this.currMonth + 1)[0].amount;
+          this.electricity = this.bills!.filter(x => x.type == 'electricity' && x.month == this.currMonth + 1)[0].amount;
+
+          this.total = 0;
+
+          this.total = Math.round(this.water / (this.members.length + 1) + this.gas / (this.members.length + 1) + this.electricity / (this.members.length + 1) + this.member!.rentalFee);
+
+          if (this.member!.userName == "thang") {
+            this.total += 60 + 42;
+          }
+
+          this.percentChange = Math.abs((this.total - this.member!.lastRentalFee) / this.member!.lastRentalFee * 100).toFixed(2);
+
+          if (this.total > this.member!.lastRentalFee) this.higher = true;
+          else this.higher = false;
+        }
+      }
+    })
   }
 }

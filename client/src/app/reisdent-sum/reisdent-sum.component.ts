@@ -23,7 +23,7 @@ export class ReisdentSumComponent implements OnInit {
     this.memberService.getMembersWithoutUserParam(refetch).subscribe({
       next: members => {
         if (members) {
-          this.members = members;
+          this.members = members.filter(x => x.active);
         }
       }
     })

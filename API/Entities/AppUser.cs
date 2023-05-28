@@ -24,5 +24,6 @@ namespace API.Entities
         public int? RoomId { get; set; }
         public virtual Room Room { get; set; }
         public bool PaidThisMonth { get; set; }
+        public bool Active { get; set; }
     }
 }

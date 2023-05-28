@@ -29,4 +29,5 @@ export interface Member {
     phoneNumber: string;
     email: string;
     paidThisMonth: boolean;
+    active: boolean;
 }
