@@ -69,6 +69,10 @@ namespace API.Controllers
 
             if (!result) return Unauthorized("Invalid Password");
 
+            var active = user.Active;
+
+            if (!active) return BadRequest("Inactive Account. Please try again.");
+
             return new UserDto
             {
                 UserName = user.UserName,

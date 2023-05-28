@@ -16,6 +16,13 @@
                 [disabled]="role === 'Admin' && username === 'admin'">
                 <label>{{role}}</label>
         </div>
+        <br>
+        <div class="form-check">
+            <input class="form-check-input" type="checkbox" value="" id="activeCheckbox" [checked]="active" (change)="changeActive($event)">
+            <label class="form-check-label" for="activeCheckbox">
+                Active
+            </label>
+        </div>
     </form>
 </div>
 <div class="modal-footer">

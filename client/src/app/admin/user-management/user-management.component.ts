@@ -125,16 +125,21 @@ export class UserManagementComponent implements OnDestroy, OnInit {
       initialState: {
         username: user.userName,
         availableRoles: this.availableRoles,
-        selectedRoles: [...user.roles]
+        selectedRoles: [...user.roles],
+        active: user.active
       }
     }
     this.bsModalRef = this.modalService.show(RolesModalComponent, config);
     this.bsModalRef.onHide?.subscribe({
       next: () => {
         const selectedRoles = this.bsModalRef.content?.selectedRoles;
-        if (!this.arrayEqual(selectedRoles!, user.roles)) {
-          this.adminService.updateUserRoles(user.userName, selectedRoles!).subscribe({
-            next: roles => user.roles = roles
+        const active = this.bsModalRef.content?.active;
+        if (!this.arrayEqual(selectedRoles!, user.roles) || user.active != active) {
+          this.adminService.updateUserRoles(user.userName, selectedRoles!, active).subscribe({
+            next: roles => {
+              user.roles = roles;
+              user.active = active;
+            }
           })
         }
       }

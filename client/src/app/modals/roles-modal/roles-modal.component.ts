@@ -10,6 +10,7 @@ export class RolesModalComponent implements OnInit {
   username = '';
   availableRoles: any[] = [];
   selectedRoles: any[] = [];
+  active: any;
 
   constructor(public bsModalRef: BsModalRef) { }
 
@@ -19,6 +20,15 @@ export class RolesModalComponent implements OnInit {
   updateChecked(checkedValue: string) {
     const index = this.selectedRoles.indexOf(checkedValue);
     index !== -1 ? this.selectedRoles.splice(index, 1) : this.selectedRoles.push(checkedValue);
+  }
+
+  changeActive(e: any) {
+    var target = e.target;
+    if (target.checked) {
+      this.active = true;
+    } else {
+      this.active = false;
+    }
   }
 
 }

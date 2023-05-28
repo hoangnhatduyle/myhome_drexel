@@ -73,7 +73,7 @@ namespace API.Controllers
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
-        public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles)
+        public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles, [FromQuery] bool active)
         {
             if (string.IsNullOrEmpty(roles)) return BadRequest("You must select at least one role");
 
@@ -86,6 +86,8 @@ namespace API.Controllers
             var userRoles = await _userManager.GetRolesAsync(user);
 
             var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
+
+            user.Active = active;
 
             if (!result.Succeeded) return BadRequest("Failed to add to roles");
 
