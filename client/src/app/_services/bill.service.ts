@@ -37,8 +37,8 @@ export class BillService {
     return this.http.get<Bill[]>(this.baseUrl + 'bill/' + type);
   }
 
-  updateBillAmount(id: number, amount: number, usernames: string[]) {
-    return this.http.put(this.baseUrl + 'admin/edit-bill-amount/' + id, { "amount": amount, "usernames": usernames })
+  updateBillAmount(id: number, amount: number, dueDate: any, paidDate: any, usernames: string[]) {
+    return this.http.put(this.baseUrl + 'admin/edit-bill-amount/' + id, { "amount": amount, "usernames": usernames, "dueDate": dueDate, "paidDate": paidDate })
   }
 
   removeBill(id: number) {

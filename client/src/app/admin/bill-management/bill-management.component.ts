@@ -6,6 +6,7 @@ import { Bill } from 'src/app/_models/bill';
 import { Member } from 'src/app/_models/member';
 import { BillService } from 'src/app/_services/bill.service';
 import { MembersService } from 'src/app/_services/members.service';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-bill-management',
@@ -15,6 +16,7 @@ import { MembersService } from 'src/app/_services/members.service';
 export class BillManagementComponent implements OnInit {
   @ViewChild('billSelection') billSelection!: ElementRef;
   bsModalRef: BsModalRef<BillsModalComponent> = new BsModalRef<BillsModalComponent>();
+  datePipe: DatePipe = new DatePipe('en-US');
 
   bills: Bill[] = [];
   water: Bill[] = [];
@@ -107,7 +109,7 @@ export class BillManagementComponent implements OnInit {
     this.memberService.getMembersWithoutUserParam().subscribe({
       next: members => {
         if (members) {
-          this.members = members;
+          this.members = members.filter(x => x.active);
           this.usernames = this.members.map(x => x.userName)
         }
       }
@@ -123,7 +125,9 @@ export class BillManagementComponent implements OnInit {
         ID: bill.id,
         type: bill.type,
         month: months[bill.month - 1],
-        amount: bill.amount
+        amount: bill.amount,
+        dueDate: bill.dueDate,
+        paidDate: bill.paidDate
       }
     }
     this.bsModalRef = this.modalService.show(BillsModalComponent, config);
@@ -131,15 +135,23 @@ export class BillManagementComponent implements OnInit {
       next: () => {
         const id = this.bsModalRef.content!.ID;
         const amount = this.bsModalRef.content!.amount;
-        this.billService.updateBillAmount(id, amount, this.usernames).subscribe({
-          next: () => {
-            bill.amount = amount;
-            const index = this.selectedBills.indexOf(bill)
-            this.selectedBills[index] = { ...this.selectedBills[index], ...bill }
-            this.toastr.success("Bill has been updated successfully");
-          }
-        })
+        const origDueDate = this.bsModalRef.content!.dueDate!;
+        const origPaidDate = this.bsModalRef.content!.paidDate!;
+        const dueDate = this.datePipe.transform(origDueDate, 'yyyy-MM-dd');
+        const paidDate = this.datePipe.transform(origPaidDate, 'yyyy-MM-dd');
 
+        if (bill.amount != amount || this.datePipe.transform(bill.dueDate, 'yyyy-MM-dd') != dueDate || this.datePipe.transform(bill.paidDate, 'yyyy-MM-dd') != paidDate) {
+          this.billService.updateBillAmount(id, amount, dueDate!, paidDate!, this.usernames).subscribe({
+            next: () => {
+              bill.amount = amount;
+              bill.dueDate = origDueDate!;
+              bill.paidDate = origPaidDate!;
+              const index = this.selectedBills.indexOf(bill)
+              this.selectedBills[index] = { ...this.selectedBills[index], ...bill }
+              this.toastr.success("Bill has been updated successfully");
+            }
+          })
+        }
       }
     })
   }

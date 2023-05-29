@@ -4,4 +4,6 @@ export interface Bill {
     month: number;
     amount: number;
     paid: boolean;
+    dueDate: Date;
+    paidDate: Date;
 }
