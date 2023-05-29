@@ -72,7 +72,7 @@ export class RecentPaymentComponent implements OnInit {
         this.memberService.addNewPayment(values).subscribe({
           next: (payment: Payment) => {
             this.toastr.success("Payment has been added successfully");
-            this.rerender();
+            this.payments.push(payment);
           },
           error: error => {
             this.toastr.error(error);

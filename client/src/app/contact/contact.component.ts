@@ -31,7 +31,7 @@ export class ContactComponent implements OnInit {
           }
         })
       }, (error) => {
-        this.toastr.error("There was am error sending the email. Please try again.")
+        this.toastr.error("There was an error sending the email. Please try again.")
       });
   }
 }
