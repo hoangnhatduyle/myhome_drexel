@@ -54,14 +54,19 @@ export class MyhomeInfocardComponent implements OnInit {
       next: members => {
         if (members) {
           this.members = members.filter(x => x.active);
-          
+
           this.water = this.bills!.filter(x => x.type == 'water' && x.month == this.currMonth + 1)[0].amount;
           this.gas = this.bills!.filter(x => x.type == 'gas' && x.month == this.currMonth + 1)[0].amount;
           this.electricity = this.bills!.filter(x => x.type == 'electricity' && x.month == this.currMonth + 1)[0].amount;
 
           this.total = 0;
 
-          this.total = Math.round(this.water / (this.members.length + 1) + this.gas / (this.members.length + 1) + this.electricity / (this.members.length + 1) + this.member!.rentalFee);
+          if (this.member?.payBill) {
+            this.total = Math.round(this.water / (this.members.length + 1) + this.gas / (this.members.length + 1) + this.electricity / (this.members.length + 1) + this.member!.rentalFee);
+          }
+          else {
+            this.total = Math.round(this.member!.rentalFee);
+          }
 
           if (this.member!.userName == "thang") {
             this.total += 60 + 42;

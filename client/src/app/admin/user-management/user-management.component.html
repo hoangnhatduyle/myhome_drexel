@@ -1,19 +1,24 @@
 <div class="row">
     <div class="mb-4 mt-2">
-        <p style="font-size: 24px; font-weight: 500;">{{months[currMonth]}} summary</p>
-        <p style="font-size: 17px;">Total Received/Total Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived}} / ${{totalIncome}}</span></p>
-        <p style="font-size: 17px;">Total Paid/Total Outcome: <span style="font-weight: 600; font-size: 17px;">${{totalPaid}} / ${{totalOutcome}}</span></p>
-        <p style="font-size: 17px; margin-bottom: 0;">Current Net Income/Total Net Income: <span style="font-weight: 600; font-size: 17px;">${{totalReceived - totalPaid}} / ${{totalIncome - totalOutcome}}</span></p>
+        <p style="font-size: 24px; font-weight: 500;">{{months[currMonth]}} Summary</p>
+        <p style="font-size: 17px;">Total Received/Total Income: <span
+                style="font-weight: 600; font-size: 17px;">${{totalReceived}} / ${{totalIncome}}</span></p>
+        <p style="font-size: 17px;">Total Paid/Total Outcome: <span
+                style="font-weight: 600; font-size: 17px;">${{totalPaid}} / ${{totalOutcome}}</span></p>
+        <p style="font-size: 17px; margin-bottom: 0;">Current Net Income/Total Net Income: <span
+                style="font-weight: 600; font-size: 17px;">${{totalReceived - totalPaid}} / ${{totalIncome -
+                totalOutcome}}</span></p>
     </div>
     <div style="border: 0.5px solid rgb(162, 162, 162);" class="p-3">
         <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover">
             <thead>
                 <tr>
-                    <th style="width: 20%">Username</th>
+                    <th style="width: 16%">Username</th>
                     <th style="width: 20%">Active Roles</th>
-                    <th style="width: 20%">Balance</th>
-                    <th style="width: 20%">Status</th>
-                    <th style="width: 20%"></th>
+                    <th style="width: 16%">Balance</th>
+                    <th style="width: 16%">Pay Bill</th>
+                    <th style="width: 16%">Status</th>
+                    <th style="width: 16%"></th>
                 </tr>
             </thead>
             <tbody>
@@ -21,10 +26,15 @@
                     <ng-container *ngIf="user.active">
                         <td>{{user.userName}}</td>
                         <td>{{user.roles.join(', ')}}</td>
-                        <td *ngIf="user.roles.includes('Member') && user.userName != 'bao'">${{user.rentalFee + utility}}
+                        <td *ngIf="user.roles.includes('Member') && user.userName != 'bao' && user.payBill">${{user.rentalFee +
+                            utility}}
                         </td>
+                        <td *ngIf="user.roles.includes('Member') && user.userName != 'bao' && !user.payBill">${{user.rentalFee}}
+                        </td>
+                        <td *ngIf="user.roles.includes('Member') && user.userName != 'bao'">{{user.payBill ? 'Yes' : 'No'}}</td>
                         <td *ngIf="user.roles.includes('Member') && user.paidThisMonth">Paid</td>
                         <td *ngIf="user.roles.includes('Member') && !user.paidThisMonth">Pending</td>
+                        <td *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">N/A</td>
                         <td *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">N/A</td>
                         <td *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">N/A</td>
                         <td><button (click)="openRolesModal(user)" class="btn btn-warning" style="color: white;">Edit
@@ -33,6 +43,7 @@
                     <ng-container *ngIf="!user.active">
                         <td>{{user.userName}}</td>
                         <td>{{user.roles.join(', ')}}</td>
+                        <td>N/A</td>
                         <td>N/A</td>
                         <td>N/A</td>
                         <td><button (click)="openRolesModal(user)" class="btn btn-warning" style="color: white;">Edit

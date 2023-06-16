@@ -18,8 +18,8 @@ export class AdminService {
     return this.http.get<User[]>(this.baseUrl + 'admin/users-with-roles');
   }
 
-  updateUserRoles(username: string, role: string[], active: boolean) {
-    return this.http.post<string[]>(this.baseUrl + 'admin/edit-roles/' + username + '?roles=' + role + '&active=' + active, {})
+  updateUserRoles(username: string, role: string[], active: boolean, payBill: boolean) {
+    return this.http.post<string[]>(this.baseUrl + 'admin/edit-roles/' + username + '?roles=' + role + '&active=' + active + '&payBill=' + payBill, {})
   }
 
   getPhotosForApproval() {

@@ -108,7 +108,11 @@ export class UserManagementComponent implements OnDestroy, OnInit {
             if (bill.paid) this.totalPaid += bill.amount;
           });
 
-          this.totalIncome += (this.gas[0]?.amount + this.water[0]?.amount + this.electricity[0]?.amount) * (totalMem - 1) / totalMem
+          debugger
+
+          let totalMemPayingBill = this.users.filter(x => x.userName != 'user' && x.active == true && x.payBill == true).length - 1; //exclude admin
+
+          this.totalIncome += this.utility * (totalMemPayingBill - 1) //exclude Bao
           this.users.filter(x => x.active == true).forEach(user => {
             this.totalIncome += user.rentalFee;
           });
@@ -126,7 +130,8 @@ export class UserManagementComponent implements OnDestroy, OnInit {
         username: user.userName,
         availableRoles: this.availableRoles,
         selectedRoles: [...user.roles],
-        active: user.active
+        active: user.active,
+        payBill: user.payBill
       }
     }
     this.bsModalRef = this.modalService.show(RolesModalComponent, config);
@@ -134,11 +139,22 @@ export class UserManagementComponent implements OnDestroy, OnInit {
       next: () => {
         const selectedRoles = this.bsModalRef.content?.selectedRoles;
         const active = this.bsModalRef.content?.active;
-        if (!this.arrayEqual(selectedRoles!, user.roles) || user.active != active) {
-          this.adminService.updateUserRoles(user.userName, selectedRoles!, active).subscribe({
+        const payBill = this.bsModalRef.content?.payBill;
+        if (!this.arrayEqual(selectedRoles!, user.roles) || user.active != active || user.payBill != payBill) {
+          this.adminService.updateUserRoles(user.userName, selectedRoles!, active, payBill).subscribe({
             next: roles => {
               user.roles = roles;
               user.active = active;
+              user.payBill = payBill;
+
+              if (payBill)
+              {
+                this.totalIncome += this.utility
+              }
+              else
+              {
+                this.totalIncome -= this.utility
+              }
             }
           })
         }

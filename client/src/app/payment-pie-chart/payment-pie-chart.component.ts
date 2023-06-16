@@ -70,9 +70,12 @@ export class PaymentPieChartComponent implements OnInit {
             this.data = [];
 
             this.data.push({ y: this.member!.rentalFee, name: "Room" });
-            this.data.push({ y: this.electricity / (this.members.length + 1), name: "Electricity" });
-            this.data.push({ y: this.water / (this.members.length + 1), name: "Water" });
-            this.data.push({ y: this.gas / (this.members.length + 1), name: "Gas" });
+
+            if (this.member?.payBill) {
+              this.data.push({ y: this.electricity / (this.members.length + 1), name: "Electricity" });
+              this.data.push({ y: this.water / (this.members.length + 1), name: "Water" });
+              this.data.push({ y: this.gas / (this.members.length + 1), name: "Gas" });
+            }
 
             if (this.member!.userName == "thao" || this.member!.userName == "thang") {
               this.data.push({ y: 60, name: "Owed Water" });

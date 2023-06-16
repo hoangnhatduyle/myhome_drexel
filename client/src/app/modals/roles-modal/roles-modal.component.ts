@@ -11,6 +11,7 @@ export class RolesModalComponent implements OnInit {
   availableRoles: any[] = [];
   selectedRoles: any[] = [];
   active: any;
+  payBill: any;
 
   constructor(public bsModalRef: BsModalRef) { }
 
@@ -28,6 +29,15 @@ export class RolesModalComponent implements OnInit {
       this.active = true;
     } else {
       this.active = false;
+    }
+  }
+
+  changePayBill(e: any) {
+    var target = e.target;
+    if (target.checked) {
+      this.payBill = true;
+    } else {
+      this.payBill = false;
     }
   }
 

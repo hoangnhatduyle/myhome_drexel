@@ -30,4 +30,5 @@ export interface Member {
     email: string;
     paidThisMonth: boolean;
     active: boolean;
+    payBill: boolean;
 }

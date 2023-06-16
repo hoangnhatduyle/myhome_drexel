@@ -35,6 +35,7 @@ namespace API.Controllers
                 RentalFee = u.RentalFee,
                 Roles = u.UserRoles.Select(r => r.Role.Name).ToList(),
                 PaidThisMonth = u.PaidThisMonth,
+                PayBill = u.PayBill,
                 Active = u.Active
             }).ToListAsync();
 
@@ -73,7 +74,7 @@ namespace API.Controllers
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
-        public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles, [FromQuery] bool active)
+        public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles, [FromQuery] bool active, [FromQuery] bool payBill)
         {
             if (string.IsNullOrEmpty(roles)) return BadRequest("You must select at least one role");
 
@@ -88,6 +89,7 @@ namespace API.Controllers
             var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
 
             user.Active = active;
+            user.PayBill = payBill;
 
             if (!result.Succeeded) return BadRequest("Failed to add to roles");
 
@@ -178,9 +180,14 @@ namespace API.Controllers
 
             var paymentStatus = paid ? "paid" : "unpaid";
 
-            if (bill.Paid == paid) return BadRequest("BIll is already " + paymentStatus + ".");
+            if (bill.Paid == paid) return BadRequest("Bill is already " + paymentStatus + ".");
 
             bill.Paid = paid;
+
+            if (paymentStatus == "paid")
+            {
+                bill.PaidDate = DateOnly.FromDateTime(DateTime.Now);
+            }
 
             if (await _unitOfWork.Complete()) return Ok();
 

@@ -8,4 +8,5 @@ export interface User {
     roles: string[];
     paidThisMonth: boolean;
     active: boolean;
+    payBill: boolean;
 }

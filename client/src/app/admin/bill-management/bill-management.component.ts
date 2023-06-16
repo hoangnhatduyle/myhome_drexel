@@ -160,6 +160,7 @@ export class BillManagementComponent implements OnInit {
     this.billService.updateBillStatus(bill.id, bill.paid).subscribe({
       next: () => {
         this.toastr.success("Bill has been updated successfully");
+        bill.paidDate = new Date();
       }
     })
   }

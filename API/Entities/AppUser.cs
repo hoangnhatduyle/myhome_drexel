@@ -25,5 +25,6 @@ namespace API.Entities
         public virtual Room Room { get; set; }
         public bool PaidThisMonth { get; set; }
         public bool Active { get; set; }
+        public bool PayBill { get; set; }
     }
 }
