@@ -1,0 +1,4 @@
+1. ng build
+2. docker build -t lehoangnhatduy2000/myhome .
+3. docker push lehoangnhatduy2000/myhome:latest
+4. flyctl deploy

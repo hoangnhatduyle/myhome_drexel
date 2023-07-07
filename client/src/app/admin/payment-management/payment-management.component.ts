@@ -46,6 +46,44 @@ export class PaymentManagementComponent implements OnInit {
     }
   }
 
+  sendEmail(approve: boolean, payment: Payment) {
+    // SecureToken: "399a8e06-2d9f-4766-a406-181ce4e20946",
+    var Email = require('./../../../assets/smtp.js');
+    var bodyHtml = "<div style='width: 40%; display: flex; justify-content: center; margin: auto; color: black;'> <div> <div style='display: flex; padding-top: 20px;'><img style='max-height: 30px; margin-right: auto;' src='https://drive.google.com/uc?export=view&id=1xzzz5GlCCovVVRZ4cTxxgRTR2Bea5P4S'><span style='font-size: 18px; font-weight: bold;'>Payment Notification</span></div> <hr> <div>You have 1 new notification:</div>";
+
+    if (approve)
+    {
+      bodyHtml += `<div style='margin-top: 20px; margin-bottom: 20px; padding: 5px 5px; border: 0.5px solid gray;'><b>Your payment of $${payment.amount} on ${payment.payDate} was <span style="color: green;">approved</span>.</b></div><div>Thank you for your payment. Please login to view more information.</div><br>`;
+    }
+    else
+    {
+      bodyHtml += `<div style='margin-top: 20px; margin-bottom: 20px; padding: 5px 5px; border: 0.5px solid gray;'><b>Your payment of $${payment.amount} on ${payment.payDate} was <span style="color: red;">rejected</span>.</b></div><div>Sorry for any inconvenience. Please contact us for more information.</div><br>`;
+    }
+
+    bodyHtml += "<div>Best wishes,<div><br> <div><b>myHome Payment Notification</b> <div> <div style='font-style: italic;'>Customer Service</div><br> <div>3201 Avondale Avenue | Toledo, OH | 43607</div> <div>Phone Number: 419-699-9535</div> <div>Email: lehoangnhatduy2000@gmail.com</div><br> </div> </div> </div> </div> </div> </div>";
+
+    Email.send({
+      SecureToken: "45347233-f706-4605-a56a-e522e578b0c5",
+      To: payment.email,
+      From: "myhomecsupp@gmail.com",
+      Subject: "Payment Notification",
+      Body: bodyHtml
+    }).then(
+      () => {
+        if (approve)
+        {
+          this.toastr.success("You have approved the payment");
+          this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === payment.id), 1);
+        }
+        else
+        {
+          this.toastr.warning("You have rejected the payment");
+          this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === payment.id), 1);
+        }
+      }
+    );
+  }
+
   getPendingPayments() {
     this.pendingPaymentView = true;
     this.paymentService.getPendingPayments().subscribe({
@@ -186,16 +224,14 @@ export class PaymentManagementComponent implements OnInit {
         if (approve) {
           this.paymentService.approvePayment(model).subscribe({
             next: _ => {
-              this.toastr.success("You have approved the payment");
-              this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === id), 1);
+              this.sendEmail(true, payment);
             }
           })
         }
         else {
           this.paymentService.rejectPayment(id).subscribe({
             next: _ => {
-              this.toastr.warning("You have rejected the payment");
-              this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === id), 1);
+              this.sendEmail(false, payment);
             }
           })
         }

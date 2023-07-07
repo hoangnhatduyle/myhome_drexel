@@ -108,8 +108,6 @@ export class UserManagementComponent implements OnDestroy, OnInit {
             if (bill.paid) this.totalPaid += bill.amount;
           });
 
-          debugger
-
           let totalMemPayingBill = this.users.filter(x => x.userName != 'user' && x.active == true && x.payBill == true).length - 1; //exclude admin
 
           this.totalIncome += this.utility * (totalMemPayingBill - 1) //exclude Bao

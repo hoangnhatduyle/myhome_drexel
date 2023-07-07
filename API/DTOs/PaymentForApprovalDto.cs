@@ -4,6 +4,7 @@ namespace API.DTOs
     {
         public int Id { get; set; }
         public string Username { get; set; }
+        public string Email { get; set; }
         public string PaymentStatus { get; set; }
         public string Method { get; set; }
         public int PayMonth { get; set; }
