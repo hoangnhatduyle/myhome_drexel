@@ -17,7 +17,7 @@ namespace API.Services
             _userManager = userManager;
             _key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(config["TokenKey"]));
         }
-        public async Task<string> CreateToken(AppUser user)
+        public async Task<string> CreateToken(AppUser user, bool remember)
         {
             var claims = new List<Claim>
             {
@@ -31,10 +31,12 @@ namespace API.Services
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
+            DateTime sessionLength = remember ? DateTime.Now.AddDays(7) : DateTime.Now.AddHours(5);
+
             var tokenDescriptor = new SecurityTokenDescriptor
             {
                 Subject = new ClaimsIdentity(claims),
-                Expires = DateTime.Now.AddDays(7),
+                Expires = sessionLength,
                 SigningCredentials = creds
             };
 

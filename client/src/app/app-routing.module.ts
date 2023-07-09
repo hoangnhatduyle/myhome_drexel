@@ -21,6 +21,7 @@ import { MyhomeForgotPasswordComponent } from './myhome-forgot-password/myhome-f
 import { MyhomeResetPasswordComponent } from './myhome-reset-password/myhome-reset-password.component';
 import { ResetPasswordGuard } from './reset-password.guard';
 import { MyhomeFaqComponent } from './myhome-faq/myhome-faq.component';
+import { CustomerReviewComponent } from './customer-review/customer-review.component';
 
 const routes: Routes = [
   { path: '', component: MyhomeLoginComponent },
@@ -66,7 +67,11 @@ const routes: Routes = [
           {
             path: 'document',
             component: MyhomeDocumnetComponent
-          }
+          },
+          {
+            path: 'review',
+            component: CustomerReviewComponent
+          },
         ]
       }
     ]

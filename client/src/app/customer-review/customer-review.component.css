@@ -1,0 +1,161 @@
+.rate {
+    float: left;
+    height: 46px;
+    padding: 0 10px;
+}
+
+.rate:not(:checked)>div>input {
+    position: absolute;
+    top: -9999px;
+}
+
+.rate:not(:checked)>div>label {
+    float: right;
+    width: 1em;
+    overflow: hidden;
+    white-space: nowrap;
+    cursor: pointer;
+    font-size: 30px;
+    color: #ccc;
+}
+
+.rate:not(:checked)>div>label:before {
+    content: '★ ';
+}
+
+.rate>div>input:checked~label {
+    color: #f4cf4f
+}
+
+.rate:not(:checked)>div>label:hover,
+.rate:not(:checked)>div>label:hover~label {
+    color: #f4cf4f
+}
+
+.rate>div>input:checked+label:hover,
+.rate>div>input:checked+label:hover~label,
+.rate>div>input:checked~label:hover,
+.rate>div>input:checked~label:hover~label,
+.rate>div>label:hover~input:checked~label {
+    color: #f4cf4f
+}
+
+.btn-scale {
+    min-width: 44px;
+    width: 6%;
+    text-align: center;
+    font-weight: bold;
+    color: black;
+    font-family: 'Lato', sans-serif;
+    margin-right: 10px;
+    margin-top: 5px;
+    border: 1px solid rgb(164, 28, 28);
+}
+
+.btn-scale:hover {
+    background-color: rgb(255, 194, 194);
+}
+
+.clicked {
+    background-color: rgb(255, 194, 194);
+}
+
+/* .btn-scale-asc-1,
+.btn-scale-desc-10 {
+    background-color: #33FF00;
+}
+
+.btn-scale-asc-1:hover,
+.btn-scale-desc-10:hover {
+    background-color: #2CDE00;
+}
+
+.btn-scale-asc-2,
+.btn-scale-desc-9 {
+    background-color: #66FF00;
+}
+
+.btn-scale-asc-2:hover,
+.btn-scale-desc-9:hover {
+    background-color: #59DE00;
+}
+
+.btn-scale-asc-3,
+.btn-scale-desc-8 {
+    background-color: #99FF00;
+}
+
+.btn-scale-asc-3:hover,
+.btn-scale-desc-8:hover {
+    background-color: #85DE00;
+}
+
+.btn-scale-asc-4,
+.btn-scale-desc-7 {
+    background-color: #CCFF00;
+}
+
+.btn-scale-asc-4:hover,
+.btn-scale-desc-7:hover {
+    background-color: #B1DE00;
+}
+
+.btn-scale-asc-5,
+.btn-scale-desc-6 {
+    background-color: #FFFF00;
+}
+
+.btn-scale-asc-5:hover,
+.btn-scale-desc-6:hover {
+    background-color: #DEDE00;
+}
+
+.btn-scale-asc-6,
+.btn-scale-desc-5 {
+    background-color: #FFCC00;
+}
+
+.btn-scale-asc-6:hover,
+.btn-scale-desc-5:hover {
+    background-color: #DEB100;
+}
+
+.btn-scale-asc-7,
+.btn-scale-desc-4 {
+    background-color: #FF9900;
+}
+
+.btn-scale-asc-7:hover,
+.btn-scale-desc-4:hover {
+    background-color: #DE8500;
+}
+
+.btn-scale-asc-8,
+.btn-scale-desc-3 {
+    background-color: #FF6600;
+}
+
+.btn-scale-asc-8:hover,
+.btn-scale-desc-3:hover {
+    background-color: #DE5900;
+}
+
+.btn-scale-asc-9,
+.btn-scale-desc-2 {
+    background-color: #FF3300;
+}
+
+.btn-scale-asc-9:hover,
+.btn-scale-desc-2:hover {
+    background-color: #DE2C00;
+}
+
+.btn-scale-asc-10,
+.btn-scale-desc-1 {
+    background-color: #FF0000;
+}
+
+.btn-scale-asc-10:hover,
+.btn-scale-desc-1:hover {
+    background-color: #DE0000;
+} */

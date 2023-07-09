@@ -897,7 +897,7 @@ header .current-date {
   z-index: 1;
   cursor: pointer;
   position: relative;
-  margin-top: 20px;
+  margin-top: 10px;
 }
 
 .days li.inactive {

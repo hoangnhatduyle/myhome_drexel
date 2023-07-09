@@ -27,19 +27,52 @@ export class MyhomeMyroomComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.loadMember()
+    this.loadMembers();
+
     this.galleryOptions = [
       {
-        width: '400px',
-        height: '400px',
+        width: '100%',
+        height: '485px',
         imagePercent: 100,
         thumbnailsColumns: 4,
         imageAnimation: NgxGalleryAnimation.Slide,
-        preview: false
+        preview: true
       }
     ]
+  }
 
-    this.loadMember()
-    this.loadMembers();
+  getImages(roomNumber: number) {
+    const imagesUrls: any = [];
+    if (roomNumber != 1) return [];
+    imagesUrls.push(
+      {
+        small: '../../assets/images/Room' + roomNumber + '/1.png',
+        medium: '../../assets/images/Room' + roomNumber + '/1.png',
+        big: '../../assets/images/Room' + roomNumber + '/1.png',
+        description: 'Room ' + roomNumber + ' - Image 1'
+      },
+      {
+        small: '../../assets/images/Room' + roomNumber + '/2.png',
+        medium: '../../assets/images/Room' + roomNumber + '/2.png',
+        big: '../../assets/images/Room' + roomNumber + '/2.png',
+        description: 'Room ' + roomNumber + ' - Image 2'
+      },
+      {
+        small: '../../assets/images/Room' + roomNumber + '/3.png',
+        medium: '../../assets/images/Room' + roomNumber + '/3.png',
+        big: '../../assets/images/Room' + roomNumber + '/3.png',
+        description: 'Room ' + roomNumber + ' - Image 3'
+      },
+      {
+        small: '../../assets/images/Room' + roomNumber + '/4.png',
+        medium: '../../assets/images/Room' + roomNumber + '/4.png',
+        big: '../../assets/images/Room' + roomNumber + '/4.png',
+        description: 'Room ' + roomNumber + ' - Image 4'
+      }
+    )
+
+    return imagesUrls;
   }
 
   loadMembers() {
@@ -59,6 +92,7 @@ export class MyhomeMyroomComponent implements OnInit {
       next: member => {
         this.member = member
         this.floor = member.room.roomNumber <= 2 ? 1 : 2;
+        this.galleryImages = this.getImages(this.member.room.roomNumber);
       }
     })
   }
