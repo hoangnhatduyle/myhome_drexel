@@ -1,5 +1,5 @@
 <div>
-    <select class="form-select w-25" #billSelection (change)="onSelected()">
+    <select style="display:inline" class="form-select w-25" #billSelection (change)="onSelected()">
         <option default value="water">Water</option>
         <option value="gas">Gas</option>
         <option value="electricity">Electricity</option>
@@ -8,6 +8,7 @@
         <option value="mobile">Mobile</option>
         <option value="owed_water">Owed Water</option>
     </select>
+    <button style="display:inline-block; color: white; background-color: #4476db;" type="button" (click)="goToBill()" class="btn ms-4">Pay Bill <span style="font-size: 14px;" class="material-icons">open_in_new</span></button>
 
     <div class="card info-card mt-4">
         <table class="table mt-3">

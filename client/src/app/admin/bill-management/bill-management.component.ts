@@ -17,6 +17,7 @@ export class BillManagementComponent implements OnInit {
   @ViewChild('billSelection') billSelection!: ElementRef;
   bsModalRef: BsModalRef<BillsModalComponent> = new BsModalRef<BillsModalComponent>();
   datePipe: DatePipe = new DatePipe('en-US');
+  selectedUrl = 'https://toledo.oh.gov/departments/public-utilities';
 
   bills: Bill[] = [];
   water: Bill[] = [];
@@ -80,28 +81,42 @@ export class BillManagementComponent implements OnInit {
     this.loadMembers();
   }
 
+  goToBill() {
+    window.open(
+      this.selectedUrl,
+      '_blank' // <- This is what makes it open in a new window.
+    );
+  }
+
   onSelected(): void {
     this.selectedBill = this.billSelection.nativeElement.value;
     if (this.selectedBill == "water") {
       this.selectedBills = this.water;
+      this.selectedUrl = 'https://toledo.oh.gov/departments/public-utilities';
     }
     else if (this.selectedBill == "gas") {
       this.selectedBills = this.gas;
+      this.selectedUrl = 'https://www.columbiagasohio.com/';
     }
     else if (this.selectedBill == "electricity") {
       this.selectedBills = this.electricity;
+      this.selectedUrl = 'https://www.firstenergycorp.com/toledo_edison.html';
     }
     else if (this.selectedBill == "insurance") {
       this.selectedBills = this.insurance;
+      this.selectedUrl = '';
     }
     else if (this.selectedBill == "internet") {
       this.selectedBills = this.internet;
+      this.selectedUrl = 'https://www.buckeyebroadband.com/';
     }
     else if (this.selectedBill == "mobile") {
       this.selectedBills = this.mobile;
+      this.selectedUrl = 'https://www.t-mobile.com/';
     }
     else if (this.selectedBill == "owed_water") {
       this.selectedBills = this.owed_water;
+      this.selectedUrl = 'https://toledo.oh.gov/departments/public-utilities';
     }
   }
 
