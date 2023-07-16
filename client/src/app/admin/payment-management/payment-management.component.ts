@@ -49,7 +49,7 @@ export class PaymentManagementComponent implements OnInit {
   sendEmail(approve: boolean, payment: Payment) {
     // SecureToken: "399a8e06-2d9f-4766-a406-181ce4e20946",
     var Email = require('./../../../assets/smtp.js');
-    var bodyHtml = "<div style='width: 40%; display: flex; justify-content: center; margin: auto; color: black;'> <div> <div style='display: flex; padding-top: 20px;'><img style='max-height: 30px; margin-right: auto;' src='https://drive.google.com/uc?export=view&id=1xzzz5GlCCovVVRZ4cTxxgRTR2Bea5P4S'><span style='font-size: 18px; font-weight: bold;'>Payment Notification</span></div> <hr> <div>You have 1 new notification:</div>";
+    var bodyHtml = "<div style='display: flex; justify-content: left; margin: auto; color: black;'> <div> <div style='display: flex; padding-top: 20px;'><img style='max-height: 30px; margin-right: auto;' src='https://drive.google.com/uc?export=view&id=1xzzz5GlCCovVVRZ4cTxxgRTR2Bea5P4S'><span style='font-size: 18px; font-weight: bold;'>Payment Notification</span></div> <hr> <div>You have 1 new notification:</div>";
 
     if (approve)
     {
