@@ -1,13 +1,14 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { BsModalRef } from 'ngx-bootstrap/modal';
 
 @Component({
-  selector: 'app-myhome-documnet',
-  templateUrl: './myhome-documnet.component.html',
-  styleUrls: ['./myhome-documnet.component.css']
+  selector: 'app-lease-modal',
+  templateUrl: './lease-modal.component.html',
+  styleUrls: ['./lease-modal.component.css']
 })
-export class MyhomeDocumnetComponent implements OnInit {
+export class LeaseModalComponent implements OnInit {
   @ViewChild('yearSelection') yearSelection!: ElementRef;
-  username: string;
+  username = '';
   listOfYear: number[] = [];
   documentUrl: string;
 
@@ -16,15 +17,9 @@ export class MyhomeDocumnetComponent implements OnInit {
 
   selectedYear = 2022;
 
-  constructor() { }
+  constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
-    const userString = localStorage.getItem("user");
-    if (!userString) return;
-    const user = JSON.parse(userString);
-
-    this.username = user.userName;
-
     this.documentUrl = "../../assets/documents/" + this.username + "/" + this.selectedYear + ".pdf";
 
     for (let i = 2024; i <= this.currYear; i++) {

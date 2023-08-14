@@ -55,6 +55,7 @@ import { FinancialReportComponent } from './financial-report/financial-report.co
 import { FinancialModalComponent } from './financial-modal/financial-modal.component';
 import { NewFinancialReportModalComponent } from './new-financial-report-modal/new-financial-report-modal.component';
 import { CustomerReviewComponent } from './customer-review/customer-review.component';
+import { LeaseModalComponent } from './modals/lease-modal/lease-modal.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -104,7 +105,8 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     FinancialReportComponent,
     FinancialModalComponent,
     NewFinancialReportModalComponent,
-    CustomerReviewComponent
+    CustomerReviewComponent,
+    LeaseModalComponent
   ],
   imports: [
     BrowserModule,

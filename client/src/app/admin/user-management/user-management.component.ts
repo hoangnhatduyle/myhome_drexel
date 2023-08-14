@@ -8,6 +8,7 @@ import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
 import { BillService } from 'src/app/_services/bill.service';
 import { PaymentService } from 'src/app/_services/payment.service';
+import { LeaseModalComponent } from 'src/app/modals/lease-modal/lease-modal.component';
 
 @Component({
   selector: 'app-user-management',
@@ -36,6 +37,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
   currYear = this.date.getFullYear();
 
   bsModalRef: BsModalRef<RolesModalComponent> = new BsModalRef<RolesModalComponent>();
+  bsModalRef2: BsModalRef<LeaseModalComponent> = new BsModalRef<LeaseModalComponent>();
   availableRoles = [
     'Admin',
     'Moderator',
@@ -158,6 +160,16 @@ export class UserManagementComponent implements OnDestroy, OnInit {
         }
       }
     })
+  }
+
+  openLeaseModal(user: User) {
+    const config = {
+      class: 'modal-dialog-centered modal-xl',
+      initialState: {
+        username: user.userName
+      }
+    }
+    this.bsModalRef2 = this.modalService.show(LeaseModalComponent, config);
   }
 
   private arrayEqual(arr1: any[], arr2: any[]) {
