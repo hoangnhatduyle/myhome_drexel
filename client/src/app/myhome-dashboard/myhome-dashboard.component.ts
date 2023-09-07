@@ -9,6 +9,8 @@ import { User } from '../_models/user';
 import { AccountService } from '../_services/account.service';
 import { BillService } from '../_services/bill.service';
 import { MembersService } from '../_services/members.service';
+import { AdminService } from '../_services/admin.service';
+import { FinancialReport } from '../_models/financialReport';
 
 @Component({
   selector: 'app-myhome-dashboard',
@@ -17,10 +19,14 @@ import { MembersService } from '../_services/members.service';
 })
 export class MyhomeDashboardComponent implements OnInit {
   member: Member | undefined;
+  financialReport: FinancialReport[] = [];
   user: User | null = null;
   bills: Bill[] = [];
 
-  constructor(private accountService: AccountService, private router: Router, private memberService: MembersService, private billService: BillService) {
+  date = new Date();
+  currYear = this.date.getFullYear();
+
+  constructor(private adminService: AdminService, private accountService: AccountService, private router: Router, private memberService: MembersService, private billService: BillService) {
     this.accountService.currentUser$.pipe(take(1)).subscribe({
       next: user => this.user = user
     })
@@ -29,6 +35,14 @@ export class MyhomeDashboardComponent implements OnInit {
   ngOnInit(): void {
     this.loadMember();
     this.getBills();
+
+    if (this.user.roles.includes("Admin")) {
+      this.adminService.getFinancialReport(this.currYear).subscribe({
+        next: report => {
+          this.financialReport = report;
+        }
+      })
+    }
   }
 
   loadMember(refetch = false) {
@@ -51,5 +65,13 @@ export class MyhomeDashboardComponent implements OnInit {
   reloadMemberInfo(event: boolean) {
     this.loadMember(true);
     this.getBills(true);
+
+    if (this.user.roles.includes("Admin")) {
+      this.adminService.getFinancialReport(this.currYear).subscribe({
+        next: report => {
+          this.financialReport = report;
+        }
+      })
+    }
   }
 }

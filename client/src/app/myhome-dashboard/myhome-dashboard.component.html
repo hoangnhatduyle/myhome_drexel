@@ -37,5 +37,10 @@
                 <app-payment-pie-chart [member]="member" [bills]="bills" (reloadMember)="reloadMemberInfo($event)"></app-payment-pie-chart>
             </div>
         </div>
+        <div class="row">
+            <div class="col-lg-8" style="padding-right: 6px">
+                <app-financial-chart [financialReport]="financialReport" (reloadMember)="reloadMemberInfo($event)"></app-financial-chart>
+            </div>
+        </div>
     </section>
 </main>
