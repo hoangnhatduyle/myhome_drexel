@@ -70,7 +70,7 @@ export class CustomerReviewComponent implements OnInit {
 
     Email.send({
       SecureToken: "45347233-f706-4605-a56a-e522e578b0c5",
-      To: "myhomecsupp@gmail.com",
+      To: "lehoangnhatduy2000@gmail.com",
       From: "myhomecsupp@gmail.com",
       Subject: "Feedback Notification",
       Body: bodyHtml

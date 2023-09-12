@@ -75,8 +75,7 @@ export class FinancialChartComponent implements OnInit {
         x: new Date(2023, i, 1), y: input[i].netIncome
       })
     }
-
-    console.log(returnArray)
+    
     return returnArray;
   }
 

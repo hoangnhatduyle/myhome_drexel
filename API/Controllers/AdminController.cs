@@ -36,7 +36,8 @@ namespace API.Controllers
                 Roles = u.UserRoles.Select(r => r.Role.Name).ToList(),
                 PaidThisMonth = u.PaidThisMonth,
                 PayBill = u.PayBill,
-                Active = u.Active
+                Active = u.Active,
+                Email = u.Email
             }).ToListAsync();
 
             return Ok(users);

@@ -1,0 +1,39 @@
+<!-- Reports -->
+<div class="card" *ngIf="users">
+    <div class="filter">
+        <a class="icon" style="cursor: pointer;">
+            <fa-icon [icon]="['fas', 'sync']" (click)="rerender()"></fa-icon>
+        </a>
+    </div>
+
+    <div class="card-body pb-2">
+        <h5 class="card-title" style="font-weight: 600;">Resident Status</h5>
+        <div class="card-body px-0 py-0 mb-0" *ngIf="isVisible" style="background-color: none !important;">
+            <div class="mb-3" *ngFor="let user of users">
+                <div class="px-0">
+                    <div class="card-header py-0 px-1 me-0 d-flex align-items-center"
+                        style="background-color: rgb(255, 242, 233); border-radius: 10px; border: rgb(251, 159, 159) solid 0.1px;">
+                        <div class="profile-wrapper">
+                            <div class="d-flex w-100">
+                                <img src="{{user.photoUrl || './assets/images/user.png'}}" alt="{{user.userName}}"
+                                    width="35" height="35" class="me-3 ms-2 rounded profile">
+
+                                <div class="d-flex w-100 justify-content-between align-items-center">
+                                    <span style="color: rgb(82, 14, 14); font-weight: 400;">{{user.userName}}</span>
+                                    <span *ngIf="user.active" [class.is-active]="user.active">
+                                        Active
+                                    </span>
+                                    <span *ngIf="!user.active" [class.is-inactive]="!user.active">
+                                        Inactive
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+    </div>
+</div><!-- End Reports -->

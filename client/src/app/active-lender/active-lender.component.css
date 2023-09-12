@@ -1,0 +1,22 @@
+.profile-wrapper {
+    width: 100%;
+    padding: 0.75rem 0.375rem;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+}
+
+@keyframes fa-blink {
+    0% {opacity: 1;}
+    100% {opacity: 0.4;}
+}
+
+.is-active {
+    animation: fa-blink 1.5s linear infinite;
+    color: rgb(1, 189, 32)
+}
+
+.is-inactive {
+    /* animation: fa-blink 1.5s linear infinite; */
+    color: rgb(189, 1, 1)
+}

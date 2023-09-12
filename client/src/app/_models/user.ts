@@ -9,4 +9,5 @@ export interface User {
     paidThisMonth: boolean;
     active: boolean;
     payBill: boolean;
+    email: string;
 }

@@ -9,6 +9,7 @@ import { AdminService } from 'src/app/_services/admin.service';
 import { BillService } from 'src/app/_services/bill.service';
 import { PaymentService } from 'src/app/_services/payment.service';
 import { LeaseModalComponent } from 'src/app/modals/lease-modal/lease-modal.component';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-user-management',
@@ -44,7 +45,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     'Member'
   ]
 
-  constructor(private adminService: AdminService, private modalService: BsModalService, private billService: BillService, private paymentService: PaymentService) { }
+  constructor(private adminService: AdminService, private toastr: ToastrService, private modalService: BsModalService, private billService: BillService, private paymentService: PaymentService) { }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
@@ -147,12 +148,10 @@ export class UserManagementComponent implements OnDestroy, OnInit {
               user.active = active;
               user.payBill = payBill;
 
-              if (payBill)
-              {
+              if (payBill) {
                 this.totalIncome += this.utility
               }
-              else
-              {
+              else {
                 this.totalIncome -= this.utility
               }
             }
@@ -170,6 +169,27 @@ export class UserManagementComponent implements OnDestroy, OnInit {
       }
     }
     this.bsModalRef2 = this.modalService.show(LeaseModalComponent, config);
+  }
+
+  sendReminderEmail(user: User) {
+    var Email = require('./../../../assets/smtp.js');
+    var bodyHtml = "<div style='display: flex; justify-content: left; margin: auto; color: black;'> <div> <div style='display: flex; padding-top: 20px;'><img style='max-height: 30px; margin-right: auto;' src='https://drive.google.com/uc?export=view&id=1xzzz5GlCCovVVRZ4cTxxgRTR2Bea5P4S'><span style='font-size: 18px; font-weight: bold;'>Payment Reminder</span></div> <hr> <div>This is only a friendly reminder. Our records show that you still have not paid for this month rent.</div>";
+
+    bodyHtml += `<div style='text-align: center; margin-top: 20px; margin-bottom: 20px; padding: 5px 5px;'><b style='font-size: 24px;'>$${user.rentalFee + this.utility}</b><br><span style='font-size: 20px; color: gray;'>Due on ${this.months[this.currMonth]} 15, ${this.currYear}</span></div><div>If payment has been sent, please disregard this email and make sure to record your payment. If you have any questions or need assistance with your payment, please let me know.</div><br>`;
+
+    bodyHtml += "<div>Best wishes,<div><br> <div><b>myHome Payment Reminder</b> <div> <div style='font-style: italic;'>Customer Service</div><br> <div>3201 Avondale Avenue | Toledo, OH | 43607</div> <div>Phone Number: 419-699-9535</div> <div>Email: lehoangnhatduy2000@gmail.com</div><br> </div> </div> </div> </div> </div> </div>";
+
+    Email.send({
+      SecureToken: "45347233-f706-4605-a56a-e522e578b0c5",
+      To: user.email,
+      From: "myhomecsupp@gmail.com",
+      Subject: "Payment Reminder",
+      Body: bodyHtml
+    }).then(
+      () => {
+        this.toastr.success("Payment reminder has been sent.");
+      }
+    );
   }
 
   private arrayEqual(arr1: any[], arr2: any[]) {
