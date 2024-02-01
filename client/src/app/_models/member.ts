@@ -1,4 +1,5 @@
 import { Message } from "./message";
+import { MonthlyPayment } from "./monthlyPayment";
 import { Payment } from "./payment";
 import { Photo } from "./photo";
 import { Room } from "./room";
@@ -22,13 +23,12 @@ export interface Member {
     payment: Payment[];
     messages: Message[];
     room: Room;
+    leaseStart: Date;
     leaseEnd: Date;
     address: string;
-    rentalFee: number;
-    lastRentalFee: number;
     phoneNumber: string;
+    notes: string;
     email: string;
-    paidThisMonth: boolean;
     active: boolean;
-    payBill: boolean;
+    monthlyPayment: MonthlyPayment;
 }

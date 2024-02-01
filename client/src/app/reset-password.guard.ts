@@ -15,7 +15,7 @@ export class ResetPasswordGuard implements CanActivate {
       return of(true);
     }
     else {
-      this.toastr.error("You shall not pass!");
+      this.toastr.error("You are not authorized!");
       this.router.navigateByUrl('/');
       return of(false);
     }

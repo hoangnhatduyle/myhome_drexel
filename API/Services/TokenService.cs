@@ -31,7 +31,7 @@ namespace API.Services
 
             var creds = new SigningCredentials(_key, SecurityAlgorithms.HmacSha512Signature);
 
-            DateTime sessionLength = remember ? DateTime.Now.AddDays(7) : DateTime.Now.AddHours(5);
+            DateTime sessionLength = remember ? DateTime.Now.AddDays(7) : DateTime.Now.AddHours(7);
 
             var tokenDescriptor = new SecurityTokenDescriptor
             {

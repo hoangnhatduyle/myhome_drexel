@@ -1,13 +1,15 @@
+import { MonthlyPayment } from "./monthlyPayment";
+
 export interface User {
     userName: string;
     token: string;
     photoUrl: string;
     knownAs: string;
-    gender: string;
-    rentalFee: any;
     roles: string[];
-    paidThisMonth: boolean;
     active: boolean;
-    payBill: boolean;
     email: string;
+    leaseStart: Date;
+    leaseEnd: Date;
+    notes: string;
+    monthlyPayment: MonthlyPayment;
 }

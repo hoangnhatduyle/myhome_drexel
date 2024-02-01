@@ -18,15 +18,14 @@ namespace API.DTOs
         public List<PhotoDto> Photos { get; set; }
         public List<PaymentDto> Payment { get; set; }
         public List<MessageDto> Messages { get; set; }
+        public DateOnly LeaseStart { get; set; }
+        public string Notes { get; set; }
         public DateOnly LeaseEnd { get; set; }
         public string Address { get; set; }
-        public int RentalFee { get; set; }
-        public int LastRentalFee { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; }
         public Room Room { get; set; }
-        public bool PaidThisMonth { get; set; }
+        public MonthlyPayment MonthlyPayment { get; set; }
         public bool Active { get; set; }
-        public bool PayBill { get; set; }
     }
 }

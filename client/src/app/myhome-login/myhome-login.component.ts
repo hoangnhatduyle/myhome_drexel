@@ -17,6 +17,13 @@ export class MyhomeLoginComponent implements OnInit {
 
   ngOnInit(): void {
     this.titleService.setTitle("myHOME - Login/Register");
+    // this.router.navigateByUrl("/main/dashboard");
+    if ("user" in localStorage) {
+      var token = JSON.parse(localStorage.getItem('user')).token;
+      if (token != null && token != undefined && !this.tokenExpired(token)) {
+        this.router.navigateByUrl("/main/dashboard");
+      }
+    }
   }
 
   registerToggle() {
@@ -31,5 +38,10 @@ export class MyhomeLoginComponent implements OnInit {
     this.accountService.login(this.model).subscribe({
       next: () => this.router.navigateByUrl("/main/dashboard")
     });
+  }
+
+  private tokenExpired(token: string) {
+    const expiry = (JSON.parse(atob(token.split('.')[1]))).exp;
+    return (Math.floor((new Date).getTime() / 1000)) >= expiry;
   }
 }

@@ -61,7 +61,7 @@ namespace API.Controllers
         [HttpPost("login")]
         public async Task<ActionResult<UserDto>> Login(LoginDto loginDto)
         {
-            var user = await _userManager.Users.Include(p => p.Photos).Include(r => r.Room).SingleOrDefaultAsync(user => user.UserName == loginDto.UserName);
+            var user = await _userManager.Users.Include(p => p.Photos).Include(u => u.MonthlyPayment).Include(r => r.Room).SingleOrDefaultAsync(user => user.UserName == loginDto.UserName);
 
             if (user == null) return Unauthorized("Invalid Username");
 
@@ -92,7 +92,7 @@ namespace API.Controllers
         [HttpPut("changepassword")]
         public async Task<ActionResult<UserDto>> ChangePassword(ChangePasswordDto changePasswordDto)
         {
-            var user = await _userManager.Users.Include(p => p.Photos).SingleOrDefaultAsync(user => user.UserName == changePasswordDto.Username);
+            var user = await _userManager.Users.Include(p => p.Photos).Include(u => u.MonthlyPayment).SingleOrDefaultAsync(user => user.UserName == changePasswordDto.Username);
             if (user == null) return Unauthorized("Username not Found");
 
             var result = await _userManager.CheckPasswordAsync(user, changePasswordDto.OldPassword);

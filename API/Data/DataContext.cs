@@ -15,6 +15,7 @@ namespace API.Data
         public DbSet<Payment> Payments { get; set; }
         public DbSet<Message> Messages { get; set; }
         public DbSet<Room> Rooms { get; set; }
+        public DbSet<MonthlyPayment> MonthlyPayment { get; set; }
         public DbSet<Bills> Bills { get; set; }
         public DbSet<FinancialReport> FinancialReports { get; set; }
         protected override void OnModelCreating(ModelBuilder builder)
