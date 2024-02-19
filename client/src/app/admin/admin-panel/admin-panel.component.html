@@ -12,29 +12,34 @@
     <section class="section dashboard">
         <div class="tab-panel">
             <tabset class="member-tabset">
-                <tab heading="User Management" *appHasRole="['Admin']">
-                    <div class="container ps-0 ms-3 mt-3">
-                        <app-user-management></app-user-management>
+                <tab heading="Monthly Payment Management" *appHasRole="['Admin', 'Moderator']">
+                    <div class="ps-0 mx-3 mt-3">
+                        <app-payer-management [users]="users"></app-payer-management>
                     </div>
                 </tab>
                 <tab heading="Bill Management" *appHasRole="['Admin', 'Moderator']">
-                    <div class="container ps-0 ms-3 mt-3">
-                        <app-bill-management></app-bill-management>
+                    <div class="ps-0 mx-3 mt-3">
+                        <app-bill-management [bills]="bills"></app-bill-management>
                     </div>
                 </tab>
                 <tab heading="Payment Management" *appHasRole="['Admin', 'Moderator']">
-                    <div class="container ps-0 ms-3 mt-3">
-                        <app-payment-management></app-payment-management>
+                    <div class="ps-0 mx-3 mt-3">
+                        <app-payment-management [allPastpayments]="pastPayments" [payments]="pendingPayments"></app-payment-management>
+                    </div>
+                </tab>
+                <tab heading="User Management" *appHasRole="['Admin']">
+                    <div class="ps-0 mx-3 mt-3">
+                        <app-user-management [users]="users"></app-user-management>
                     </div>
                 </tab>
                 <tab heading="Room Management" *appHasRole="['Admin', 'Moderator']">
-                    <div class="container ps-0 ms-3 mt-3">
+                    <div class="ps-0 mx-3 mt-3">
                         <app-room-management></app-room-management>
                     </div>
                 </tab>
                 <tab heading="Financial Report" *appHasRole="['Admin', 'Moderator']">
-                    <div class="container ps-0 ms-3 mt-3">
-                        <app-financial-report></app-financial-report>
+                    <div class="ps-0 mx-3 mt-3">
+                        <app-financial-report [payments]="pastPayments"></app-financial-report>
                     </div>
                 </tab>
             </tabset>

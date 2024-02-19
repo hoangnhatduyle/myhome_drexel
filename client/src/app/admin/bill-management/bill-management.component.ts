@@ -1,11 +1,9 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { BillsModalComponent } from 'src/app/modals/bills-modal/bills-modal.component';
 import { Bill } from 'src/app/_models/bill';
-import { Member } from 'src/app/_models/member';
 import { BillService } from 'src/app/_services/bill.service';
-import { MembersService } from 'src/app/_services/members.service';
 import { DatePipe } from '@angular/common';
 
 @Component({
@@ -15,11 +13,11 @@ import { DatePipe } from '@angular/common';
 })
 export class BillManagementComponent implements OnInit {
   @ViewChild('billSelection') billSelection!: ElementRef;
+  @Input() bills: Bill[] | undefined;
   bsModalRef: BsModalRef<BillsModalComponent> = new BsModalRef<BillsModalComponent>();
   datePipe: DatePipe = new DatePipe('en-US');
   selectedUrl = 'https://toledo.oh.gov/departments/public-utilities';
 
-  bills: Bill[] = [];
   water: Bill[] = [];
   gas: Bill[] = [];
   electricity: Bill[] = [];
@@ -29,11 +27,7 @@ export class BillManagementComponent implements OnInit {
   owed_water: Bill[] = [];
 
   selectedBills: Bill[] = [];
-  members: Member[] = [];
-  usernames: string[] = [];
-
   selectedBill = '';
-  checked: boolean | undefined;
 
   config = {
     height: 25,
@@ -59,26 +53,23 @@ export class BillManagementComponent implements OnInit {
     },
   };
 
-  constructor(private memberService: MembersService, private billService: BillService, private modalService: BsModalService, private toastr: ToastrService) { }
+  constructor(private billService: BillService, private modalService: BsModalService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.billService.getBills().subscribe({
-      next: bills => {
-        if (bills) {
-          this.bills = bills;
-          this.water = this.bills.filter(x => x.type == 'water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-          this.gas = this.bills.filter(x => x.type == 'gas').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-          this.electricity = this.bills.filter(x => x.type == 'electricity').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-          this.insurance = this.bills.filter(x => x.type == 'insurance').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-          this.internet = this.bills.filter(x => x.type == 'internet').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-          this.mobile = this.bills.filter(x => x.type == 'mobile').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-          this.owed_water = this.bills.filter(x => x.type == 'owed_water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+  }
 
-          this.selectedBills = this.water;
-        }
-      }
-    })
-    this.loadMembers();
+  ngOnChanges(): void {
+    if (this.bills && this.bills.length > 0) {
+      this.water = this.bills.filter(x => x.type == 'water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.gas = this.bills.filter(x => x.type == 'gas').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.electricity = this.bills.filter(x => x.type == 'electricity').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.insurance = this.bills.filter(x => x.type == 'insurance').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.internet = this.bills.filter(x => x.type == 'internet').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.mobile = this.bills.filter(x => x.type == 'mobile').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.owed_water = this.bills.filter(x => x.type == 'owed_water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+
+      this.selectedBills = this.water;
+    }
   }
 
   goToBill() {
@@ -86,6 +77,14 @@ export class BillManagementComponent implements OnInit {
       this.selectedUrl,
       '_blank' // <- This is what makes it open in a new window.
     );
+  }
+
+  resetPaid() {
+    this.billService.updatePaidThisMonth().subscribe({
+      next: () => {
+        this.toastr.success("Paid This Month has been reset successfully");
+      }
+    })
   }
 
   onSelected(): void {
@@ -108,7 +107,7 @@ export class BillManagementComponent implements OnInit {
     }
     else if (this.selectedBill == "internet") {
       this.selectedBills = this.internet;
-      this.selectedUrl = 'https://www.buckeyebroadband.com/';
+      this.selectedUrl = 'https://www.t-mobile.com/';
     }
     else if (this.selectedBill == "mobile") {
       this.selectedBills = this.mobile;
@@ -118,17 +117,6 @@ export class BillManagementComponent implements OnInit {
       this.selectedBills = this.owed_water;
       this.selectedUrl = 'https://toledo.oh.gov/departments/public-utilities';
     }
-  }
-
-  loadMembers() {
-    this.memberService.getMembersWithoutUserParam().subscribe({
-      next: members => {
-        if (members) {
-          this.members = members.filter(x => x.active);
-          this.usernames = this.members.map(x => x.userName)
-        }
-      }
-    })
   }
 
   openBillModal(bill: Bill) {
@@ -156,7 +144,7 @@ export class BillManagementComponent implements OnInit {
         const paidDate = this.datePipe.transform(origPaidDate, 'yyyy-MM-dd');
 
         if (bill.amount != amount || this.datePipe.transform(bill.dueDate, 'yyyy-MM-dd') != dueDate || this.datePipe.transform(bill.paidDate, 'yyyy-MM-dd') != paidDate) {
-          this.billService.updateBillAmount(id, amount, dueDate!, paidDate!, this.usernames).subscribe({
+          this.billService.updateBillAmount(id, amount, dueDate!, paidDate!, bill.type).subscribe({
             next: () => {
               bill.amount = amount;
               bill.dueDate = origDueDate!;

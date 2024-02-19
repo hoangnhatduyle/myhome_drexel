@@ -42,15 +42,16 @@
             </div>
 
             <div class="card-body">
-                <h5 class="card-title" style="font-weight: 600;">Residents <span>| As of now</span></h5>
+                <h5 class="card-title" style="font-weight: 600;">Lease Info <span>| As of now</span></h5>
 
                 <div class="d-flex align-items-center" *ngIf="isVisible">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
                         style="background-color: rgb(185, 252, 252);">
-                        <fa-icon [icon]="['fas', 'users']" style="color: #007bff"></fa-icon>
+                        <fa-icon [icon]="['fas', 'file-contract']" style="color: #007bff"></fa-icon>
                     </div>
                     <div class="ps-3">
-                        <h6>{{this.members.length}} housemates</h6>
+                        <h6 style="font-size: 18px;" class="mb-1">Lease Sign On: {{this.member.leaseStart | date:'mediumDate'}}</h6>
+                        <h6 style="font-size: 18px;">Lease Duration: 1 year</h6>
                     </div>
                 </div>
 
@@ -73,22 +74,24 @@
                 <h5 class="card-title" style="font-weight: 600;">Rent Fee <span>| {{month[currMonth]}} -
                         {{date.getFullYear()}}</span></h5>
 
-                <div class="d-flex align-items-center" *ngIf="isVisible && member.paidThisMonth == false">
+                <div class="d-flex align-items-center" *ngIf="isVisible && member.monthlyPayment.paidThisMonth == false">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
                         style="background-color: rgb(209, 252, 185);">
                         <fa-icon [icon]="['fas', 'money-bill-alt']" style="color: #28a745"></fa-icon>
                     </div>
                     <div class="ps-3">
                         <h6>${{total}}</h6>
-                        <span class="small pt-1 fw-bold" [class.text-success]="!higher"
-                            [class.text-danger]="higher">{{percentChange}}%</span>
-                        <span class="text-muted small pt-2 ps-1" *ngIf="higher">increase</span>
-                        <span class="text-muted small pt-2 ps-1" *ngIf="!higher">decrease</span>
+                        <ng-container *ngIf="member.monthlyPayment.lastRentalFee != 0">
+                            <span class="small pt-1 fw-bold" [class.text-success]="!higher"
+                                [class.text-danger]="higher">{{percentChange}}%</span>
+                            <span class="text-muted small pt-2 ps-1" *ngIf="higher">increase</span>
+                            <span class="text-muted small pt-2 ps-1" *ngIf="!higher">decrease</span>
+                        </ng-container>
 
                     </div>
                 </div>
 
-                <div class="d-flex align-items-center" *ngIf="member.paidThisMonth == true">
+                <div class="d-flex align-items-center" *ngIf="member.monthlyPayment.paidThisMonth == true">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
                         style="background-color: rgb(209, 252, 185);">
                         <fa-icon [icon]="['fas', 'money-bill-alt']" style="color: #28a745"></fa-icon>

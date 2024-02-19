@@ -2,8 +2,8 @@ namespace API.DTOs
 {
     public class BillUpdateDto
     {
-        public int Amount { get; set; }
-        public string[] Usernames { get; set; }  
+        public double Amount { get; set; }
+        public string Type { get; set; }
         public DateOnly DueDate { get; set; }    
         public DateOnly PaidDate { get; set; }    
     }

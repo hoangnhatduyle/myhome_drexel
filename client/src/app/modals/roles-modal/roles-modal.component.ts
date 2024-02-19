@@ -11,11 +11,18 @@ export class RolesModalComponent implements OnInit {
   availableRoles: any[] = [];
   selectedRoles: any[] = [];
   active: any;
-  payBill: any;
+  leaseStart: any;
+  leaseEnd: any;
+  notes: string;
+
+  modifiedLeaseStart: Date;
+  modifiedLeaseEnd: Date;
 
   constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
+    this.modifiedLeaseStart = new Date(this.leaseStart.split('-'))
+    this.modifiedLeaseEnd = new Date(this.leaseEnd.split('-'))
   }
 
   updateChecked(checkedValue: string) {
@@ -32,13 +39,13 @@ export class RolesModalComponent implements OnInit {
     }
   }
 
-  changePayBill(e: any) {
-    var target = e.target;
-    if (target.checked) {
-      this.payBill = true;
-    } else {
-      this.payBill = false;
-    }
-  }
+  // changePayBill(e: any) {
+  //   var target = e.target;
+  //   if (target.checked) {
+  //     this.payBill = true;
+  //   } else {
+  //     this.payBill = false;
+  //   }
+  // }
 
 }

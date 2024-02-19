@@ -1,0 +1,47 @@
+<div class="modal-header">
+    <h4 class="modal-title pull-left">Edit Amount for this bill</h4>
+    <button type="button" class="btn-close close pull-right" aria-label="Close" (click)="bsModalRef.hide()">
+        <span aria-hidden="true" class="visually-hidden">&times;</span>
+    </button>
+</div>
+<div class="modal-body">
+    <form #billsForm="ngForm" id="billsForm">
+        <div class="form-group row">
+            <label for="billID" class="col-sm-2 col-form-label me-0 pe-0">Username:</label>
+            <div class="col-sm-10 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" value={{username}}>
+            </div>
+        </div>
+
+        <div class="form-group row">
+            <label for="type" class="col-sm-2 col-form-label me-0 pe-0">Balance:</label>
+            <div class="col-sm-10 me-0 pe-0">
+                <input type="text" readonly class="form-control-plaintext" value={{balance}}>
+            </div>
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label" for="payBill">
+                Pay Bill
+            </label>
+            <input class="form-check-input" type="checkbox" value="" id="payBill" [checked]="payBill" (change)="changePayBill($event)">
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label" for="paidThisMonth">
+                Paid <span style="color: red; font-weight: bold;">(This should only be updated from Payment Management)</span>
+            </label>
+            <input class="form-check-input" type="checkbox" value="" id="paidThisMonth" [checked]="payStatus" (change)="changePayStatus($event)">
+        </div>
+
+        <div class="form-check">
+            <label class="form-check-label" for="payRent">
+                Pay Rent
+            </label>
+            <input class="form-check-input" type="checkbox" value="" id="payRent" [checked]="payRent" (change)="changePayRent($event)">
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-success" (click)="bsModalRef.hide()">Submit</button>
+</div>

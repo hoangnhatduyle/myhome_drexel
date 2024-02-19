@@ -58,7 +58,7 @@ namespace API.Data
                 Introduction = "Intro goes here",
                 City = "Toledo",
                 Country = "USA",
-                Address = "3201 Avondale Avenue, Toledo, Ohio 43607",
+                Address = "3843 Drexel Drive, Toledo, Ohio 43612",
                 EmailConfirmed = true,
                 Email = "lehoangnhatduy2000@gmail.com",
                 PhoneNumber = "+1 (419) 699-9535"

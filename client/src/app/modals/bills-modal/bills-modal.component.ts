@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { Bill } from '../../_models/bill';
-import { BillService } from '../../_services/bill.service';
 
 @Component({
   selector: 'app-bills-modal',
@@ -16,7 +14,7 @@ export class BillsModalComponent implements OnInit {
   dueDate: Date = new Date();
   paidDate:  Date = new Date();
 
-  constructor(public bsModalRef: BsModalRef, private billService: BillService) { }
+  constructor(public bsModalRef: BsModalRef) { }
 
   ngOnInit(): void {
     this.dueDate = new Date(this.dueDate);

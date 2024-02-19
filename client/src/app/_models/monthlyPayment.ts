@@ -4,6 +4,7 @@ export interface MonthlyPayment {
     lastRentalFee: number;
     payBill: boolean;
     paidThisMonth: boolean;
+    payRent: boolean;
     waterBill: number;
     electricityBill: number;
     gasBill: number;

@@ -33,12 +33,6 @@ namespace API.Data
             // var query = _context.Users.ProjectTo<MemberDto>(_mapper.ConfigurationProvider).AsNoTracking();
             var query = _context.Users.AsQueryable();
             query = query.Where(u => u.UserName != userParams.CurrentUsername);
-            // query = query.Where(u => u.Gender == userParams.Gender);
-
-            var minDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MaxAge - 1));
-            var maxDob = DateOnly.FromDateTime(DateTime.Today.AddYears(-userParams.MinAge));
-
-            query = query.Where(u => u.DateOfBirth >= minDob && u.DateOfBirth <= maxDob);
 
             query = userParams.OrderBy switch
             {
@@ -92,13 +86,44 @@ namespace API.Data
             _context.Entry(user).State = EntityState.Modified;
         }
 
-        public async Task UpdatePaidThisMonth(string[] usernames)
+        public async Task UpdatePaidThisMonth()
         {
-            AppUser user;
-            foreach (string username in usernames)
+            List<AppUser> users = await _context.Users.Include(x => x.MonthlyPayment).ToListAsync();
+            foreach (AppUser user in users)
             {
-                user = await _context.Users.Where(user => user.UserName == username).FirstOrDefaultAsync();
-                user.PaidThisMonth = false;
+                user.MonthlyPayment.PaidThisMonth = false;
+                user.MonthlyPayment.LastRentalFee = user.MonthlyPayment.TotalMonthlyPayment;
+
+                //reset total monthly payment to only room fee
+                user.MonthlyPayment.TotalMonthlyPayment = user.MonthlyPayment.RentalFee;
+                user.MonthlyPayment.WaterBill = 0;
+                user.MonthlyPayment.ElectricityBill = 0;
+                user.MonthlyPayment.GasBill = 0;
+            }
+            return;
+        }
+
+        public async Task UpdateBillsThisMonth(string type, double amount)
+        {
+            List<AppUser> users = await _context.Users.Include(x => x.MonthlyPayment).Where(x => x.MonthlyPayment.PayBill).ToListAsync();
+            int numberOfUsersPaidBill = users.Count;
+
+            foreach (AppUser user in users)
+            {
+                if (type == "water")
+                {
+                    user.MonthlyPayment.WaterBill = amount / numberOfUsersPaidBill;
+                }
+                else if (type == "gas")
+                {
+                    user.MonthlyPayment.GasBill = amount / numberOfUsersPaidBill;
+                }
+                else if (type == "electricity")
+                {
+                    user.MonthlyPayment.ElectricityBill = amount / numberOfUsersPaidBill;
+                }
+                
+                user.MonthlyPayment.TotalMonthlyPayment += amount / numberOfUsersPaidBill;
             }
             return;
         }

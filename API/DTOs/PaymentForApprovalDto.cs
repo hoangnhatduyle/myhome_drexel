@@ -9,6 +9,6 @@ namespace API.DTOs
         public string Method { get; set; }
         public int PayMonth { get; set; }
         public DateOnly PayDate { get; set; }
-        public int Amount { get; set; }
+        public double Amount { get; set; }
     }
 }

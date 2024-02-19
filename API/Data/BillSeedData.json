@@ -2,7 +2,7 @@
     {
         "Type": "water",
         "Month": 1,
-        "Amount": 120
+        "Amount": 0
     },
     {
         "Type": "water",
@@ -62,7 +62,7 @@
     {
         "Type": "gas",
         "Month": 1,
-        "Amount": 240
+        "Amount": 0
     },
     {
         "Type": "gas",
@@ -122,7 +122,7 @@
     {
         "Type": "electricity",
         "Month": 1,
-        "Amount": 180
+        "Amount": 0
     },
     {
         "Type": "electricity",
@@ -176,6 +176,126 @@
     },
     {
         "Type": "electricity",
+        "Month": 12,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 1,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 2,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 3,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 4,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 5,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 6,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 7,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 8,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 9,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 10,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 11,
+        "Amount": 0
+    },
+    {
+        "Type": "internet",
+        "Month": 12,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 1,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 2,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 3,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 4,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 5,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 6,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 7,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 8,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 9,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 10,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
+        "Month": 11,
+        "Amount": 0
+    },
+    {
+        "Type": "mortgage",
         "Month": 12,
         "Amount": 0
     }

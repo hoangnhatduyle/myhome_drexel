@@ -4,15 +4,15 @@ namespace API.DTOs
     {
         public int Month { get; set; }
         public int Year { get; set; }
-        public int TotalIncome { get; set; }
-        public int TotalOutcome { get; set; }
-        public int NetIncome { get; set; }
-        public int WaterBill { get; set; }
-        public int ElectricityBill { get; set; }
-        public int GasBill { get; set; }
-        public int MobileBill { get; set; }
-        public int InternetBill { get; set; }
-        public int InsuranceBill { get; set; }
-        public int OwedWaterBill { get; set; }
+        public double TotalIncome { get; set; }
+        public double TotalOutcome { get; set; }
+        public double NetIncome { get; set; }
+        public double WaterBill { get; set; }
+        public double ElectricityBill { get; set; }
+        public double GasBill { get; set; }
+        public double MobileBill { get; set; }
+        public double InternetBill { get; set; }
+        public double InsuranceBill { get; set; }
+        public double OwedWaterBill { get; set; }
     }
 }

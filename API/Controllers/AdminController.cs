@@ -31,13 +31,14 @@ namespace API.Controllers
             var users = await _userManager.Users.OrderBy(u => u.UserName).Select(u => new
             {
                 u.Id,
-                UserName = u.UserName,
-                RentalFee = u.RentalFee,
+                u.UserName,
+                u.MonthlyPayment,
                 Roles = u.UserRoles.Select(r => r.Role.Name).ToList(),
-                PaidThisMonth = u.PaidThisMonth,
-                PayBill = u.PayBill,
-                Active = u.Active,
-                Email = u.Email
+                u.Active,
+                u.LeaseStart,
+                u.LeaseEnd,
+                u.Notes,
+                u.Email
             }).ToListAsync();
 
             return Ok(users);
@@ -75,7 +76,7 @@ namespace API.Controllers
 
         [Authorize(Policy = "RequireAdminRole")]
         [HttpPost("edit-roles/{username}")]
-        public async Task<ActionResult> EditRoles(string username, [FromQuery] string roles, [FromQuery] bool active, [FromQuery] bool payBill)
+        public async Task<ActionResult> EditDetails(string username, [FromQuery] string roles, [FromQuery] bool active, [FromQuery] DateOnly leaseStart, [FromQuery] DateOnly leaseEnd, [FromQuery] string notes)
         {
             if (string.IsNullOrEmpty(roles)) return BadRequest("You must select at least one role");
 
@@ -90,15 +91,45 @@ namespace API.Controllers
             var result = await _userManager.AddToRolesAsync(user, selectedRoles.Except(userRoles));
 
             user.Active = active;
-            user.PayBill = payBill;
+            // user.MonthlyPayment.PayBill = payBill;
+            user.LeaseStart = leaseStart;
+            user.LeaseEnd = leaseEnd;
+            user.Notes = notes;
 
-            if (!result.Succeeded) return BadRequest("Failed to add to roles");
+            if (!result.Succeeded) return BadRequest("Failed to update user details.");
 
             result = await _userManager.RemoveFromRolesAsync(user, userRoles.Except(selectedRoles));
 
             if (!result.Succeeded) return BadRequest("Failed to remove from roles");
 
             return Ok(await _userManager.GetRolesAsync(user));
+        }
+
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPost("edit-monthly-payment/{username}")]
+        public async Task<ActionResult> EditMonthlyPaymentDetails(string username, [FromQuery] bool payBill, [FromQuery] bool payStatus, [FromQuery] bool payRent)
+        {
+            var user = await _userManager.Users.Include(u => u.MonthlyPayment).SingleOrDefaultAsync(user => user.UserName == username);
+
+            if (user == null) return NotFound();
+
+            user.MonthlyPayment.PaidThisMonth = payStatus;
+            user.MonthlyPayment.PayBill = payBill;
+            user.MonthlyPayment.PayRent = payRent;
+
+            if (payBill) {
+                user.MonthlyPayment.TotalMonthlyPayment += user.MonthlyPayment.WaterBill + user.MonthlyPayment.ElectricityBill + user.MonthlyPayment.GasBill;
+            } else {
+                user.MonthlyPayment.TotalMonthlyPayment -= user.MonthlyPayment.WaterBill + user.MonthlyPayment.ElectricityBill + user.MonthlyPayment.GasBill;
+            }
+
+            if (payStatus) {
+                user.MonthlyPayment.PaidThisMonth = true;
+            }
+
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to update user monthly payment. Please try again.");
         }
 
         [Authorize(Policy = "ModeratePhotoRole")]
@@ -164,7 +195,9 @@ namespace API.Controllers
 
             _mapper.Map(billUpdateDto, bill);
 
-            if (billUpdateDto.Usernames != null && billUpdateDto.Usernames.Length > 0) await _unitOfWork.UserRepository.UpdatePaidThisMonth(billUpdateDto.Usernames);
+            if (billUpdateDto.Type == "water" || billUpdateDto.Type == "gas" || billUpdateDto.Type == "electricity") {
+                await _unitOfWork.UserRepository.UpdateBillsThisMonth(billUpdateDto.Type, billUpdateDto.Amount);
+            }
 
             if (await _unitOfWork.Complete()) return Ok();
 
@@ -194,21 +227,33 @@ namespace API.Controllers
 
             return BadRequest("Failed to update bill payment status");
         }
+        
+        [Authorize(Policy = "RequireAdminRole")]
+        [HttpPut("reset-paid-this-month")]
+        public async Task<ActionResult> EditPaidThisMonth()
+        {
+            await _unitOfWork.UserRepository.UpdatePaidThisMonth();
+
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to update bill");
+        }
 
         [Authorize(Policy = "ModeratePhotoRole")]
         [HttpPut("approve-payment")]
         public async Task<ActionResult> ApprovePayment(PaymentForApprovalDto paymentForApprovalDto)
         {
             var payment = await _unitOfWork.PaymentRepository.GetPaymentById(paymentForApprovalDto.Id);
-            var user = await _userManager.Users.SingleOrDefaultAsync(user => user.UserName == paymentForApprovalDto.Username);
+            var user = await _userManager.Users.Include(u => u.MonthlyPayment).SingleOrDefaultAsync(user => user.UserName == paymentForApprovalDto.Username);
 
-            user.LastRentalFee = paymentForApprovalDto.Amount;
-            user.PaidThisMonth = true;
+            user.MonthlyPayment.LastRentalFee = paymentForApprovalDto.Amount;
+            user.MonthlyPayment.PaidThisMonth = true;
 
             payment.PaymentStatus = "Approve";
 
-            await _unitOfWork.Complete();
-            return Ok();
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to approve payment. Please try again.");
         }
 
         [Authorize(Policy = "ModeratePhotoRole")]
@@ -219,8 +264,9 @@ namespace API.Controllers
 
             payment.PaymentStatus = "Reject";
 
-            await _unitOfWork.Complete();
-            return Ok();
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to reject payment. Please try again.");
         }
 
         [Authorize(Policy = "ModeratePhotoRole")]
@@ -238,8 +284,9 @@ namespace API.Controllers
                 user.RoomId = roomId;
             }
 
-            await _unitOfWork.Complete();
-            return Ok();
+            if (await _unitOfWork.Complete()) return Ok();
+
+            return BadRequest("Failed to change room. Please try again.");
         }
     }
 }

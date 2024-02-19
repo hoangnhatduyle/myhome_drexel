@@ -1,15 +1,11 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { BsModalRef, BsModalService, ModalOptions } from 'ngx-bootstrap/modal';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Subject } from 'rxjs';
 import { RolesModalComponent } from 'src/app/modals/roles-modal/roles-modal.component';
-import { Bill } from 'src/app/_models/bill';
-import { Payment } from 'src/app/_models/payment';
 import { User } from 'src/app/_models/user';
 import { AdminService } from 'src/app/_services/admin.service';
-import { BillService } from 'src/app/_services/bill.service';
-import { PaymentService } from 'src/app/_services/payment.service';
 import { LeaseModalComponent } from 'src/app/modals/lease-modal/lease-modal.component';
-import { ToastrService } from 'ngx-toastr';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-user-management',
@@ -17,25 +13,10 @@ import { ToastrService } from 'ngx-toastr';
   styleUrls: ['./user-management.component.css']
 })
 export class UserManagementComponent implements OnDestroy, OnInit {
+  @Input() users: User[] | undefined;
   dtOptions: DataTables.Settings = {};
+  datePipe: DatePipe = new DatePipe('en-US');
   dtTrigger: Subject<any> = new Subject<any>();
-
-  users: User[] = [];
-  bills: Bill[] = [];
-  water: Bill[] = [];
-  gas: Bill[] = [];
-  electricity: Bill[] = [];
-  payments: Payment[] = [];
-  utility: number = 0;
-  totalIncome: number = 0;
-  totalReceived: number = 0;
-  totalPaid: number = 0;
-  totalOutcome: number = 0;
-
-  date = new Date();
-  months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  currMonth = this.date.getMonth();
-  currYear = this.date.getFullYear();
 
   bsModalRef: BsModalRef<RolesModalComponent> = new BsModalRef<RolesModalComponent>();
   bsModalRef2: BsModalRef<LeaseModalComponent> = new BsModalRef<LeaseModalComponent>();
@@ -45,13 +26,17 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     'Member'
   ]
 
-  constructor(private adminService: AdminService, private toastr: ToastrService, private modalService: BsModalService, private billService: BillService, private paymentService: PaymentService) { }
+  constructor(private adminService: AdminService, private modalService: BsModalService) { }
 
   ngOnDestroy(): void {
     this.dtTrigger.unsubscribe();
   }
 
   ngOnInit(): void {
+    
+  }
+
+  ngOnChanges(): void {
     this.dtOptions = {
       pagingType: 'full_numbers',
       language: {
@@ -63,65 +48,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
         [5, 10, 25, 'All'],
       ]
     };
-    this.getUsersWithRoles();
-    this.paymentService.getPastPayments().subscribe({
-      next: payments => {
-        this.payments = payments
-        this.payments = this.payments.filter(x => x.payMonth == this.currMonth + 1 && this.getYearOfDate(x.payDate) == this.currYear && x.paymentStatus == 'Approve');
-        this.payments.forEach(x => {
-          this.totalReceived += x.amount;
-        })
-      }
-    })
-  }
-
-  getUsersWithRoles() {
-    this.adminService.getUsersWithRoles().subscribe({
-      next: users => {
-        this.users = users;
-        let thang = users.find(x => x.userName == 'thang');
-        thang!.rentalFee += 60 + 42;
-        users[users.indexOf(users.find(x => x.userName == 'thang')!)] = thang!;
-
-        this.getBill();
-      }
-    })
-  }
-
-  getBill() {
-    this.billService.getBills().subscribe({
-      next: bills => {
-        if (bills) {
-          this.bills = bills.filter(x => x.amount != 0 && x.month == this.currMonth + 1);
-
-          let totalMem = this.users.filter(x => x.userName != 'user' && x.active == true).length - 1; //exclude admin
-
-          this.users = this.users.filter(x => x.userName != 'user');
-
-          if (this.bills.length > 0) {
-
-            this.water = this.bills.filter(x => x.type == 'water');
-            this.gas = this.bills.filter(x => x.type == 'gas');
-            this.electricity = this.bills.filter(x => x.type == 'electricity');
-            this.utility = parseInt((this.water[0].amount / totalMem + this.gas[0].amount / totalMem + this.electricity[0].amount / totalMem).toFixed(2));
-          }
-
-          this.bills.forEach(bill => {
-            this.totalOutcome += bill.amount;
-            if (bill.paid) this.totalPaid += bill.amount;
-          });
-
-          let totalMemPayingBill = this.users.filter(x => x.userName != 'user' && x.active == true && x.payBill == true).length - 1; //exclude admin
-
-          this.totalIncome += this.utility * (totalMemPayingBill - 1) //exclude Bao
-          this.users.filter(x => x.active == true).forEach(user => {
-            this.totalIncome += user.rentalFee;
-          });
-          this.totalIncome = parseInt((Math.round(this.totalIncome * 100) / 100).toFixed(2))
-        }
-        this.dtTrigger.next(void 0);
-      }
-    })
+    this.dtTrigger.next(void 0);
   }
 
   openRolesModal(user: User) {
@@ -132,7 +59,9 @@ export class UserManagementComponent implements OnDestroy, OnInit {
         availableRoles: this.availableRoles,
         selectedRoles: [...user.roles],
         active: user.active,
-        payBill: user.payBill
+        leaseStart: this.datePipe.transform(user.leaseStart, 'yyyy-MM-dd'),
+        leaseEnd: this.datePipe.transform(user.leaseEnd, 'yyyy-MM-dd'),
+        notes: user.notes
       }
     }
     this.bsModalRef = this.modalService.show(RolesModalComponent, config);
@@ -140,20 +69,21 @@ export class UserManagementComponent implements OnDestroy, OnInit {
       next: () => {
         const selectedRoles = this.bsModalRef.content?.selectedRoles;
         const active = this.bsModalRef.content?.active;
-        const payBill = this.bsModalRef.content?.payBill;
-        if (!this.arrayEqual(selectedRoles!, user.roles) || user.active != active || user.payBill != payBill) {
-          this.adminService.updateUserRoles(user.userName, selectedRoles!, active, payBill).subscribe({
+        const leaseStart = this.bsModalRef.content?.modifiedLeaseStart;
+        const leaseEnd = this.bsModalRef.content?.modifiedLeaseEnd;
+        const notes = this.bsModalRef.content?.notes;
+
+        let leaseStartString = this.datePipe.transform(leaseStart, 'yyyy-MM-dd');
+        let leaseEndString = this.datePipe.transform(leaseEnd, 'yyyy-MM-dd');
+
+        if (!this.arrayEqual(selectedRoles!, user.roles) || user.active != active || this.datePipe.transform(user.leaseStart, 'yyyy-MM-dd') != leaseStartString || this.datePipe.transform(user.leaseEnd, 'yyyy-MM-dd') != leaseEndString || user.notes != notes) {
+          this.adminService.updateUserDetails(user.userName, selectedRoles!, active, leaseStartString, leaseEndString, notes).subscribe({
             next: roles => {
               user.roles = roles;
               user.active = active;
-              user.payBill = payBill;
-
-              if (payBill) {
-                this.totalIncome += this.utility
-              }
-              else {
-                this.totalIncome -= this.utility
-              }
+              user.leaseStart = leaseStart;
+              user.leaseEnd = leaseEnd;
+              user.notes = notes;
             }
           })
         }
@@ -171,32 +101,7 @@ export class UserManagementComponent implements OnDestroy, OnInit {
     this.bsModalRef2 = this.modalService.show(LeaseModalComponent, config);
   }
 
-  sendReminderEmail(user: User) {
-    var Email = require('./../../../assets/smtp.js');
-    var bodyHtml = "<div style='display: flex; justify-content: left; margin: auto; color: black;'> <div> <div style='display: flex; padding-top: 20px;'><img style='max-height: 30px; margin-right: auto;' src='https://drive.google.com/uc?export=view&id=1xzzz5GlCCovVVRZ4cTxxgRTR2Bea5P4S'><span style='font-size: 18px; font-weight: bold;'>Payment Reminder</span></div> <hr> <div>This is only a friendly reminder. Our records show that you still have not paid for this month rent.</div>";
-
-    bodyHtml += `<div style='text-align: center; margin-top: 20px; margin-bottom: 20px; padding: 5px 5px;'><b style='font-size: 24px;'>$${user.rentalFee + this.utility}</b><br><span style='font-size: 20px; color: gray;'>Due on ${this.months[this.currMonth]} 15, ${this.currYear}</span></div><div>If payment has been sent, please disregard this email and make sure to record your payment. If you have any questions or need assistance with your payment, please let me know.</div><br>`;
-
-    bodyHtml += "<div>Best wishes,<div><br> <div><b>myHome Payment Reminder</b> <div> <div style='font-style: italic;'>Customer Service</div><br> <div>3201 Avondale Avenue | Toledo, OH | 43607</div> <div>Phone Number: 419-699-9535</div> <div>Email: lehoangnhatduy2000@gmail.com</div><br> </div> </div> </div> </div> </div> </div>";
-
-    Email.send({
-      SecureToken: "45347233-f706-4605-a56a-e522e578b0c5",
-      To: user.email,
-      From: "myhomecsupp@gmail.com",
-      Subject: "Payment Reminder",
-      Body: bodyHtml
-    }).then(
-      () => {
-        this.toastr.success("Payment reminder has been sent.");
-      }
-    );
-  }
-
   private arrayEqual(arr1: any[], arr2: any[]) {
     return JSON.stringify(arr1.sort()) === JSON.stringify(arr2.sort());
-  }
-
-  private getYearOfDate(inputDate: Date) {
-    return new Date(inputDate).getFullYear();
   }
 }

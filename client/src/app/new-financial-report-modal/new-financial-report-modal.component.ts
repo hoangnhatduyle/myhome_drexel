@@ -1,7 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BsModalRef } from 'ngx-bootstrap/modal';
-import { ToastrService } from 'ngx-toastr';
 import { BillService } from '../_services/bill.service';
 import { Bill } from '../_models/bill';
 import { MembersService } from '../_services/members.service';
@@ -29,12 +28,11 @@ export class NewFinancialReportModalComponent implements OnInit {
 
   totalIncome: number = 0;
   totalOutcome: number = 0;
-  utility: number = 0;
 
   date = new Date();
   currMonth = this.date.getMonth();
 
-  constructor(public bsModalRef2: BsModalRef, private fb: FormBuilder, private toastr: ToastrService, private billService: BillService, private memberService: MembersService) { }
+  constructor(public bsModalRef2: BsModalRef, private fb: FormBuilder, private billService: BillService, private memberService: MembersService) { }
 
   ngOnInit(): void {
     this.loadMembers();
@@ -67,8 +65,6 @@ export class NewFinancialReportModalComponent implements OnInit {
         if (bills) {
           this.bills = bills.filter(x => x.amount != 0 && x.month == this.currMonth + 1);
 
-          let totalMem = this.members.filter(x => x.userName != 'user' && x.active == true && x.payBill == true).length;
-
           if (this.bills.length > 0) {
 
             this.water = this.bills.filter(x => x.type == 'water' && x.month == this.currMonth + 1)[0];
@@ -79,9 +75,6 @@ export class NewFinancialReportModalComponent implements OnInit {
             this.insurance = this.bills.filter(x => x.type == 'insurance' && x.month == this.currMonth + 1)[0];
             this.owed_water = this.bills.filter(x => x.type == 'owed_water' && x.month == this.currMonth + 1)[0];
 
-
-            this.utility = parseInt((this.water.amount / totalMem + this.gas.amount / totalMem + this.electricity.amount / totalMem).toFixed(2));
-
             this.totalOutcome += (this.water == undefined || this.water == null) ? 0 : this.water.amount
             this.totalOutcome += (this.gas == undefined || this.gas == null) ? 0 : this.gas.amount
             this.totalOutcome += (this.electricity == undefined || this.electricity == null) ? 0 : this.electricity.amount
@@ -89,15 +82,16 @@ export class NewFinancialReportModalComponent implements OnInit {
             this.totalOutcome += (this.mobile == undefined || this.mobile == null) ? 0 : this.mobile.amount
             this.totalOutcome += (this.insurance == undefined || this.insurance == null) ? 0 : this.insurance.amount
             this.totalOutcome += (this.owed_water == undefined || this.owed_water == null) ? 0 : this.owed_water.amount
+
+            this.totalOutcome = parseFloat(this.totalOutcome.toFixed(3));
           }
 
-          this.totalIncome += this.utility * (totalMem - 1); //exlude Bao
-          this.members.filter(x => x.active == true).forEach(user => {
-            this.totalIncome += user.rentalFee;
+          this.members.forEach(user => {
+            this.totalIncome += user.monthlyPayment.totalMonthlyPayment;
             if (user.userName == 'thang')
-              this.totalIncome += 60 + 42;
+              this.totalIncome += 42;
           });
-          this.totalIncome = parseInt((Math.round(this.totalIncome * 100) / 100).toFixed(2))
+          this.totalIncome = parseFloat(this.totalIncome.toFixed(3));
         }
         this.initializeForm();
       }
@@ -108,7 +102,7 @@ export class NewFinancialReportModalComponent implements OnInit {
     this.memberService.getMembersWithoutUserParam().subscribe({
       next: members => {
         if (members) {
-          this.members = members.filter(x => x.active);
+          this.members = members.filter(x => x.active && x.monthlyPayment.payRent);
           this.getBill();
         }
       }

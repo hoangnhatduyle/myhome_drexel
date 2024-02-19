@@ -58,6 +58,8 @@ import { CustomerReviewComponent } from './customer-review/customer-review.compo
 import { LeaseModalComponent } from './modals/lease-modal/lease-modal.component';
 import { FinancialChartComponent } from './financial-chart/financial-chart.component';
 import { ActiveLenderComponent } from './active-lender/active-lender.component';
+import { PayerManagementComponent } from './admin/payer-management/payer-management.component';
+import { EditPaymentModalComponent } from './modals/edit-payment-modal/edit-payment-modal.component';
 var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
 
 @NgModule({
@@ -110,7 +112,9 @@ var CanvasJSChart = CanvasJSAngularChart.CanvasJSChart;
     CustomerReviewComponent,
     LeaseModalComponent,
     FinancialChartComponent,
-    ActiveLenderComponent
+    ActiveLenderComponent,
+    PayerManagementComponent,
+    EditPaymentModalComponent
   ],
   imports: [
     BrowserModule,

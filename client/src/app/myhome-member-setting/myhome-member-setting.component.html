@@ -54,35 +54,7 @@
                                                 </div>
                                             </div>
                                         </div>
-
-                                        <div class="row mb-3">
-                                            <label for="about" class="col-md-4 col-lg-3 col-form-label">Room
-                                                Number</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="company" type="text" readonly
-                                                    class="form-control-plaintext" id="company"
-                                                    value={{member.room.roomNumber}}>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="company" class="col-md-4 col-lg-3 col-form-label">Room
-                                                Type</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="company" type="text" readonly
-                                                    class="form-control-plaintext" id="company"
-                                                    value={{member.room.roomType}}>
-                                            </div>
-                                        </div>
-
-                                        <div class="row mb-3">
-                                            <label for="Job" class="col-md-4 col-lg-3 col-form-label">Lease End</label>
-                                            <div class="col-md-8 col-lg-9">
-                                                <input name="job" type="text" readonly class="form-control-plaintext"
-                                                    id="Job" value={{member.leaseEnd}}>
-                                            </div>
-                                        </div>
-
+                                        
                                         <div class="row mb-3">
                                             <label for="introduction" class="col-md-4 col-lg-3 col-form-label">Introduction</label>
                                             <div class="col-md-8 col-lg-9">
@@ -105,6 +77,14 @@
                                             <div class="col-md-8 col-lg-9">
                                                 <input name="city" type="text" class="form-control"
                                                     [(ngModel)]="member.city" value={{member.city}}>
+                                            </div>
+                                        </div>
+
+                                        <div class="row mb-3">
+                                            <label for="country" class="col-md-4 col-lg-3 col-form-label">Country</label>
+                                            <div class="col-md-8 col-lg-9">
+                                                <input name="country" type="text" class="form-control"
+                                                    [(ngModel)]="member.country" value={{member.country}}>
                                             </div>
                                         </div>
 

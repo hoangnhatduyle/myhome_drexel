@@ -18,7 +18,7 @@
         <div class="card info-card">
             <div class="px-4">
                 <h2 class="text-center mb-1 mt-4 pb-2" style="border-bottom: 2px solid gray;">Financial Report -
-                    {{currYear}}</h2>
+                    {{selectedYear}}</h2>
             </div>
             <div class="px-4 mt-3">
                 <table class="table">
@@ -43,6 +43,31 @@
                                     style="color: white;">View Details</button></td>
                         </tr>
                     </tbody>
+                </table>
+            </div>
+            <div class="px-4">
+                <table class="table" style="border-top: 2px solid gray;">
+                    <thead>
+                        <tr>
+                            <th style="width: 10%">Total</th>
+                            <th style="width: 18%">N/A</th>
+                            <th style="width: 18%">${{totalIncome}}</th>
+                            <th style="width: 18%">${{totalOutcome}}</th>
+                            <th style="width: 18%">${{totalNetIncome}}</th>
+                            <th style="width: 18%"></th>
+                        </tr>
+                    </thead>
+                    <!-- <tbody>
+                        <tr *ngFor="let finance of financeReport; let index = index;">
+                            <td>{{index + 1}}</td>
+                            <td>{{months[finance.month - 1]}}</td>
+                            <td>${{finance.totalIncome}}</td>
+                            <td>${{finance.totalOutcome}}</td>
+                            <td>${{finance.netIncome}}</td>
+                            <td><button class="btn btn-warning" (click)="openReportModal(finance)"
+                                    style="color: white;">View Details</button></td>
+                        </tr>
+                    </tbody> -->
                 </table>
             </div>
         </div>

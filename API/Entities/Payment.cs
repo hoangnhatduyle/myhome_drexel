@@ -10,7 +10,7 @@ namespace API.Entities
         public DateOnly PayDate { get; set; }
         public int PayMonth { get; set; }
         public string PaymentStatus { get; set; }
-        public int Amount { get; set; }
+        public double Amount { get; set; }
         public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
     }

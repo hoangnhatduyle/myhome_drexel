@@ -1,9 +1,8 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { PaymentModalComponent } from 'src/app/modals/payment-modal/payment-modal.component';
 import { Payment } from 'src/app/_models/payment';
-import { AdminService } from 'src/app/_services/admin.service';
 import { PaymentService } from 'src/app/_services/payment.service';
 
 @Component({
@@ -12,12 +11,12 @@ import { PaymentService } from 'src/app/_services/payment.service';
   styleUrls: ['./payment-management.component.css']
 })
 export class PaymentManagementComponent implements OnInit {
+  @Input() payments: Payment[] | undefined;
+  @Input() allPastpayments: Payment[] | undefined;
   bsModalRef: BsModalRef<PaymentModalComponent> = new BsModalRef<PaymentModalComponent>();
 
   pendingPaymentView = true;
   selectedMonth = "0";
-  allPastpayments: Payment[] = [];
-  payments: Payment[] = [];
   jan: Payment[] = [];
   feb: Payment[] = [];
   mar: Payment[] = [];
@@ -37,25 +36,26 @@ export class PaymentManagementComponent implements OnInit {
   currYear = this.date.getFullYear();
   selectedYear = this.currYear;
 
-  constructor(private paymentService: PaymentService, private modalService: BsModalService, private toastr: ToastrService, private adminService: AdminService) { }
+  constructor(private paymentService: PaymentService, private modalService: BsModalService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
-    this.getPendingPayments();
     for (let i = 2024; i <= this.currYear; i++) {
       this.listOfYear.push(i);
     }
+  }
+
+  ngOnChanges(): void {
+    this.getPendingPayments();
   }
 
   sendEmail(approve: boolean, payment: Payment) {
     var Email = require('./../../../assets/smtp.js');
     var bodyHtml = "<div style='display: flex; justify-content: left; margin: auto; color: black;'> <div> <div style='display: flex; padding-top: 20px;'><img style='max-height: 30px; margin-right: auto;' src='https://drive.google.com/uc?export=view&id=1xzzz5GlCCovVVRZ4cTxxgRTR2Bea5P4S'><span style='font-size: 18px; font-weight: bold;'>Payment Notification</span></div> <hr> <div>You have 1 new notification:</div>";
 
-    if (approve)
-    {
+    if (approve) {
       bodyHtml += `<div style='margin-top: 20px; margin-bottom: 20px; padding: 5px 5px; border: 0.5px solid gray;'><b>Your payment of $${payment.amount} on ${payment.payDate} was <span style="color: green;">approved</span>.</b></div><div>Thank you for your payment. Please login to view more information.</div><br>`;
     }
-    else
-    {
+    else {
       bodyHtml += `<div style='margin-top: 20px; margin-bottom: 20px; padding: 5px 5px; border: 0.5px solid gray;'><b>Your payment of $${payment.amount} on ${payment.payDate} was <span style="color: red;">rejected</span>.</b></div><div>Sorry for any inconvenience. Please contact us for more information.</div><br>`;
     }
 
@@ -69,13 +69,11 @@ export class PaymentManagementComponent implements OnInit {
       Body: bodyHtml
     }).then(
       () => {
-        if (approve)
-        {
+        if (approve) {
           this.toastr.success("You have approved the payment");
           this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === payment.id), 1);
         }
-        else
-        {
+        else {
           this.toastr.warning("You have rejected the payment");
           this.selectedPayment?.splice(this.selectedPayment.findIndex(p => p.id === payment.id), 1);
         }
@@ -85,51 +83,36 @@ export class PaymentManagementComponent implements OnInit {
 
   getPendingPayments() {
     this.pendingPaymentView = true;
-    this.paymentService.getPendingPayments().subscribe({
-      next: payment => {
-        if (payment) {
-          this.payments = payment;
-          this.jan = this.payments.filter(x => x.payMonth == 1);
-          this.feb = this.payments.filter(x => x.payMonth == 2);
-          this.mar = this.payments.filter(x => x.payMonth == 3);
-          this.apr = this.payments.filter(x => x.payMonth == 4);
-          this.may = this.payments.filter(x => x.payMonth == 5);
-          this.jun = this.payments.filter(x => x.payMonth == 6);
-          this.jul = this.payments.filter(x => x.payMonth == 7);
-          this.aug = this.payments.filter(x => x.payMonth == 8);
-          this.sep = this.payments.filter(x => x.payMonth == 9);
-          this.oct = this.payments.filter(x => x.payMonth == 10);
-          this.nov = this.payments.filter(x => x.payMonth == 11);
-          this.dec = this.payments.filter(x => x.payMonth == 12);
-          this.selectedPayment = this.payments;
-        }
-      }
-    })
+    this.jan = this.payments.filter(x => x.payMonth == 1);
+    this.feb = this.payments.filter(x => x.payMonth == 2);
+    this.mar = this.payments.filter(x => x.payMonth == 3);
+    this.apr = this.payments.filter(x => x.payMonth == 4);
+    this.may = this.payments.filter(x => x.payMonth == 5);
+    this.jun = this.payments.filter(x => x.payMonth == 6);
+    this.jul = this.payments.filter(x => x.payMonth == 7);
+    this.aug = this.payments.filter(x => x.payMonth == 8);
+    this.sep = this.payments.filter(x => x.payMonth == 9);
+    this.oct = this.payments.filter(x => x.payMonth == 10);
+    this.nov = this.payments.filter(x => x.payMonth == 11);
+    this.dec = this.payments.filter(x => x.payMonth == 12);
+    this.selectedPayment = this.payments;
   }
 
   getPastPayments() {
     this.pendingPaymentView = false;
-    this.paymentService.getPastPayments().subscribe({
-      next: payment => {
-        if (payment) {
-          this.allPastpayments = payment;
-          this.payments = this.allPastpayments.filter(x => this.getYearOfDate(x.payDate) == this.selectedYear);
-          this.jan = this.payments.filter(x => x.payMonth == 1);
-          this.feb = this.payments.filter(x => x.payMonth == 2);
-          this.mar = this.payments.filter(x => x.payMonth == 3);
-          this.apr = this.payments.filter(x => x.payMonth == 4);
-          this.may = this.payments.filter(x => x.payMonth == 5);
-          this.jun = this.payments.filter(x => x.payMonth == 6);
-          this.jul = this.payments.filter(x => x.payMonth == 7);
-          this.aug = this.payments.filter(x => x.payMonth == 8);
-          this.sep = this.payments.filter(x => x.payMonth == 9);
-          this.oct = this.payments.filter(x => x.payMonth == 10);
-          this.nov = this.payments.filter(x => x.payMonth == 11);
-          this.dec = this.payments.filter(x => x.payMonth == 12);
-          this.selectedPayment = this.payments;
-        }
-      }
-    })
+    this.jan = this.allPastpayments.filter(x => x.payMonth == 1);
+    this.feb = this.allPastpayments.filter(x => x.payMonth == 2);
+    this.mar = this.allPastpayments.filter(x => x.payMonth == 3);
+    this.apr = this.allPastpayments.filter(x => x.payMonth == 4);
+    this.may = this.allPastpayments.filter(x => x.payMonth == 5);
+    this.jun = this.allPastpayments.filter(x => x.payMonth == 6);
+    this.jul = this.allPastpayments.filter(x => x.payMonth == 7);
+    this.aug = this.allPastpayments.filter(x => x.payMonth == 8);
+    this.sep = this.allPastpayments.filter(x => x.payMonth == 9);
+    this.oct = this.allPastpayments.filter(x => x.payMonth == 10);
+    this.nov = this.allPastpayments.filter(x => x.payMonth == 11);
+    this.dec = this.allPastpayments.filter(x => x.payMonth == 12);
+    this.selectedPayment = this.allPastpayments.filter(x => this.getYearOfDate(x.payDate) == this.selectedYear);
   }
 
   onSelected(): void {
@@ -179,7 +162,6 @@ export class PaymentManagementComponent implements OnInit {
 
   onYearSelected() {
     let year = this.selectedYear;
-
     this.payments = this.allPastpayments.filter(x => this.getYearOfDate(x.payDate) == year);
     this.jan = this.payments.filter(x => x.payMonth == 1);
     this.feb = this.payments.filter(x => x.payMonth == 2);

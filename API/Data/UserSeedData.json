@@ -9,7 +9,7 @@
         "Introduction": "Intro goes here",
         "City": "Toledo",
         "Country": "USA",
-        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "Address": "3843 Drexel Drive, Toledo, Ohio 43612",
         "RentalFee": 350,
         "LastRentalFee": 505,
         "PhoneNumber": "+1 (469) 478-0577",
@@ -41,7 +41,7 @@
         "Introduction": "Intro goes here",
         "City": "Toledo",
         "Country": "USA",
-        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "Address": "3843 Drexel Drive, Toledo, Ohio 43612",
         "RentalFee": 400,
         "LastRentalFee": 500,
         "PhoneNumber": "+1 (908) 290-8133",
@@ -49,7 +49,7 @@
         "PaidThisMonth": false,
         "Photos": [],
         "Room": {
-            "RoomNumber": 2,
+            "RoomNumber": 1,
             "RoomType": "Single",
             "IsOccupied": true
         },
@@ -73,7 +73,7 @@
         "Introduction": "Intro goes here",
         "City": "Toledo",
         "Country": "USA",
-        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
+        "Address": "3843 Drexel Drive, Toledo, Ohio 43612",
         "RentalFee": 350,
         "LastRentalFee": 0,
         "PhoneNumber": "+1 (419) 770-7299",
@@ -81,7 +81,7 @@
         "PaidThisMonth": false,
         "Photos": [],
         "Room": {
-            "RoomNumber": 3,
+            "RoomNumber": 2,
             "RoomType": "Double",
             "IsOccupied": true
         },
@@ -94,87 +94,5 @@
                 "PayMonth": 1
             }
         ]
-    },
-    {
-        "UserName": "Dang",
-        "Gender": "male",
-        "DateOfBirth": "2002-08-12",
-        "KnownAs": "Dang",
-        "LeaseEnd": "2024-01-01",
-        "Created": "2023-01-01",
-        "Introduction": "Intro goes here",
-        "City": "Toledo",
-        "Country": "USA",
-        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
-        "RentalFee": 400,
-        "LastRentalFee": 0,
-        "PhoneNumber": "+1 (314) 850-8225",
-        "Email": "danghuynh8012@gmail.com",
-        "PaidThisMonth": false,
-        "Photos": [],
-        "Payment": [
-            {
-                "Method": "Zelle",
-                "PayDate": "2023-01-18",
-                "PaymentStatus": "Pending",
-                "Amount": 350,
-                "PayMonth": 1
-            }
-        ]
-    },
-    {
-        "UserName": "Thang",
-        "Gender": "male",
-        "DateOfBirth": "2000-10-29",
-        "KnownAs": "Thang",
-        "LeaseEnd": "2025-01-01",
-        "Created": "2021-08-20",
-        "Introduction": "Intro goes here",
-        "City": "Toledo",
-        "Country": "USA",
-        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
-        "RentalFee": 340,
-        "LastRentalFee": 537,
-        "PhoneNumber": "+1 (419) 699-9537",
-        "Email": "thangtran29102000@gmail.com",
-        "PaidThisMonth": false,
-        "Photos": [],
-        "Room": {
-            "RoomNumber": 4,
-            "RoomType": "Double",
-            "IsOccupied": true
-        },
-        "Payment": [
-            {
-                "Method": "Zelle",
-                "PayDate": "2023-01-18",
-                "PaymentStatus": "Pending",
-                "Amount": 512,
-                "PayMonth": 1
-            }
-        ]
-    },
-    {
-        "UserName": "Bao",
-        "Gender": "male",
-        "DateOfBirth": "2000-08-24",
-        "KnownAs": "Bao",
-        "LeaseEnd": "9999-01-01",
-        "Created": "2019-08-01",
-        "Introduction": "Intro goes here",
-        "City": "Toledo",
-        "Country": "USA",
-        "Address": "3201 Avondale Avenue, Toledo, Ohio 43607",
-        "RentalFee": 0,
-        "LastRentalFee": 0,
-        "PhoneNumber": "+1 (419) 699-9534",
-        "Email": "kmktag904@gmail.com",
-        "PaidThisMonth": false,
-        "Photos": [],
-        "Room": {
-            "RoomNumber": 0,
-            "RoomType": "Irrelevant",
-            "IsOccupied": true
-        }
     }
 ]

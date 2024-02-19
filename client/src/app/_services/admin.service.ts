@@ -5,21 +5,33 @@ import { RolesModalComponent } from '../modals/roles-modal/roles-modal.component
 import { FinancialReport } from '../_models/financialReport';
 import { Photo } from '../_models/photo';
 import { User } from '../_models/user';
+import { map, of } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AdminService {
   baseUrl = environment.apiUrl;
+  users: User[] = [];
 
   constructor(private http: HttpClient) { }
 
   getUsersWithRoles() {
-    return this.http.get<User[]>(this.baseUrl + 'admin/users-with-roles');
+    if (this.users.length > 0) return of(this.users);
+    return this.http.get<User[]>(this.baseUrl + 'admin/users-with-roles').pipe(
+      map(user => {
+        this.users = user.filter(x => x.userName != 'user');
+        return this.users;
+      })
+    );
   }
 
-  updateUserRoles(username: string, role: string[], active: boolean, payBill: boolean) {
-    return this.http.post<string[]>(this.baseUrl + 'admin/edit-roles/' + username + '?roles=' + role + '&active=' + active + '&payBill=' + payBill, {})
+  updateUserMonthlyPayment(username: string, payBill: boolean, payStatus: boolean, payRent: boolean) {
+    return this.http.post<string[]>(this.baseUrl + 'admin/edit-monthly-payment/' + username + '?payBill=' + payBill + '&payStatus=' + payStatus + '&payRent=' + payRent, {})
+  }
+  
+  updateUserDetails(username: string, role: string[], active: boolean, leaseStart: any, leaseEnd: any, notes: string) {
+    return this.http.post<string[]>(this.baseUrl + 'admin/edit-roles/' + username + '?roles=' + role + '&active=' + active + '&leaseStart=' + leaseStart + '&leaseEnd=' + leaseEnd + '&notes=' + notes, {})
   }
 
   getPhotosForApproval() {

@@ -1,13 +1,11 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { FinancialModalComponent } from '../financial-modal/financial-modal.component';
 import { FinancialReport } from '../_models/financialReport';
 import { AdminService } from '../_services/admin.service';
-import { BillService } from '../_services/bill.service';
 import jsPDF from 'jspdf';
 import html2canvas from 'html2canvas';
 import { Payment } from '../_models/payment';
-import { PaymentService } from '../_services/payment.service';
 import { NewFinancialReportModalComponent } from '../new-financial-report-modal/new-financial-report-modal.component';
 import { ToastrService } from 'ngx-toastr';
 
@@ -18,32 +16,41 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class FinancialReportComponent implements OnInit {
   @ViewChild('yearSelection') yearSelection!: ElementRef;
+  @Input() payments: Payment[] | undefined;
   bsModalRef: BsModalRef<FinancialModalComponent> = new BsModalRef<FinancialModalComponent>();
   bsModalRef2: BsModalRef<NewFinancialReportModalComponent> = new BsModalRef<NewFinancialReportModalComponent>();
 
   financeReport: FinancialReport[] = [];
-  payments: Payment[] = [];
-
   listOfYear: number[] = [];
 
   date = new Date();
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   currYear = this.date.getFullYear();
   currMonth = this.date.getMonth();
+  selectedYear = this.currYear;
 
-  constructor(private adminService: AdminService, private modalService: BsModalService, private paymentService: PaymentService, private toastr: ToastrService) { }
+  totalIncome = 0;
+  totalOutcome = 0;
+  totalNetIncome = 0;
+
+  constructor(private adminService: AdminService, private modalService: BsModalService, private toastr: ToastrService) { }
 
   ngOnInit(): void {
     // var selectedYear = this.yearSelection.nativeElement.value;
     this.adminService.getFinancialReport(this.currYear).subscribe({
       next: report => {
         this.financeReport = report;
+
+        report.forEach(x => {
+          this.totalIncome += x.totalIncome;
+          this.totalOutcome += x.totalOutcome;
+          this.totalNetIncome += x.totalIncome - x.totalOutcome;
+        })
       }
     })
     for (let i = 2024; i <= this.currYear; i++) {
       this.listOfYear.push(i);
     }
-    this.loadPayments();
   }
 
   openReportModal(report: FinancialReport) {
@@ -56,16 +63,6 @@ export class FinancialReportComponent implements OnInit {
       }
     }
     this.bsModalRef = this.modalService.show(FinancialModalComponent, config);
-  }
-
-  loadPayments() {
-    this.paymentService.getPastPayments().subscribe({
-      next: payments => {
-        if (payments) {
-          this.payments = payments;
-        }
-      }
-    })
   }
 
   addNewData() {
@@ -107,11 +104,21 @@ export class FinancialReportComponent implements OnInit {
   }
 
   onSelected(): void {
-    let year = this.yearSelection.nativeElement.value;
+    this.selectedYear = this.yearSelection.nativeElement.value;
 
-    this.adminService.getFinancialReport(year).subscribe({
+    this.adminService.getFinancialReport(this.selectedYear).subscribe({
       next: report => {
         this.financeReport = report;
+
+        this.totalIncome = 0;
+        this.totalOutcome = 0;
+        this.totalNetIncome = 0;
+
+        report.forEach(x => {
+          this.totalIncome += x.totalIncome;
+          this.totalOutcome += x.totalOutcome;
+          this.totalNetIncome += x.totalIncome - x.totalOutcome;
+        })
       }
     })
   }

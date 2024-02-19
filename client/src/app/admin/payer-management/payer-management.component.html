@@ -1,0 +1,78 @@
+<div class="row">
+    <div class="mb-4 mt-2">
+        <p style="font-size: 24px; font-weight: 500;">{{months[currMonth]}} Summary</p>
+        <p style="font-size: 17px;">Total Received/Total Income: <span
+                style="font-weight: 600; font-size: 17px;">{{totalReceived.toFixed(3)}} /
+                {{totalIncome.toFixed(3)}}</span></p>
+        <p style="font-size: 17px;">Total Paid/Total Outcome: <span
+                style="font-weight: 600; font-size: 17px;">{{totalPaid.toFixed(3)}} / {{totalOutcome.toFixed(3)}}</span>
+        </p>
+        <p style="font-size: 17px; margin-bottom: 0;">Current Net Income/Total Net Income: <span
+                style="font-weight: 600; font-size: 17px;">{{(totalReceived - totalPaid).toFixed(3)}} / {{(totalIncome -
+                totalOutcome).toFixed(3)}}</span></p>
+    </div>
+    <div style="border: 0.5px solid rgb(162, 162, 162);" class="p-3">
+        <table datatable [dtOptions]="dtOptions" [dtTrigger]="dtTrigger" class="row-border hover w-100">
+            <thead>
+                <tr>
+                    <th>Username</th>
+                    <th>Balance</th>
+                    <th>Pay Bill <span data-bs-toggle="tooltip" data-bs-placement="right"
+                            title="Set this user to pay bill or not.">
+                            <fa-icon [icon]="['fas', 'info-circle']" class="me-2"></fa-icon>
+                        </span></th>
+                    <th>Pay Status <span data-bs-toggle="tooltip" data-bs-placement="right"
+                        title="Set this user to already paid this month.">
+                        <fa-icon [icon]="['fas', 'info-circle']" class="me-2"></fa-icon>
+                    </span></th>
+                    <th>Pay Rent <span data-bs-toggle="tooltip" data-bs-placement="right"
+                        title="Set this when we receive rent from the user.">
+                        <fa-icon [icon]="['fas', 'info-circle']" class="me-2"></fa-icon>
+                    </span></th>
+                    <th>Late Days</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let user of users">
+                    <ng-container *ngIf="user.active">
+                        <td>{{user.userName}}</td>
+                        <ng-container *ngIf="user.roles.includes('Member')">
+                            <td>{{user.monthlyPayment.totalMonthlyPayment.toFixed(3)}}</td>
+                            <td>{{user.monthlyPayment.payBill}}</td>
+                            <td>{{user.monthlyPayment.paidThisMonth}}</td>
+                            <td>{{user.monthlyPayment.payRent}}</td>
+                            <td *ngIf="user.monthlyPayment.paidThisMonth == true">N/A</td>
+                            <td *ngIf="user.monthlyPayment.paidThisMonth == false">{{lateDate < 0 ? 'N/A' :
+                                    lateDate}}</td>
+                        </ng-container>
+                        <ng-container *ngIf="user.roles.includes('Admin') || user.roles.includes('Moderator')">
+                            <td>N/A</td>
+                            <td *ngIf="user.roles.includes('Admin')">N/A</td>
+                            <td *ngIf="user.roles.includes('Moderator')">{{user.monthlyPayment.payBill}}</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                            <td>N/A</td>
+                        </ng-container>
+                        <td>
+                            <button (click)="openEditPaymentModal(user)" class="btn btn-warning mb-1 me-2"
+                                style="color: white;">Edit Payment</button>
+                        </td>
+                    </ng-container>
+                    <ng-container *ngIf="!user.active">
+                        <td>{{user.userName}}</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>N/A</td>
+                        <td>
+                            <button (click)="openEditPaymentModal(user)" class="btn btn-warning mb-1 me-2"
+                                style="color: white;">Edit Payment</button>
+                        </td>
+                    </ng-container>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
