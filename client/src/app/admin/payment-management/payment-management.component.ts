@@ -59,7 +59,7 @@ export class PaymentManagementComponent implements OnInit {
       bodyHtml += `<div style='margin-top: 20px; margin-bottom: 20px; padding: 5px 5px; border: 0.5px solid gray;'><b>Your payment of $${payment.amount} on ${payment.payDate} was <span style="color: red;">rejected</span>.</b></div><div>Sorry for any inconvenience. Please contact us for more information.</div><br>`;
     }
 
-    bodyHtml += "<div>Best wishes,<div><br> <div><b>myHome Payment Notification</b> <div> <div style='font-style: italic;'>Customer Service</div><br> <div>3201 Avondale Avenue | Toledo, OH | 43607</div> <div>Phone Number: 419-699-9535</div> <div>Email: lehoangnhatduy2000@gmail.com</div><br> </div> </div> </div> </div> </div> </div>";
+    bodyHtml += "<div>Best wishes,<div><br> <div><b>myHome Payment Notification</b> <div> <div style='font-style: italic;'>Customer Service</div><br> <div>3843 Drexel Drive | Toledo, OH | 43612</div> <div>Phone Number: 419-699-9535</div> <div>Email: lehoangnhatduy2000@gmail.com</div><br> </div> </div> </div> </div> </div> </div>";
 
     Email.send({
       SecureToken: "45347233-f706-4605-a56a-e522e578b0c5",

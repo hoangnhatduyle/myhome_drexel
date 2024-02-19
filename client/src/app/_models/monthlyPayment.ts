@@ -8,5 +8,6 @@ export interface MonthlyPayment {
     waterBill: number;
     electricityBill: number;
     gasBill: number;
+    internetBill: number;
     totalMonthlyPayment: number;
 }

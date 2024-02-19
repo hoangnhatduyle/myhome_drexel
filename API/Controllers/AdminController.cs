@@ -195,7 +195,7 @@ namespace API.Controllers
 
             _mapper.Map(billUpdateDto, bill);
 
-            if (billUpdateDto.Type == "water" || billUpdateDto.Type == "gas" || billUpdateDto.Type == "electricity") {
+            if (billUpdateDto.Type != "mortgage") {
                 await _unitOfWork.UserRepository.UpdateBillsThisMonth(billUpdateDto.Type, billUpdateDto.Amount);
             }
 

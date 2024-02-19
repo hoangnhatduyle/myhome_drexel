@@ -122,6 +122,10 @@ namespace API.Data
                 {
                     user.MonthlyPayment.ElectricityBill = amount / numberOfUsersPaidBill;
                 }
+                else if (type == "internet")
+                {
+                    user.MonthlyPayment.InternetBill = amount / numberOfUsersPaidBill;
+                }
                 
                 user.MonthlyPayment.TotalMonthlyPayment += amount / numberOfUsersPaidBill;
             }

@@ -11,8 +11,8 @@
             </div>
 
             <div class="card-body">
-                <h5 class="card-title" style="font-weight: 600;">Room # <span *ngIf="member.room.roomNumber <= 2">|
-                        Downstairs</span><span *ngIf="member.room.roomNumber > 2">| Upstairs</span></h5>
+                <h5 class="card-title" style="font-weight: 600;">Room # <span *ngIf="member.room.roomNumber < 3">|
+                        Upstairs</span><span *ngIf="member.room.roomNumber > 2">| Downstairs</span></h5>
 
                 <div class="d-flex align-items-center" *ngIf="isVisible">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
@@ -50,7 +50,8 @@
                         <fa-icon [icon]="['fas', 'file-contract']" style="color: #007bff"></fa-icon>
                     </div>
                     <div class="ps-3">
-                        <h6 style="font-size: 18px;" class="mb-1">Lease Sign On: {{this.member.leaseStart | date:'mediumDate'}}</h6>
+                        <h6 style="font-size: 18px;" class="mb-1">Lease Sign On: {{this.member.leaseStart |
+                            date:'mediumDate'}}</h6>
                         <h6 style="font-size: 18px;">Lease Duration: 1 year</h6>
                     </div>
                 </div>
@@ -74,7 +75,8 @@
                 <h5 class="card-title" style="font-weight: 600;">Rent Fee <span>| {{month[currMonth]}} -
                         {{date.getFullYear()}}</span></h5>
 
-                <div class="d-flex align-items-center" *ngIf="isVisible && member.monthlyPayment.paidThisMonth == false">
+                <div class="d-flex align-items-center"
+                    *ngIf="isVisible && member.monthlyPayment.paidThisMonth == false">
                     <div class="card-icon rounded-circle d-flex align-items-center justify-content-center"
                         style="background-color: rgb(209, 252, 185);">
                         <fa-icon [icon]="['fas', 'money-bill-alt']" style="color: #28a745"></fa-icon>

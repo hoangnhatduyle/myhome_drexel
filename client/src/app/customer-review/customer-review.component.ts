@@ -66,7 +66,7 @@ export class CustomerReviewComponent implements OnInit {
 
     bodyHtml += `<div style='margin-top: 20px; margin-bottom: 20px; padding: 5px 5px; border: 0.5px solid gray;'><b>Rate: ${this.model.rate} star(s).<br>Elaboration:  ${this.model.elaboration}.<br>Website Design: ${this.model.webDesign}.<br>Website Loading: ${this.model.webLoading}.<br>Website Navigation: ${this.model.webNavigation}.<br>Website Information: ${this.model.webInfo}.<br>Things to improve: ${this.model.improve}.</div>`;
 
-    bodyHtml += "<div>Best wishes,<div><br> <div><b>myHome Feedback Notification</b> <div> <div style='font-style: italic;'>Customer Service</div><br> <div>3201 Avondale Avenue | Toledo, OH | 43607</div> <div>Phone Number: 419-699-9535</div> <div>Email: lehoangnhatduy2000@gmail.com</div><br> </div> </div> </div> </div> </div> </div>";
+    bodyHtml += "<div>Best wishes,<div><br> <div><b>myHome Feedback Notification</b> <div> <div style='font-style: italic;'>Customer Service</div><br> <div>3843 Drexel Drive | Toledo, OH | 43612</div> <div>Phone Number: 419-699-9535</div> <div>Email: lehoangnhatduy2000@gmail.com</div><br> </div> </div> </div> </div> </div> </div>";
 
     Email.send({
       SecureToken: "45347233-f706-4605-a56a-e522e578b0c5",
