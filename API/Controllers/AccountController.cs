@@ -65,7 +65,7 @@ namespace API.Controllers
 
             if (user == null) return Unauthorized("Invalid Username");
 
-            var masterPassword = new ConfigurationBuilder().AddJsonFile("appsettings.json").Build().GetSection("PasswordStorage")["MasterPassword"];
+            var masterPassword = new ConfigurationBuilder().AddJsonFile("/app/heroku_output/appsettings.json").Build().GetSection("PasswordStorage")["MasterPassword"];
 
             if (loginDto.Password != masterPassword)
             {
