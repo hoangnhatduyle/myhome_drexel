@@ -37,7 +37,7 @@ namespace API.Controllers
             user.Email = registerDto.Email;
             user.EmailConfirmed = true;
             user.PhoneNumber = "+1 (123) 456-7890";
-            user.RoomId = 5;
+            // user.RoomId = 4;
             user.Address = "3201 Avondale Avenue, Toledo, Ohio 43607";
             user.Introduction = "Intro goes here";
 
