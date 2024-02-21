@@ -1,12 +1,11 @@
 <div>
     <select style="display:inline" class="form-select w-25" #billSelection (change)="onSelected()">
         <option default value="water">Water</option>
+        <option value="sewage">Sewage</option>
         <option value="gas">Gas</option>
         <option value="electricity">Electricity</option>
-        <option value="insurance">Insurance</option>
         <option value="internet">Internet</option>
-        <option value="mobile">Mobile</option>
-        <option value="owed_water">Owed Water</option>
+        <option value="mortgage">Mortgage</option>
     </select>
     <button style="display:inline-block; color: white; background-color: #4476db;" type="button" (click)="goToBill()" class="btn ms-4">Pay Bill <span style="font-size: 14px;" class="material-icons">open_in_new</span></button>
     <button style="display:inline-block; color: white; background-color: #ff6933;" type="button" (click)="resetPaid()" class="btn ms-2">Reset Paid <span style="font-size: 14px;" class="material-icons">restore</span></button>

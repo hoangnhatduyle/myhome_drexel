@@ -19,12 +19,11 @@ export class BillManagementComponent implements OnInit {
   selectedUrl = 'https://toledo.oh.gov/departments/public-utilities';
 
   water: Bill[] = [];
+  sewage: Bill[] = [];
   gas: Bill[] = [];
   electricity: Bill[] = [];
-  insurance: Bill[] = [];
   internet: Bill[] = [];
-  mobile: Bill[] = [];
-  owed_water: Bill[] = [];
+  mortgage: Bill[] = [];
 
   selectedBills: Bill[] = [];
   selectedBill = '';
@@ -63,10 +62,9 @@ export class BillManagementComponent implements OnInit {
       this.water = this.bills.filter(x => x.type == 'water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
       this.gas = this.bills.filter(x => x.type == 'gas').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
       this.electricity = this.bills.filter(x => x.type == 'electricity').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-      this.insurance = this.bills.filter(x => x.type == 'insurance').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.sewage = this.bills.filter(x => x.type == 'sewage').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
       this.internet = this.bills.filter(x => x.type == 'internet').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-      this.mobile = this.bills.filter(x => x.type == 'mobile').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
-      this.owed_water = this.bills.filter(x => x.type == 'owed_water').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
+      this.mortgage = this.bills.filter(x => x.type == 'mortgage').sort((a, b) => a.month < b.month ? -1 : a.month > b.month ? 1 : 0);
 
       this.selectedBills = this.water;
     }
@@ -101,21 +99,17 @@ export class BillManagementComponent implements OnInit {
       this.selectedBills = this.electricity;
       this.selectedUrl = 'https://www.firstenergycorp.com/toledo_edison.html';
     }
-    else if (this.selectedBill == "insurance") {
-      this.selectedBills = this.insurance;
+    else if (this.selectedBill == "sewage") {
+      this.selectedBills = this.sewage;
       this.selectedUrl = '';
     }
     else if (this.selectedBill == "internet") {
       this.selectedBills = this.internet;
-      this.selectedUrl = 'https://www.t-mobile.com/';
+      this.selectedUrl = 'https://www.buckeyebroadband.com/';
     }
-    else if (this.selectedBill == "mobile") {
-      this.selectedBills = this.mobile;
-      this.selectedUrl = 'https://www.t-mobile.com/';
-    }
-    else if (this.selectedBill == "owed_water") {
-      this.selectedBills = this.owed_water;
-      this.selectedUrl = 'https://toledo.oh.gov/departments/public-utilities';
+    else if (this.selectedBill == "mortgage") {
+      this.selectedBills = this.mortgage;
+      this.selectedUrl = 'https://www.huntington.com/';
     }
   }
 
